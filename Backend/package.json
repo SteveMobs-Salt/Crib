@@ -1,0 +1,30 @@
+{
+  "name": "stevemobs-final-project",
+  "version": "1.0.0",
+  "description": " A househould app server side",
+  "main": "app.js",
+  "scripts": {
+    "lint": "eslint app.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteveMobs-Salt/SteveMobsProject"
+  },
+  "keywords": [],
+  "author": "Stevemobs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SteveMobs-Salt/SteveMobsProject/issues"
+  },
+  "homepage": "https://github.com/SteveMobs-Salt/SteveMobsProject",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-salt": "^1.0.1",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
