@@ -5,10 +5,10 @@ const mongoose = require("mongoose");
 
 const passport = require("./passport/setup");
 const auth = require("./routes/auth");
-
+require('dotenv').config();
 const app = express();
 const PORT = 3001;
-const MONGO_URI = "mongodb+srv://test-admin:<pass>@pad.gb15x.azure.mongodb.net/database?retryWrites=true&w=majority";
+const MONGO_URI = `mongodb+srv://test-admin:${process.env.DB_PASSWORD}@pad.gb15x.azure.mongodb.net/database?retryWrites=true&w=majority`;
 
 mongoose
     .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

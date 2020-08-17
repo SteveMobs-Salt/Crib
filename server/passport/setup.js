@@ -21,7 +21,7 @@ passport.use(
             .then(user => {
                 // Create new User
                 if (!user) {
-                    const newUser = new User({ email, password });
+                    const newUser = new User({ email, password});
                     // Hash password before saving in database
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(newUser.password, salt, (err, hash) => {
