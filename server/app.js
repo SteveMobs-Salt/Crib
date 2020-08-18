@@ -75,9 +75,7 @@ app.post('/shopping_list', async (req, res) => {
     const uuid = uuidv4();
     household.shoppingList.push({ _id: uuid, name, bought: false});
     household.save();
-    res.json({
-        household,
-    });
+    res.json(household);
   }
 });
 
