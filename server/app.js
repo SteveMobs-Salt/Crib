@@ -89,7 +89,7 @@ app.post('/shopping_list', async (req, res) => {
   // OR pass along groupId )
   if (household.owner === owner) {
     const uuid = uuidv4();
-    household.shoppingList.push({ _id: uuid, name, bought: false });
+    household.shoppingList.push({ _id: uuid, name, bought: false, date: Date.now() });
     household.save();
     res.json(household);
   }
@@ -115,5 +115,16 @@ app.get('/household', async (req, res) => {
   const household = await Household.findById(householdId);
   res.json(household);
 });
+
+app.post('/budget', async (req, res) => {
+  // const test = await Household.findOne({owner: 'Ali'});
+  // console.log(test)
+  // test.budget.amount = 1500;
+  // test.budget.categories = [""]
+  // // test.budget = new Household.budget({ amount: 5000, categories: [1,2 ,3]})
+  // console.log(test)
+  // test.save()
+  res.end();
+})
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

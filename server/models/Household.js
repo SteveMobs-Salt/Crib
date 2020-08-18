@@ -9,13 +9,14 @@ const HouseholdSchema = new mongoose.Schema(
             required: true
         },
         budget: {
-            type: new mongoose.Schema({
-              amount: Number,
-              categories: new mongoose.Schema({
-                name: String,
-                amount: Number
-              })
-            }),
+            amount: {
+              type: Number,
+              default: 0  
+            },
+            categories: {
+              type: Array,
+              default: ["Groceries", "Housing", "Basic Utilities", "Transportation", "Insurance", "Loan Repayments"]
+            }
         },
         expenses: {
           type: Array
@@ -29,5 +30,6 @@ const HouseholdSchema = new mongoose.Schema(
     },
     { strict: false }
 );
+
 
 module.exports = Household = mongoose.model("household", HouseholdSchema);
