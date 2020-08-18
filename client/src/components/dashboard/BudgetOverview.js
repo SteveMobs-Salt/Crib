@@ -8,20 +8,23 @@ import {
   useHistory,
 } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
+import BudgetChart from '../BudgetChart';
 
 function BudgetOverview({expenses}) {
   const history = useHistory();
   const {
-    household: { budget },
+    household: { budgets },
   } = useContext(HouseholdContext);
 
 
-  if (budget) {
+  if (budgets) {
     return (
       <div>
         <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
         <h2>Budget</h2>
-        {budget.amount}
+        {/* {budget.amount} */}
+    {/* {budgets.map( budget => <p>{budget}</p>)} */}
+        {/* <BudgetChart /> */}
       </div>
     );
   }

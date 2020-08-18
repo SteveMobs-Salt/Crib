@@ -2,33 +2,31 @@ const mongoose = require("mongoose");
 
 // Create Schema
 const HouseholdSchema = new mongoose.Schema(
-    {
-        owner: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        budget: {
-            amount: {
-              type: Number,
-              default: 0  
-            },
-            categories: {
-              type: Array,
-              default: ["Groceries", "Housing", "Basic Utilities", "Transportation", "Insurance", "Loan Repayments"]
-            }
-        },
-        expenses: {
-          type: Array
-        },
-        shoppingList: {
-          type: Array
-        },
-        tabs: {
-          type: Array
-        },
+  {
+    owner: {
+      type: String,
+      unique: true,
+      required: true
     },
-    { strict: false }
+    budgets: {
+        type: Array,
+        default: [{"Groceries": 0.00},{"Housing": 0.00}, {"Utilities": 0.00}, {"Transportation": 0.00}, {"Insurance": 0.00}, {"Loan Repaymnets": 0.00}]
+      },
+    expenses: {
+      type: Array
+    },
+    shoppingList: {
+      type: Array
+    },
+    tabs: {
+      type: Array
+    },
+    categories: {
+      type: Array,
+      default: ["Groceries", "Housing", "Utilities", "Transportation", "Insurance", "Loan Repayments"]
+    }
+  },
+  { strict: false }
 );
 
 
