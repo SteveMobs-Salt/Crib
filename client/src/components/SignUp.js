@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import UserContext from '../UserContext';
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
+
 
 const SignUpForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const history = useHistory();
+    const { setUserID, setHouseholdID } = useContext(UserContext);
 
     const onSubmit = event => {
         event.preventDefault();
@@ -17,9 +22,15 @@ const SignUpForm = () => {
         axios
             .post('/api/auth/register_login', userData)
             .then(res => {
-                // 
-                axios.get('/createHousehold')
-                    .then(res => console.log(res))
+                console.log(res)
+                // res.data.household
+                // res.data.user
+                // save to state/context for further interaction
+                setUserID(res.data.user)
+                setHouseholdID(res.data.household)
+                // window.location.href = '/dashboard';
+                // window.location.replace("/dashboard");
+                history.push('/dashboard')
             })
             .catch(err => {
                 console.log(err);
