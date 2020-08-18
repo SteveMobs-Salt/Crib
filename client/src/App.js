@@ -6,6 +6,9 @@ import Dashboard from './components/Dashboard';
 import UserContext from './contexts/UserContext';
 import HouseholdContext from './contexts/HouseholdContext';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import BudgetOverview from './components/dashboard/BudgetOverview';
+import ExpensesOverview from './components/dashboard/ExpensesOverview';
+import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
 
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
+              <li>
+                <Link to="/dashboard/expenses">Expenses</Link>
+              </li>
             </ul>
 
             <hr />
@@ -50,8 +56,17 @@ function App() {
               {/* <Route path="/user">
           <About />
         </Route> */}
-              <Route path="/dashboard">
+              <Route exact path="/dashboard">
                 <Dashboard />
+              </Route>
+              <Route path="/dashboard/budget">
+                <BudgetOverview />
+              </Route>
+              <Route path="/dashboard/expenses">
+                <ExpensesOverview />
+              </Route>
+              <Route path="/dashboard/shopping-list">
+                <ShoppingListOverview/>
               </Route>
             </Switch>
           </div>
