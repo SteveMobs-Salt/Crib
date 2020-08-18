@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
 
-function BudgetOverview() {
+function BudgetOverview({expenses}) {
   const history = useHistory();
   const {
     household: { budget },
@@ -21,7 +21,7 @@ function BudgetOverview() {
       <div>
         <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
         <h2>Budget</h2>
-
+        {budget.amount}
       </div>
     );
   }

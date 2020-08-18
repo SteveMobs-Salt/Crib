@@ -23,7 +23,7 @@ const Dashboard = () => {
 
       {/* /dashboard/budget */}
       <Link to={`${url}/budget`} >
-        <BudgetCompact />
+        <BudgetCompact budget={household.budget} expenses={household.expenses} />
       </Link>
       {/* /dashboard/expenses */}
       <Link to={`${url}/expenses`} >

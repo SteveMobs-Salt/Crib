@@ -12,7 +12,6 @@ import { func } from 'prop-types';
 import axios from 'axios';
 
 function ShoppingListOverview() {
-  const [item, setItem] = useState("");
   const history = useHistory();
   const {
     setHousehold,
@@ -21,10 +20,12 @@ function ShoppingListOverview() {
 
   const handleSubmit = event => {
     event.preventDefault();
+    const shoppingItem = event.target.item;
     axios
-      .post('/shopping_list', { name: item })
+      .post('/shopping_list', { name: shoppingItem.value })
       .then(data => setHousehold(data.data))
       .catch(err => console.log(err));
+    shoppingItem.value = null;
   };
 
   const handleDelete = id => {
@@ -41,11 +42,11 @@ function ShoppingListOverview() {
         <h2>Shopping List</h2>
         <form onSubmit={event => handleSubmit(event)}>
           <label>Add item</label>
-          <input onChange={event => setItem(event.target.value)} />
+          <input name="item" />
           <button>Submit</button> 
         </form>
         {/* form + inputfield */}
-        {shoppingList ? shoppingList.map(item => <p>{item.name}
+        {shoppingList ? shoppingList.sort((a, b) => b.date - a.date).map(item => <p>{item.name}
         <button onClick={() => handleDelete(item._id)}>Remove</button></p>) : <p>Add items to buy here</p>}
       </div>
     );
