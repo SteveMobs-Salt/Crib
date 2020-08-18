@@ -27,7 +27,7 @@ const Dashboard = () => {
       </Link>
       {/* /dashboard/expenses */}
       <Link to={`${url}/expenses`} >
-        <ExpensesCompact />
+        <ExpensesCompact expenses={household.expenses}/>
       </Link>
       {/* /dashboard/shopping-list */}
       <Link to={`${url}/shopping-list`} >

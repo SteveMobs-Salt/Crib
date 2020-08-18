@@ -40,19 +40,8 @@ app.use(passport.session());
 app.use('/api/auth', auth);
 app.get('/', (req, res) => res.send('Good morning sunshine!'));
 
-// obsolete
-// app.get("/createHousehold", (req, res) => {
-//     const owner = req.session.passport.user;
-//     const newHousehold = new Household({ owner });
-//     newHousehold.save();
-//     res.json({
-//         message: "Succesfully created household.",
-//         data: newHousehold
-//     });
-// })
-
 app.post('/expenses', async (req, res) => {
-  const owner = req.session.passport.user;
+  // const owner = req.session.passport.user;
   const { amount, debtors, name, category } = req.body;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
@@ -63,6 +52,16 @@ app.post('/expenses', async (req, res) => {
     data: household,
   });
 });
+
+app.delete('/expenses', async(req, res) => {
+  const { id } = req.query;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  const index = household.expenses.map(a => a._id).indexOf(id);
+  household.expenses.splice(index, 1);
+  household.save();
+  res.json(household);
+})
 
 //TODO have session; expense body posted to household id
 app.post('/shopping_list', async (req, res) => {
@@ -78,6 +77,16 @@ app.post('/shopping_list', async (req, res) => {
     res.json(household);
   }
 });
+
+app.delete('/shopping_list', async (req, res) => {
+  const { id } = req.query;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  const index = household.shoppingList.map( a => a._id).indexOf(id);
+  household.shoppingList.splice(index, 1);
+  household.save();
+  res.json(household);
+})
 
 //Fetch household data
 app.get('/household', async (req, res) => {
