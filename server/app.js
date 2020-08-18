@@ -53,11 +53,11 @@ app.get('/', (req, res) => res.send('Good morning sunshine!'));
 
 app.post('/expenses', async (req, res) => {
   const owner = req.session.passport.user;
-//   const { householdId } = req.body;
+  const { amount, debtors, name, category } = req.body;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
   const uuid = uuidv4();
-  household.expenses.push({ _id: uuid, name: 'groceries', amount: 5.99 });
+  household.expenses.push({ _id: uuid, name, amount, debtors, category, date: Date.now() });
   household.save();
   res.json({
     data: household,

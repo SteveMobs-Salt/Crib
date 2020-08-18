@@ -2,7 +2,7 @@ import React from 'react'
 
 const BudgetCompact = () => {
   return (
-    <div>
+    <div className="budget-compact">
       Budget component
     </div>
   )

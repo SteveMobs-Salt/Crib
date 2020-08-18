@@ -18,7 +18,7 @@ function App() {
     <UserContext.Provider value={values}>
       <HouseholdContext.Provider value={householdValue}>
         <Router>
-          <div>
+          <div className="sign-links">
             <ul>
               <li>
                 <Link to="/">Sign Up</Link>

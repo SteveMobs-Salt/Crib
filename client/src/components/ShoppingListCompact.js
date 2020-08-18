@@ -2,7 +2,7 @@ import React from 'react'
 
 const ShoppingListCompact = () => {
   return (
-    <div>
+    <div className="shopping-compact">
       Shopping list
     </div>
   )

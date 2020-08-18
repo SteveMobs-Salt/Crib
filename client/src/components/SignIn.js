@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import axios from "axios";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const history = useHistory();
 
     const onSubmit = event => {
         event.preventDefault();
@@ -17,7 +19,7 @@ const SignInForm = () => {
         axios
             .post('/api/auth/register_login', userData)
             .then(res => {
-                console.log(res);
+                history.push('/dashboard');
             })
             .catch(err => {
                 console.log(err);
