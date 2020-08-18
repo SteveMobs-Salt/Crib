@@ -1,0 +1,50 @@
+body {
+  background-color: #f4f4f4;
+}
+
+a:link{
+  color: #60a4c9;
+  text-decoration: none;
+}
+
+a:active{
+  color: #60a4c9;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #63879b;
+  text-decoration: none;
+}
+
+a:visited{
+  color: #60a4c9;
+  text-decoration: none;
+}
+
+.expenses-compact{
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  height: 100px;
+  box-shadow: 5px 5px 5px #bfbdbd;
+}
+
+.budget-compact{
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  height: 100px;
+  box-shadow: 5px 5px 5px #bfbdbd;
+}
+
+.shopping-compact{
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  height: 100px;
+  box-shadow: 5px 5px 5px #bfbdbd;
+}
