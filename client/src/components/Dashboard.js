@@ -1,5 +1,5 @@
 import React, { Component, useContext } from 'react'
-import UserContext from '../UserContext'
+import UserContext from '../contexts/UserContext'
 import BudgetCompact from './BudgetCompact'
 import ExpensesCompact from './ExpensesCompact'
 import ShoppingListCompact from './ShoppingListCompact'

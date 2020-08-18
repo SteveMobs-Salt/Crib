@@ -38,7 +38,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/api/auth', auth);
-app.get('/', (req, res) => res.send('Good monring sunshine!'));
+app.get('/', (req, res) => res.send('Good morning sunshine!'));
 
 // obsolete
 // app.get("/createHousehold", (req, res) => {
@@ -53,8 +53,9 @@ app.get('/', (req, res) => res.send('Good monring sunshine!'));
 
 app.post('/expenses', async (req, res) => {
   const owner = req.session.passport.user;
-  const { id } = req.body;
-  const household = await Household.findById(id);
+//   const { householdId } = req.body;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
   const uuid = uuidv4();
   household.expenses.push({ _id: uuid, name: 'groceries', amount: 5.99 });
   household.save();
@@ -62,5 +63,29 @@ app.post('/expenses', async (req, res) => {
     data: household,
   });
 });
+
+//TODO have session; expense body posted to household id
+app.post('/shopping_list', async (req, res) => {
+  const owner = req.session.passport.user;
+  const { name } = req.body;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  //for a group : if(household.owner === owner | household.owner.includes(id) OR pass along groupId )
+  if(household.owner === owner){
+    const uuid = uuidv4();
+    household.shoppingList.push({ _id: uuid, name, bought: false});
+    household.save();
+    res.json({
+        household,
+    });
+  }
+});
+
+//Fetch household data
+app.get('/household', async (req, res) => {
+    const householdId = req.session.household;
+    const household = await Household.findById(householdId);
+    res.json(household);
+})
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

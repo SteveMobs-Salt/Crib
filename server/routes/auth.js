@@ -16,7 +16,8 @@ router.post("/register_login", (req, res, next) => {
                 return res.status(400).json({ errors: err });
             }
             const household = await Household.findOne({owner: user.id}).exec()
-            return res.status(200).json({ 
+            req.session.household = household.id;
+            return res.status(200).json({
                 success: `logged in as ${user.id}`,
                 user: user.id,
                 household: household.id,
