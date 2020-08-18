@@ -42,37 +42,54 @@ app.get('/', (req, res) => res.send('Good morning sunshine!'));
 
 app.post('/expenses', async (req, res) => {
   // const owner = req.session.passport.user;
-  const { amount, debtors, name, category } = req.body;
+  const {
+    amount,
+    debtors,
+    name,
+    category,
+  } = req.body;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
   const uuid = uuidv4();
-  household.expenses.push({ _id: uuid, name, amount, debtors, category, date: Date.now() });
+  household.expenses
+    .push({
+      _id: uuid,
+      name,
+      amount,
+      debtors,
+      category,
+      date: Date.now(),
+    });
   household.save();
   res.json({
     data: household,
   });
 });
 
-app.delete('/expenses', async(req, res) => {
+app.delete('/expenses', async (req, res) => {
   const { id } = req.query;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
   const index = household.expenses.map(a => a._id).indexOf(id);
+  if (index === -1) {
+    return res.status(404).end();
+  }
   household.expenses.splice(index, 1);
   household.save();
-  res.json(household);
-})
+  return res.json(household);
+});
 
-//TODO have session; expense body posted to household id
+// TODO have session; expense body posted to household id
 app.post('/shopping_list', async (req, res) => {
   const owner = req.session.passport.user;
   const { name } = req.body;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
-  //for a group : if(household.owner === owner | household.owner.includes(id) OR pass along groupId )
-  if(household.owner === owner){
+  // for a group : if(household.owner === owner | household.owner.includes(id)
+  // OR pass along groupId )
+  if (household.owner === owner) {
     const uuid = uuidv4();
-    household.shoppingList.push({ _id: uuid, name, bought: false});
+    household.shoppingList.push({ _id: uuid, name, bought: false });
     household.save();
     res.json(household);
   }
@@ -82,17 +99,21 @@ app.delete('/shopping_list', async (req, res) => {
   const { id } = req.query;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
-  const index = household.shoppingList.map( a => a._id).indexOf(id);
+  /* eslint no-underscore-dangle: 0 */
+  const index = household.shoppingList.map(a => a._id).indexOf(id);
+  if (index === -1) {
+    return res.status(404).end();
+  }
   household.shoppingList.splice(index, 1);
   household.save();
-  res.json(household);
-})
+  return res.json(household);
+});
 
-//Fetch household data
+// Fetch household data
 app.get('/household', async (req, res) => {
-    const householdId = req.session.household;
-    const household = await Household.findById(householdId);
-    res.json(household);
-})
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  res.json(household);
+});
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

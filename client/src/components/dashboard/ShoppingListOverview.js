@@ -27,6 +27,14 @@ function ShoppingListOverview() {
       .catch(err => console.log(err));
   };
 
+  const handleDelete = id => {
+    console.log(id);
+    axios
+    .delete(`/shopping_list?id=${id}`)
+    .then(data => setHousehold(data.data))
+    .catch( err => console.log(err) );
+  }
+
     return (
       <div>
         <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
@@ -34,10 +42,11 @@ function ShoppingListOverview() {
         <form onSubmit={event => handleSubmit(event)}>
           <label>Add item</label>
           <input onChange={event => setItem(event.target.value)} />
-          <button>Submit</button>
+          <button>Submit</button> 
         </form>
         {/* form + inputfield */}
-        {shoppingList ? shoppingList.map(item => <p>{item.name}</p>) : <p>Add items to buy here</p>}
+        {shoppingList ? shoppingList.map(item => <p>{item.name}
+        <button onClick={() => handleDelete(item._id)}>Remove</button></p>) : <p>Add items to buy here</p>}
       </div>
     );
   }
