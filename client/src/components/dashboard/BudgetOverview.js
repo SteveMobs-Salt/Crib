@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,28 +17,47 @@ function BudgetOverview() {
     household: { budgets, expenses, categories },
   } = useContext(HouseholdContext);
   const { path, url } = useRouteMatch();
+  console.log(budgets, expenses, categories);
   // map over categories, which maps over expenses matching the categories
-  let data = [];
+  let data = null;
   if (budgets && expenses && categories) {
+    console.log('this if is met');
     data = categories.map(cat => {
       let total = expenses
         .filter(exp => exp.category === cat)
         .map(e => e.amount)
         .reduce((a, c) => a + c, 0);
-      let {amount} = budgets.find(a=> a.category === cat)
-
-      return { category: cat, spent: parseFloat(total.toFixed(2)), limit: amount };
+      let { amount } = budgets.find(a => a.category === cat);
+      return {
+        category: cat,
+        spent: parseFloat(total.toFixed(2)),
+        limit: amount,
+      };
     });
   }
   return (
     <div>
       <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
       <h2>Budget</h2>
-      <Link to={`${url}/add`}><button>Add Budget Category</button></Link>
+      <Link to={`${url}/add`}>
+        <button>Add Budget Category</button>
+      </Link>
       {/* {budget.amount} */}
       {/* {budgets.map( budget => <p>{budget}</p>)} */}
       {/* <BudgetChart /> */}
-      { data ? data.map(cat => <CategoryBudgetCompact category={cat.category} spent={cat.spent} limit={cat.limit}/>) : null}
+      {data ? (
+        data.map(cat => (
+          <Link to={`${url}/${cat.category}`}>
+            <CategoryBudgetCompact
+              category={cat.category}
+              spent={cat.spent}
+              limit={cat.limit}
+            />
+          </Link>
+        ))
+      ) : (
+        <p>No data to show</p>
+      )}
     </div>
   );
   // return (

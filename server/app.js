@@ -154,8 +154,10 @@ app.delete('/budget', async (req, res) => {
   if (defaultCat.includes(category)) {
     return res.status(403).end();
   }
-  const index = household.budgets.map(b => b.category).indexOf(category);
-  household.budgets.splice(index, 1);
+  const budgetIndex = household.budgets.map(b => b.category).indexOf(category);
+  const catIndex = household.categories.indexOf(category);
+  household.budgets.splice(budgetIndex, 1);
+  household.categories.splice(catIndex, 1);
   household.save();
   return res.json(household);
 })

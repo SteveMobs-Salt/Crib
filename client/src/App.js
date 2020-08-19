@@ -9,6 +9,7 @@ import BudgetOverview from './components/dashboard/BudgetOverview';
 import ExpensesOverview from './components/dashboard/ExpensesOverview';
 import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
 import CreateBudget from './components/CreateBudget';
+import CategoryBudgetOverview from './components/CategoryBudgetOverview';
 
 function App() {
   const [household, setHousehold] = useState('');
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route exact path="/dashboard/budget">
           <BudgetOverview />
+        </Route>
+        <Route exact path="/dashboard/budget/:category">
+          <CategoryBudgetOverview />
         </Route>
         <Route exact path="/dashboard/budget/add">
           <CreateBudget />
