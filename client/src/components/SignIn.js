@@ -40,6 +40,7 @@ const SignInForm = () => {
             <input type='password' required onChange={event => setPassword(event.target.value)}/>
             <button type='submit'>submit</button>
         </form>
+        <Link to="/">Sign up here</Link>
         </div>
     )}
 

@@ -22,14 +22,6 @@ const SignUpForm = () => {
         axios
             .post('/api/auth/register_login', userData)
             .then(res => {
-                console.log(res)
-                // res.data.household
-                // res.data.user
-                // save to state/context for further interaction
-                setUserID(res.data.user)
-                setHouseholdID(res.data.household)
-                // window.location.href = '/dashboard';
-                // window.location.replace("/dashboard");
                 history.push('/dashboard')
             })
             .catch(err => {
@@ -52,7 +44,7 @@ const SignUpForm = () => {
             <input type='password' required onChange={event => setPassword(event.target.value)}/>
             <button type='submit'>submit</button>
         </form>
-            <p>Already have an account? <a href="# ">Login here!</a></p>
+            <p>Already have an account? <Link to="/signin">Login here!</Link></p>
 
         </div>
     )}
