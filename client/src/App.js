@@ -46,11 +46,11 @@ function App() {
         <Route exact path="/dashboard/budget">
           <BudgetOverview />
         </Route>
-        <Route exact path="/dashboard/budget/:category">
-          <CategoryBudgetOverview />
-        </Route>
-        <Route exact path="/dashboard/budget/add">
+        <Route path="/dashboard/budget/add">
           <CreateBudget />
+        </Route>
+        <Route path="/dashboard/budget/:category">
+          <CategoryBudgetOverview />
         </Route>
         <Route exact path="/dashboard/expenses">
           <ExpensesOverview />
