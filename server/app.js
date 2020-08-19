@@ -76,6 +76,7 @@ app.delete('/expenses', async (req, res) => {
   }
   household.expenses.splice(index, 1);
   household.save();
+  console.log(id);
   return res.json(household);
 });
 
