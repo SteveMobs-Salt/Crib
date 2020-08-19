@@ -10,6 +10,7 @@ import ExpensesOverview from './components/dashboard/ExpensesOverview';
 import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
 import CreateBudget from './components/CreateBudget';
 import CategoryBudgetOverview from './components/CategoryBudgetOverview';
+import ExpenseOverview from './components/ExpenseOverview';
 
     //!When context changes set to local storage
     //!need to make a dynamic connection between local storage and context
@@ -54,6 +55,9 @@ function App() {
         </Route>
         <Route exact path="/dashboard/expenses">
           <ExpensesOverview />
+        </Route>
+        <Route exact path="/dashboard/expenses/:id">
+          <ExpenseOverview />
         </Route>
         <Route path="/dashboard/shopping-list">
           <ShoppingListOverview />

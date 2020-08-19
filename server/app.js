@@ -79,6 +79,22 @@ app.delete('/expenses', async (req, res) => {
   return res.json(household);
 });
 
+app.put('/expenses', async (req, res) => {
+  const { name, id, amount, debtors, category } = req.body;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  const index = household.expenses.map(a => a._id).indexOf(id);
+  if(index === -1){
+    return res.status(404).end();
+  }
+  if(name) household.expenses[index].name = name;
+  if(category) household.expenses[index].category = category;
+  if(debtors) household.expenses[index].debtors = debtors;
+  if(amount) household.expenses[index].amount = amount;
+  household.save();
+  return res.json(household);
+});
+
 // TODO have session; expense body posted to household id
 app.post('/shopping_list', async (req, res) => {
   const owner = req.session.passport.user;
