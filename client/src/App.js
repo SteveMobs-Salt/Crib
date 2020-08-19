@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import BudgetOverview from './components/dashboard/BudgetOverview';
 import ExpensesOverview from './components/dashboard/ExpensesOverview';
 import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
-
+import CreateBudget from './components/CreateBudget';
 
 function App() {
   const [household, setHousehold] = useState('');
@@ -40,10 +40,13 @@ function App() {
         <Route exact path="/dashboard">
           <Dashboard />
         </Route>
-        <Route path="/dashboard/budget">
+        <Route exact path="/dashboard/budget">
           <BudgetOverview />
         </Route>
-        <Route path="/dashboard/expenses">
+        <Route exact path="/dashboard/budget/add">
+          <CreateBudget />
+        </Route>
+        <Route exact path="/dashboard/expenses">
           <ExpensesOverview />
         </Route>
         <Route path="/dashboard/shopping-list">

@@ -117,14 +117,47 @@ app.get('/household', async (req, res) => {
 });
 
 app.post('/budget', async (req, res) => {
-  // const test = await Household.findOne({owner: 'Ali'});
-  // console.log(test)
-  // test.budget.amount = 1500;
-  // test.budget.categories = [""]
-  // // test.budget = new Household.budget({ amount: 5000, categories: [1,2 ,3]})
-  // console.log(test)
-  // test.save()
-  res.end();
+  const { category, amount } = req.body;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  household.budgets.push({ category, amount });
+  household.categories.push(category);
+  household.save();
+  res.json(household);
+})
+
+app.put('/budget', async (req, res) => {
+  const { category, amount } = req.body;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  const index = household.budgets.map(b => b.category).indexOf(category);
+  if (index === -1) {
+    return res.status(404).end();
+  }
+  household.budgets[index].amount = amount;
+  household.save();
+  return res.json(household);
+})
+
+app.delete('/budget', async (req, res) => {
+  const { category } = req.body;
+  const householdId = req.session.household;
+  const household = await Household.findById(householdId);
+  const defaultCat = [
+    'Groceries',
+    'Housing',
+    'Utilities',
+    'Transportation',
+    'Insurance',
+    'Loan Repayments'
+  ];
+  if (defaultCat.includes(category)) {
+    return res.status(403).end();
+  }
+  const index = household.budgets.map(b => b.category).indexOf(category);
+  household.budgets.splice(index, 1);
+  household.save();
+  return res.json(household);
 })
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

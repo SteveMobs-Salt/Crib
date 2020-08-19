@@ -20,14 +20,13 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
-
       {/* /dashboard/budget */}
       <Link to={`${url}/budget`} >
         <BudgetCompact budget={household.budget} expenses={household.expenses} />
       </Link>
       {/* /dashboard/expenses */}
       <Link to={`${url}/expenses`} >
-        <ExpensesCompact expenses={household.expenses}/>
+        <ExpensesCompact expenses={household.expenses} />
       </Link>
       {/* /dashboard/shopping-list */}
       <Link to={`${url}/shopping-list`} >

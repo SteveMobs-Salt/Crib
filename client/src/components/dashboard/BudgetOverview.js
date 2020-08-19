@@ -16,7 +16,7 @@ function BudgetOverview() {
   const {
     household: { budgets, expenses, categories },
   } = useContext(HouseholdContext);
-
+  const { path, url } = useRouteMatch();
   // map over categories, which maps over expenses matching the categories
   let data = [];
   if (budgets && expenses && categories) {
@@ -34,6 +34,7 @@ function BudgetOverview() {
     <div>
       <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
       <h2>Budget</h2>
+      <Link to={`${url}/add`}><button>Add Budget Category</button></Link>
       {/* {budget.amount} */}
       {/* {budgets.map( budget => <p>{budget}</p>)} */}
       {/* <BudgetChart /> */}
