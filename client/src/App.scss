@@ -1,3 +1,27 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   background-color: #f4f4f4;
 }
@@ -20,6 +44,10 @@ a:hover{
 a:visited{
   color: #60a4c9;
   text-decoration: none;
+}
+
+.app {
+  margin:10px
 }
 
 .expenses-compact{
@@ -47,4 +75,32 @@ a:visited{
   padding: 10px;
   height: 100px;
   box-shadow: 5px 5px 5px #bfbdbd;
+}
+
+.header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  nav {
+    display: flex;
+    align-content: center;
+    i {
+      align-self: center;
+      margin-right: 10px;
+    }
+  }
+  a {
+    align-self: center;
+    margin-right: 10;
+  }
+}
+
+.compact {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
 }

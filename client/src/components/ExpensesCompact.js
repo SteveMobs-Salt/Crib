@@ -12,7 +12,7 @@ const ExpensesCompact = ({ expenses }) => {
   return (
     <div className="expenses-compact">
       <h4>Expenses</h4>
-      <p>{total ? ` $${total}` : `<p>Add your expenses</p>`}</p>
+      <p>{total ? ` $${total}` : `Add your expenses`}</p>
       {latest.map(item => <p>{item.name}{' '}{'$'}{item.amount}</p>)}
       <ExpenseCompactView />
     </div>

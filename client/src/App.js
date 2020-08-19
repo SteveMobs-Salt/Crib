@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import './App.css';
+import './App.scss';
 import SignUpForm from './components/SignUp';
 import SignInForm from './components/SignIn';
 import Dashboard from './components/Dashboard';
@@ -11,6 +11,7 @@ import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
 import CreateBudget from './components/CreateBudget';
 import CategoryBudgetOverview from './components/CategoryBudgetOverview';
 import ExpenseOverview from './components/ExpenseOverview';
+import CreateExpense from './components/CreateExpense';
 
     //!When context changes set to local storage
     //!need to make a dynamic connection between local storage and context
@@ -19,6 +20,7 @@ function App() {
 
   const householdValue = { household, setHousehold };
   return (
+    <div className="app">
     <HouseholdContext.Provider value={householdValue}>
     <Router>
       {/*
@@ -56,7 +58,10 @@ function App() {
         <Route exact path="/dashboard/expenses">
           <ExpensesOverview />
         </Route>
-        <Route exact path="/dashboard/expenses/:id">
+        <Route path="/dashboard/expenses/add">
+          <CreateExpense />
+        </Route>
+        <Route path="/dashboard/expenses/:id">
           <ExpenseOverview />
         </Route>
         <Route path="/dashboard/shopping-list">
@@ -65,6 +70,7 @@ function App() {
       </Switch>
     </Router>
   </HouseholdContext.Provider>
+  </div>
   );
 }
 

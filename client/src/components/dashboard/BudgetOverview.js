@@ -37,11 +37,16 @@ function BudgetOverview() {
   }
   return (
     <div>
-      <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
-      <h2>Budget</h2>
-      <Link to={`${url}/add`}>
-        <button>Add Budget Category</button>
-      </Link>
+      <div className="header">
+        <nav>
+          <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
+          <h2>Budget</h2>
+        </nav>
+        <Link to={`${url}/add`}>
+          <button>Add Budget Category</button>
+        </Link>
+      </div>
+
       {/* {budget.amount} */}
       {/* {budgets.map( budget => <p>{budget}</p>)} */}
       {/* <BudgetChart /> */}

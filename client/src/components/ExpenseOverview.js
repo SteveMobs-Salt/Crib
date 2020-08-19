@@ -29,6 +29,7 @@ function ExpenseOverview() {
             .delete(`/expenses?id=${id}`)
             .then(data => setHousehold(data.data))
             .catch(err => console.log(err));
+        history.go(-1);
     }
 
 
