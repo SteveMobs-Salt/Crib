@@ -10,11 +10,11 @@ const ExpensesCompact = ({ expenses }) => {
   }
 
   return (
-    <div className="expenses-compact">
+    <div className="compact expenses">
       <h4>Expenses</h4>
       <p>{total ? ` $${total}` : `Add your expenses`}</p>
-      {latest.map(item => <p>{item.name}{' '}{'$'}{item.amount}</p>)}
-      <ExpenseCompactView />
+      {latest.map(item => <ExpenseCompactView  name={item.name} amount={item.amount} category={item.category} date={item.date}/>)}
+      
     </div>
   )
 }

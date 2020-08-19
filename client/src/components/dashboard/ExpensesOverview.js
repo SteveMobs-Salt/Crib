@@ -9,6 +9,30 @@ import {
 } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
 import ExpenseCompactView from './ExpenseCompactView';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCoffee,
+  faUtensils,
+  faHamburger,
+  faBolt,
+  faShower,
+  faSubway,
+  faMoneyCheckAlt,
+  faHouseDamage,
+  faHospitalUser,
+  faPiggyBank,
+  faHouseUser,
+  faSwimmer,
+  faCocktail,
+  faUserSecret,
+  faTshirt,
+  faDice,
+  faCalculator,
+  faShoppingBasket,
+  faChevronCircleLeft,
+  faChevronLeft,
+  faPlus
+} from '@fortawesome/free-solid-svg-icons';
 
 function ExpensesOverview() {
   const { url } = useRouteMatch();
@@ -22,11 +46,11 @@ function ExpensesOverview() {
       <div className="">
         <div className="header">
           <nav>
-          <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
-          <h2>Expenses</h2>
+            <FontAwesomeIcon icon={faChevronLeft} size="lg" onClick={() => history.go(-1)}/>
+            <h2>Expenses</h2>
           </nav>
           <Link to={`${url}/add`}>
-            <i className="fa fa-plus"></i>
+            <FontAwesomeIcon icon={faPlus} size="lg" />
           </Link>
         </div>
         {/* map over <ExpenseCompactView />  */}
@@ -36,6 +60,7 @@ function ExpensesOverview() {
               category={expense.category}
               amount={expense.amount}
               name={expense.name}
+              date={expense.date}
             />
           </Link>
         ))}

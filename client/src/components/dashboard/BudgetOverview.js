@@ -21,7 +21,6 @@ function BudgetOverview() {
   // map over categories, which maps over expenses matching the categories
   let data = null;
   if (budgets && expenses && categories) {
-    console.log('this if is met');
     data = categories.map(cat => {
       let total = expenses
         .filter(exp => exp.category === cat)

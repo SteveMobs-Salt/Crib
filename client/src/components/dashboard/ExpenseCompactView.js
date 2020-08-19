@@ -1,13 +1,84 @@
-import React from 'react'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCoffee,
+  faUtensils,
+  faHamburger,
+  faBolt,
+  faShower,
+  faSubway,
+  faMoneyCheckAlt,
+  faHouseDamage,
+  faHospitalUser,
+  faPiggyBank,
+  faHouseUser,
+  faSwimmer,
+  faCocktail,
+  faUserSecret,
+  faTshirt,
+  faDice,
+  faCalculator,
+  faShoppingBasket,
+} from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 
-function ExpenseCompactView({ name, amount, category }) {
+function ExpenseCompactView({ name, amount, category, date }) {
+  let icon = null;
+  switch (category) {
+    case 'Entertainment':
+      icon = faCocktail;
+      break;
+    case 'Housing':
+      icon = faHouseUser;
+      break;
+    case 'Groceries':
+      icon = faShoppingBasket;
+      break;
+    case 'Utilities':
+      icon = faShower;
+      break;
+    case 'Transport':
+      icon = faSubway;
+      break;
+    case 'Loan Repayments':
+      icon = faMoneyCheckAlt;
+      break;
+    case 'Insurance':
+      icon = faHospitalUser;
+      break;
+    case 'Fitness':
+      icon = faSwimmer;
+      break;
+    case 'Clothing':
+      icon = faUserSecret;
+      break;
+    case 'Dining':
+      icon = faUtensils;
+      break;
+    default:
+      icon = faDice;
+      break;
+  }
   return (
-    <div>
+    <div className="compact">
       {/* category with icon / possible its own component Icon */}
-      {amount}
-      {name}
+      <div className="expense">
+        <div className="details">
+          <div className="category-icon">
+            <FontAwesomeIcon icon={icon} size="lg" />
+          </div>
+          <div className="info">
+            <span className="category">{category}</span>
+            <span className="name">{name}</span>
+          </div>
+        </div>
+        <div className="numbers">
+          <span className="amount">${amount}</span>
+          <span className="date">{moment(date).format('MMM Do')}</span>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default ExpenseCompactView
+export default ExpenseCompactView;
