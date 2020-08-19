@@ -11,6 +11,8 @@ import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
 import CreateBudget from './components/CreateBudget';
 import CategoryBudgetOverview from './components/CategoryBudgetOverview';
 
+    //!When context changes set to local storage
+    //!need to make a dynamic connection between local storage and context
 function App() {
   const [household, setHousehold] = useState('');
 
