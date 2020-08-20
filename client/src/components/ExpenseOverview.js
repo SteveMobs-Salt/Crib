@@ -26,7 +26,7 @@ function ExpenseOverview() {
     const handleDelete = event => {
         event.preventDefault();
         axios
-            .delete(`/expenses?id=${id}`)
+            .delete(`/expenses?id={id}`)
             .then(data => setHousehold(data.data))
             .catch(err => console.log(err));
         history.go(-1);

@@ -10,6 +10,9 @@ import {
 import HouseholdContext from '../../contexts/HouseholdContext';
 import { func } from 'prop-types';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faTrash} from '@fortawesome/free-solid-svg-icons';
+
 
 function ShoppingListOverview() {
   const history = useHistory();
@@ -37,17 +40,20 @@ function ShoppingListOverview() {
   }
 
     return (
-      <div>
-        <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
-        <h2>Shopping List</h2>
+      <div className="shoppingList-overview">
+         <div className="header">
+          <nav>
+            <FontAwesomeIcon icon={faChevronLeft} size="lg" onClick={() => history.go(-1)}/>
+            <h2>Shopping List</h2>
+          </nav>
+        </div>
         <form onSubmit={event => handleSubmit(event)}>
-          <label>Add item</label>
-          <input name="item" />
-          <button>Submit</button> 
+          <input name="item" required placeholder="Need anything?"/>
+          <button>Submit</button>
         </form>
         {/* form + inputfield */}
-        {shoppingList ? shoppingList.sort((a, b) => b.date - a.date).map(item => <p>{item.name}
-        <button onClick={() => handleDelete(item._id)}>Remove</button></p>) : <p>Add items to buy here</p>}
+        {shoppingList ? shoppingList.sort((a, b) => b.date - a.date).map(item => <div className="compact"><div className="shopping-item"><p className="item-name">{item.name}</p>
+        <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(item._id)}/></div></div>) : <p>Add items to buy here</p>}
       </div>
     );
   }

@@ -7,7 +7,7 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-  
+
 }
 
 body,
@@ -153,10 +153,29 @@ a:visited {
   // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); light
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.23);
   overflow: hidden;
+
+  .shopping-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .item-name {
+      font-weight: 700;
+      margin-left: 5px;
+      font-size: 1.1em;
+    }
+    svg {
+      align-self: center;
+      color: rgb(247, 98, 98);
+      margin-right: 5px;
+      font-size: 1.1em;
+    }
+  }
   .compact-title {
     position: relative;
+    width: 100%;
     // overflow: hidden;
-    
+
     .icon {
       opacity: 0.4;
       position: absolute;
@@ -177,6 +196,25 @@ a:visited {
       z-index: 10;
     }
   }
+  .details{
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+
+  .compact-extitle {
+    display: flex;
+    justify-content: space-between;
+    .title{
+    font-weight: 800;
+    font-size: 1.4em;
+    }
+    .total-expenses{
+      font-weight: 600;
+      font-size: 1.1em;
+      align-self: center;
+    }
+  }
+
   &.budget {
     border-color: rgba(84, 144, 255, 0.2);
     display: flex;
@@ -247,5 +285,11 @@ a:visited {
         font-size: 0.9em;
       }
     }
+  }
+}
+
+.shoppingList-overview {
+  form {
+    border: solid black 2px
   }
 }
