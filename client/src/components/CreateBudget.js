@@ -19,7 +19,7 @@ function CreateBudget() {
         event.preventDefault();
         const body = {
             category: event.target.category.value,
-            amount: event.target.amount.value
+            amount: parseInt(event.target.amount.value)
         }
         axios.post('/budget', body)
             .then( data => {
@@ -31,7 +31,7 @@ function CreateBudget() {
                 history.go(-2)
             })
             .catch(err => console.log(err))
-        
+
     }
 
     return (
