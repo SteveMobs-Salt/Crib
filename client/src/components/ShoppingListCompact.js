@@ -13,8 +13,7 @@ const ShoppingListCompact = ({items}) => {
           {/* <FontAwesomeIcon icon={faEuroSign} size="8x" /> */}
         </span>
         <span className="title">Shopping List</span>
-        
-        {items?  items.splice(0, 3).map(i => <ShoppingListItem  item={i}/>) : null}
+        {items?  items.splice(0, 3).map(i => <ShoppingListItem key={i._id} item={i}/>) : null}
       </div>
     </div>
   )

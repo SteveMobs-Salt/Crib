@@ -19,7 +19,7 @@ const ExpensesCompact = ({ expenses }) => {
         <span className="title">Expenses</span>
         <span className="total-expenses">{total ? ` €${total}` : `Add your expenses`}</span>
       </div>
-      {latest.map(item => <ExpenseCompactView  name={item.name} amount={item.amount} category={item.category} date={item.date}/>)}
+      {latest.map(item => <ExpenseCompactView key={item._id} name={item.name} amount={item.amount} category={item.category} date={item.date}/>)}
 
     </div>
   )
