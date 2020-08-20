@@ -11,7 +11,7 @@ import HouseholdContext from '../../contexts/HouseholdContext';
 import { func } from 'prop-types';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faTrash, faPlus} from '@fortawesome/free-solid-svg-icons';
 
 
 function ShoppingListOverview() {
@@ -49,7 +49,7 @@ function ShoppingListOverview() {
         </div>
         <form onSubmit={event => handleSubmit(event)}>
           <input name="item" required placeholder="Need anything?"/>
-          <button>Submit</button>
+          <button type="submit"><FontAwesomeIcon icon={faPlus} /></button>
         </form>
         {/* form + inputfield */}
         {shoppingList ? shoppingList.sort((a, b) => b.date - a.date).map(item => <div className="compact"><div className="shopping-item"><p className="item-name">{item.name}</p>

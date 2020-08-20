@@ -290,6 +290,37 @@ a:visited {
 
 .shoppingList-overview {
   form {
-    border: solid black 2px
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    input {
+      width: 90%;
+      height: 48px;
+      font-weight: 600;
+
+      font-size: 1em;
+      padding-left: 15px;
+      border-radius: 10px;
+      border: 2px solid #f3f3f3;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.23);
+      &::placeholder{
+        color: rgb(196, 193, 193);
+      }
+    }
+    button {
+      border: none;
+      background: none;
+      margin: 0;
+      padding: 0;
+      font-size: 1.8em;
+      align-self: center;
+      margin-right: 12px;
+      margin-left: 12px;
+      svg {
+        // font-size: 1.2em;
+        color: rgb(133, 235, 133);
+      }
+    }
   }
 }
