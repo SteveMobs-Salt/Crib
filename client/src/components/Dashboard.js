@@ -35,7 +35,7 @@ import {
 
 const Dashboard = () => {
   const { userID } = useContext(UserContext);
-  const { setHousehold, household: { expenses, budgets} } = useContext(HouseholdContext);
+  const { setHousehold, household: { expenses, budgets, shoppingList} } = useContext(HouseholdContext);
   const { path, url } = useRouteMatch();
 
   useEffect(() => {
@@ -49,10 +49,11 @@ const Dashboard = () => {
   if (expenses && budgets) {
     totalBudget = budgets.reduce((a, c) => a+c.amount, 0)
     totalSpent = expenses.reduce((a, c) => a+c.amount, 0)
+    console.log(shoppingList)
   }
 
   return (
-    <div>
+    <div className="dashboard">
       <div className="header">
           <nav>
             {/* <FontAwesomeIcon icon={faChevronLeft} size="lg" onClick={() => history.go(-1)}/> */}
@@ -76,7 +77,7 @@ const Dashboard = () => {
       </Link>
       {/* /dashboard/shopping-list */}
       <Link to={`${url}/shopping-list`} >
-        <ShoppingListCompact />
+        <ShoppingListCompact items={shoppingList}/>
       </Link>
     </div>
   )

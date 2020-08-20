@@ -3,8 +3,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   faEuroSign
 } from '@fortawesome/free-solid-svg-icons';
+import ShoppingListItem from './ShoppingListItem';
 
-const ShoppingListCompact = () => {
+const ShoppingListCompact = ({items}) => {
   return (
     <div className="compact shopping">
        <div className="compact-title">
@@ -12,6 +13,8 @@ const ShoppingListCompact = () => {
           {/* <FontAwesomeIcon icon={faEuroSign} size="8x" /> */}
         </span>
         <span className="title">Shopping List</span>
+        
+        {items?  items.splice(0, 3).map(i => <ShoppingListItem  item={i}/>) : null}
       </div>
     </div>
   )

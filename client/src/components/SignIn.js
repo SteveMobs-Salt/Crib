@@ -40,11 +40,14 @@ const SignInForm = () => {
                 <input type='password' placeholder="Password"
                     required onChange={event => setPassword(event.target.value)} />
                 <div className="actions">
-                    <h1>Sign in</h1>
+                    <h1>Sign In</h1>
                     <button type='submit'><FontAwesomeIcon icon={faArrowCircleRight} /></button>
                 </div>
             </form>
-            <Link to="/">Sign up here</Link>
+            <p className="log-type">
+        <Link to="/">Sign up</Link>
+      </p>
+            {/* <Link to="/">Sign up here</Link> */}
         </div>
     )
 }
