@@ -10,6 +10,8 @@ import {
     useParams
 } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function ExpenseOverview() {
 
@@ -39,16 +41,23 @@ function ExpenseOverview() {
         // const debtors = event.target.expense.debtors.value;
         const category = event.target.category.value;
         axios
-            .put(`/expenses`, {name, id, amount, category})
-            .then( data => setHousehold(data.data))
+            .put(`/expenses`, { name, id, amount, category })
+            .then(data => setHousehold(data.data))
             .catch(err => console.log(err))
     }
 
     return (
-
-        <div>
-            <i className="fa fa-chevron-left"
-                onClick={() => history.go(-1)}></i>
+        <div className="expense-overview">
+            <div className="header">
+                <nav>
+                    <FontAwesomeIcon
+                        icon={faChevronLeft}
+                        size="lg"
+                        onClick={() => history.go(-1)}
+                    />
+                    <h3>{expense.name}</h3>
+                </nav>
+            </div>
             <h4>{expense.name}{' '}{expense.amount}</h4>
             <p>Category: {expense.category}</p>
             <p>Date:{expense.date}</p>
@@ -62,8 +71,8 @@ function ExpenseOverview() {
                     <input name="name" type="text" placeholder={expense.name} />
                     <input name="amount" type="number" placeholder={expense.amount} />
                     <select name="category" type="string">
-                    {
-                            categories ? categories.map( category => <option value={category}>{category}</option>) : null
+                        {
+                            categories ? categories.map(category => <option value={category}>{category}</option>) : null
                         }
                     </select>
                     {/* <input placeholder={expense.debtors}/> */}
