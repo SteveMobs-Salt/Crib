@@ -19,8 +19,7 @@ const BudgetCompact = ({ budget, spent }) => {
     percent = (spent * 100) / budget;
     console.log(percent);
   }
-  //! % spent
-  //!
+  //! 500EUR of budget available
 
   // const amount = budget ? budget.amount : 0;
   // const expenseTotal = expenses ?  expenses.reduce((a, c) => a + c.amount, 0) : 0;
@@ -50,7 +49,7 @@ const BudgetCompact = ({ budget, spent }) => {
           {/* <i className="fas fa-2x fa-piggy-bank"></i> */}
         </CircularProgressbarWithChildren>
       </div>
-      <div className="details">{budget}</div>
+      <div className="details">€{budget}</div>
       {/* <h4>{amount && expenseTotal ? `Total Budget: ${amount}` : null}</h4>
     <h4>{amount && expenseTotal ? `Amount left: ${Number(amount - expenseTotal).toFixed(2)}` : null}</h4> */}
     </div>

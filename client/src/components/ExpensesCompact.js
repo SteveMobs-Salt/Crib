@@ -1,5 +1,9 @@
 import React from 'react'
 import ExpenseCompactView from './dashboard/ExpenseCompactView';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+  faEuroSign
+} from '@fortawesome/free-solid-svg-icons';
 
 const ExpensesCompact = ({ expenses }) => {
   let total = 0;
@@ -11,10 +15,12 @@ const ExpensesCompact = ({ expenses }) => {
 
   return (
     <div className="compact expenses">
-      <h4>Expenses</h4>
-      <p>{total ? ` $${total}` : `Add your expenses`}</p>
+       <div className="compact-extitle">
+        <span className="title">Expenses</span>
+        <span className="total-expenses">{total ? ` €${total}` : `Add your expenses`}</span>
+      </div>
       {latest.map(item => <ExpenseCompactView  name={item.name} amount={item.amount} category={item.category} date={item.date}/>)}
-      
+
     </div>
   )
 }

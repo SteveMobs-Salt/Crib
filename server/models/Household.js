@@ -10,7 +10,7 @@ const HouseholdSchema = new mongoose.Schema(
     },
     budgets: {
         type: Array,
-        default: [{category: "Groceries", amount: 0.00},{category: "Housing", amount: 0.00}, {category: "Utilities", amount: 0.00}, {category: "Transportation", amount: 0.00}, {category: "Utilities", amount: 0.00}, {category: "Loan Repayments", amount: 0.00}]
+        default: [{category: "Groceries", amount: 0.00},{category: "Housing", amount: 0.00}, {category: "Utilities", amount: 0.00}, {category: "Transportation", amount: 0.00}, {category: "Utilities", amount: 0.00}, {category: "Loan Repayments", amount: 0.00}, {category: "Entertainment", amount: 0.00}, {category: "Clothing", amount: 0.00}, {category: "Fitness", amount: 0.00}, {category: "Dining", amount: 0.00}, {category: "Other", amount: 0.00}]
       },
     expenses: {
       type: Array
@@ -23,7 +23,7 @@ const HouseholdSchema = new mongoose.Schema(
     },
     categories: {
       type: Array,
-      default: ["Groceries", "Housing", "Utilities", "Transportation", "Insurance", "Loan Repayments"]
+      default: ["Groceries", "Housing", "Utilities", "Transportation", "Insurance", "Loan Repayments", "Entertainment", "Clothing", "Fitness", "Dining", "Other"]
     }
   },
   { strict: false }

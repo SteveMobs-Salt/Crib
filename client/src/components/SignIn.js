@@ -1,6 +1,8 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');
@@ -28,20 +30,26 @@ const SignInForm = () => {
     };
 
     return (
-        <div className="loginForm">
+        <div className="login-form">
             <header>
-                <h1>Sign in</h1>
+                <h1>Welcome Back</h1>
             </header>
-        <form onSubmit={onSubmit}>
-            <p>Welcome back to your Pad!</p>
-            <p><label>Email</label></p>
-            <input type='email' required onChange={event => setEmail(event.target.value)}/>
-            <p><label>Password</label></p>
-            <input type='password' required onChange={event => setPassword(event.target.value)}/>
-            <button type='submit'>submit</button>
-        </form>
-        <Link to="/">Sign up here</Link>
+            <form onSubmit={onSubmit}>
+                <input type='email' placeholder="Email"
+                    required onChange={event => setEmail(event.target.value)} />
+                <input type='password' placeholder="Password"
+                    required onChange={event => setPassword(event.target.value)} />
+                <div className="actions">
+                    <h1>Sign In</h1>
+                    <button type='submit'><FontAwesomeIcon icon={faArrowCircleRight} /></button>
+                </div>
+            </form>
+            <p className="log-type">
+        <Link to="/">Sign up</Link>
+      </p>
+            {/* <Link to="/">Sign up here</Link> */}
         </div>
-    )}
+    )
+}
 
 export default SignInForm;

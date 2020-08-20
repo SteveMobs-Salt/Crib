@@ -37,7 +37,7 @@ function ExpenseCompactView({ name, amount, category, date }) {
     case 'Utilities':
       icon = faShower;
       break;
-    case 'Transport':
+    case 'Transportation':
       icon = faSubway;
       break;
     case 'Loan Repayments':
@@ -73,7 +73,7 @@ function ExpenseCompactView({ name, amount, category, date }) {
           </div>
         </div>
         <div className="numbers">
-          <span className="amount">${amount}</span>
+          <span className="amount">€{amount}</span>
           <span className="date">{moment(date).format('MMM Do')}</span>
         </div>
       </div>
