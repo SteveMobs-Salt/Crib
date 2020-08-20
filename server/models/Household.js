@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // Create Schema
 const HouseholdSchema = new mongoose.Schema(
@@ -6,28 +6,41 @@ const HouseholdSchema = new mongoose.Schema(
     owner: {
       type: String,
       unique: true,
-      required: true
+      required: true,
     },
     budgets: {
-        type: Array,
-        default: [{category: "Groceries", amount: 0.00},{category: "Housing", amount: 0.00}, {category: "Utilities", amount: 0.00}, {category: "Transportation", amount: 0.00}, {category: "Utilities", amount: 0.00}, {category: "Loan Repayments", amount: 0.00}]
-      },
+      type: Array,
+      default: [
+        { category: 'Groceries', amount: 0.0 },
+        { category: 'Housing', amount: 0.0 },
+        { category: 'Utilities', amount: 0.0 },
+        { category: 'Transportation', amount: 0.0 },
+        { category: 'Utilities', amount: 0.0 },
+        { category: 'Loan Repayments', amount: 0.0 },
+      ],
+    },
     expenses: {
-      type: Array
+      type: Array,
     },
     shoppingList: {
-      type: Array
+      type: Array,
     },
     tabs: {
-      type: Array
+      type: Array,
     },
     categories: {
       type: Array,
-      default: ["Groceries", "Housing", "Utilities", "Transportation", "Insurance", "Loan Repayments"]
-    }
+      default: [
+        'Groceries',
+        'Housing',
+        'Utilities',
+        'Transportation',
+        'Insurance',
+        'Loan Repayments',
+      ],
+    },
   },
-  { strict: false }
+  { strict: false },
 );
 
-
-module.exports = Household = mongoose.model("household", HouseholdSchema);
+module.exports = Household = mongoose.model('household', HouseholdSchema);

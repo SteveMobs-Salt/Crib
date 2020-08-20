@@ -10,6 +10,8 @@ import {
 import HouseholdContext from '../../contexts/HouseholdContext';
 import BudgetChart from '../BudgetChart';
 import CategoryBudgetCompact from '../CategoryBudgetCompact';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function BudgetOverview() {
   const history = useHistory();
@@ -17,36 +19,56 @@ function BudgetOverview() {
     household: { budgets, expenses, categories },
   } = useContext(HouseholdContext);
   const { path, url } = useRouteMatch();
-  console.log(budgets, expenses, categories);
+  // console.log(budgets, expenses, categories);
   // map over categories, which maps over expenses matching the categories
   let data = null;
   if (budgets && expenses && categories) {
+    console.log(budgets);
+    console.log(categories);
     data = categories.map(cat => {
       let total = expenses
         .filter(exp => exp.category === cat)
         .map(e => e.amount)
         .reduce((a, c) => a + c, 0);
       let { amount } = budgets.find(a => a.category === cat);
+      let numOfExpenses = expenses.filter(a => a.category === cat).length;
       return {
         category: cat,
         spent: parseFloat(total.toFixed(2)),
         limit: amount,
+        transactions: numOfExpenses,
       };
     });
   }
   return (
-    <div>
+    <div className="budgets-overview">
       <div className="header">
         <nav>
-          <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            size="lg"
+            onClick={() => history.go(-1)}
+          />
           <h2>Budget</h2>
         </nav>
         <Link to={`${url}/add`}>
-          <button>Add Budget Category</button>
+          <FontAwesomeIcon icon={faPlus} size="lg" />
         </Link>
       </div>
-
-      {/* {budget.amount} */}
+      <div className="numbers-overview">
+        <span className="budget-total">
+          <span className="number">
+            ${budgets ? `${budgets.reduce((a, c) => a + c.amount, 0)}` : null}
+          </span>
+          <span>Total Budget</span>
+        </span>
+        <span className="spent-total">
+          <span className="number">
+            ${expenses ? `${expenses.reduce((a, c) => a + c.amount, 0)}` : null}
+          </span>
+          <span>Total Spent</span>
+        </span>
+      </div>
       {/* {budgets.map( budget => <p>{budget}</p>)} */}
       {/* <BudgetChart /> */}
       {data ? (
@@ -56,6 +78,7 @@ function BudgetOverview() {
               category={cat.category}
               spent={cat.spent}
               limit={cat.limit}
+              transactions={cat.transactions}
             />
           </Link>
         ))
