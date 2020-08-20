@@ -11,13 +11,11 @@ import {
   faHandHoldingUsd,
   faPiggyBank,
 } from '@fortawesome/free-solid-svg-icons';
-
 const BudgetCompact = ({ budget, spent }) => {
   let percent;
   if (budget && spent) {
     //(spent * 100) / budget
     percent = (spent * 100) / budget;
-    console.log(percent);
   }
   //! 500EUR of budget available
 
@@ -25,14 +23,11 @@ const BudgetCompact = ({ budget, spent }) => {
   // const expenseTotal = expenses ?  expenses.reduce((a, c) => a + c.amount, 0) : 0;
   return (
     <div className="compact budget">
-      <div className="compact-title">
-        <span className="icon">
-          <FontAwesomeIcon icon={faEuroSign} size="8x" />
-        </span>
+      <div className="text">
         <span className="title">Budget</span>
+        <span className="details">€{budget}</span>
       </div>
-
-      <div className="progress">
+      {/* <div className="progress">
         <CircularProgressbarWithChildren
           value={percent}
           styles={buildStyles({
@@ -44,12 +39,17 @@ const BudgetCompact = ({ budget, spent }) => {
             trailColor: '#dfdfdf',
             backgroundColor: '#3e98c7',
           })}
+          strokeWidth={10}
           text={`${parseInt(percent)}%`}
         >
-          {/* <i className="fas fa-2x fa-piggy-bank"></i> */}
         </CircularProgressbarWithChildren>
+        <div className="bar"></div>
+      </div> */}
+
+      <div id="myProgress">
+        <div id="myBar" style={{ width: `${percent}%` }}></div>
       </div>
-      <div className="details">€{budget}</div>
+
       {/* <h4>{amount && expenseTotal ? `Total Budget: ${amount}` : null}</h4>
     <h4>{amount && expenseTotal ? `Amount left: ${Number(amount - expenseTotal).toFixed(2)}` : null}</h4> */}
     </div>

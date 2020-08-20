@@ -49,7 +49,6 @@ const Dashboard = () => {
   if (expenses && budgets) {
     totalBudget = budgets.reduce((a, c) => a+c.amount, 0)
     totalSpent = expenses.reduce((a, c) => a+c.amount, 0)
-    console.log(shoppingList)
   }
 
   return (
