@@ -727,3 +727,72 @@ a:visited {
     }
   }
 }
+
+.create-expense {
+
+  form {
+    margin: 0 auto 20px auto;
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+    input {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: 2px solid #e4e4e4;
+      color: #444;
+      font-weight: 700;
+      &::placeholder {
+        color: #444;
+        font-weight: 700;
+      }
+    }
+    select {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: 2px solid #e4e4e4;
+      background: none;
+
+    }
+    button {
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #e4e4e4;
+    }
+  }
+}
+.create-budget {
+
+  form {
+    margin: 0 auto 20px auto;
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+    input {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: 2px solid #e4e4e4;
+      color: #444;
+      font-weight: 700;
+      &::placeholder {
+        color: #444;
+        font-weight: 700;
+      }
+    }
+    select {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: 2px solid #e4e4e4;
+      background: none;
+
+    }
+    button {
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #e4e4e4;
+    }
+  }
+}

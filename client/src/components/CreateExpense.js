@@ -5,6 +5,8 @@ import {
 } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 function CreateExpense() {
   const {
@@ -34,17 +36,21 @@ function CreateExpense() {
   };
 
   return (
-    <div>
+    <div className="create-expense">
       <div className="header">
         <nav>
-          <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
-          <h2>Create Expense</h2>
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            size="lg"
+            onClick={() => history.go(-1)}
+          />
+          <h2>Add Expense</h2>
         </nav>
       </div>
 
       <form onSubmit={e => handleCreateExpense(e)}>
-        <input type="text" name="name" id="" />
-        <input type="number" name="amount" min="0" />
+        <input type="text" placeholder="Name" name="name" id="" />
+        <input type="number" placeholder="Amount" name="amount" min="0" />
         <select name="category" id="">
           {categories
             ? categories.map(c => <option value={c}>{c}</option>)
