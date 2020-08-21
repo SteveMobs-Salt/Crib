@@ -77,6 +77,14 @@ function ExpenseOverview() {
         <div className="details">
           <span className="amount">€{expense.amount}</span>
 
+          <div className="name tag">
+            {/* <span className="date-icon">
+              <FontAwesomeIcon icon={faCalendarAlt}  size="lg"/>
+            </span> */}
+            <span className="">
+              {expense.name}
+            </span>
+          </div>
 
           <div className="date tag">
             <span className="date-icon">
