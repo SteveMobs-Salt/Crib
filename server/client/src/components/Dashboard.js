@@ -4,7 +4,7 @@ import BudgetCompact from './BudgetCompact'
 import ExpensesCompact from './ExpensesCompact'
 import ShoppingListCompact from './ShoppingListCompact'
 import HouseholdContext from '../contexts/HouseholdContext'
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCoffee,
@@ -37,7 +37,7 @@ const Dashboard = () => {
   const { userID } = useContext(UserContext);
   const { setHousehold, household: { expenses, budgets, shoppingList} } = useContext(HouseholdContext);
   const { path, url } = useRouteMatch();
-
+  const history = useHistory();
   useEffect(() => {
     fetch('/api/household')
       .then(res => res.json())
@@ -50,6 +50,12 @@ const Dashboard = () => {
     totalBudget = budgets.reduce((a, c) => a+c.amount, 0)
     totalSpent = expenses.reduce((a, c) => a+c.amount, 0)
   }
+  
+  const handleLogout = () => {
+    fetch('/api/auth/logout')
+      .then(res => history.push('/signin'))
+      .catch(err => console.log(err))
+  }
 
   return (
     <div className="dashboard">
@@ -61,7 +67,7 @@ const Dashboard = () => {
           {/* <Link to={`${url}/add`}> */}
           <div className="household-views">
             <FontAwesomeIcon icon={faUser} size="lg" className="person"/>
-            <FontAwesomeIcon icon={faUsers} size="lg" className="group"/>
+            <FontAwesomeIcon icon={faUsers} size="lg" className="group" onClick={()=> handleLogout()} />
           </div>
           {/* </Link> */}
         </div>

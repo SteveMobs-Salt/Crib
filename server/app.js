@@ -3,12 +3,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
-const auth = require('./routes/auth');
 const path = require('path');
+const auth = require('./routes/auth');
 require('dotenv').config();
 
 const app = express();
-var PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 const Household = require('./models/Household');
 const passport = require('./passport/setup');
 
