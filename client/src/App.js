@@ -1,10 +1,10 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import './App.scss';
 import SignUpForm from './components/SignUp';
 import SignInForm from './components/SignIn';
 import Dashboard from './components/Dashboard';
 import HouseholdContext from './contexts/HouseholdContext';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BudgetOverview from './components/dashboard/BudgetOverview';
 import ExpensesOverview from './components/dashboard/ExpensesOverview';
 import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
@@ -16,7 +16,14 @@ import CreateExpense from './components/CreateExpense';
     //!When context changes set to local storage
     //!need to make a dynamic connection between local storage and context
 function App() {
-  const [household, setHousehold] = useState('');
+  const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('localHousehold')) || '');
+
+  useEffect(() => {
+    localStorage.setItem('localHousehold', JSON.stringify(household));
+    return () => {
+    }
+  }, [household])
+
 
   const householdValue = { household, setHousehold };
   return (

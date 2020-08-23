@@ -1,30 +1,27 @@
 import React, { useContext, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useHistory,
-} from 'react-router-dom';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
-import BudgetChart from '../BudgetChart';
 import CategoryBudgetCompact from '../CategoryBudgetCompact';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function BudgetOverview() {
   const history = useHistory();
+  let storage = null;
   const {
     household: { budgets, expenses, categories },
   } = useContext(HouseholdContext);
+
+  if (localStorage.getItem('localHousehold')) {
+    storage = JSON.parse(localStorage.getItem('localHousehold'));
+    console.log(storage)
+    console.log(budgets)
+  }
+
   const { path, url } = useRouteMatch();
-  // console.log(budgets, expenses, categories);
-  // map over categories, which maps over expenses matching the categories
+
   let data = null;
   if (budgets && expenses && categories) {
-    console.log(budgets);
-    console.log(categories);
     data = categories.map(cat => {
       let total = expenses
         .filter(exp => exp.category === cat)

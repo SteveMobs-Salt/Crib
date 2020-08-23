@@ -35,7 +35,7 @@ import {
 
 const Dashboard = () => {
   const { userID } = useContext(UserContext);
-  const { setHousehold, household: { expenses, budgets, shoppingList} } = useContext(HouseholdContext);
+  const { setHousehold, household, household: { expenses, budgets, shoppingList} } = useContext(HouseholdContext);
   const { path, url } = useRouteMatch();
 
   useEffect(() => {
@@ -44,6 +44,13 @@ const Dashboard = () => {
       .then(data => setHousehold(data))
       .catch(err => console.log(err))
   }, [])
+
+  // useEffect(() => {
+  //   localStorage.setItem('localHousehold', JSON.stringify(household));
+  //   return () => {
+  //   }
+  // }, [household])
+
 
   let totalBudget= 0, totalSpent= 0;
   if (expenses && budgets) {
