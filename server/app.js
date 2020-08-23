@@ -92,6 +92,7 @@ app.put('/expenses', async (req, res) => {
   if(category) household.expenses[index].category = category;
   if(debtors) household.expenses[index].debtors = debtors;
   if(amount) household.expenses[index].amount = amount;
+  household.markModified('expenses');
   household.save();
   return res.json(household);
 });
@@ -152,6 +153,7 @@ app.put('/budget', async (req, res) => {
     return res.status(404).end();
   }
   household.budgets[index].amount = amount;
+  household.markModified('budgets');
   household.save();
   return res.json(household);
 })
