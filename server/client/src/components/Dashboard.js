@@ -39,7 +39,7 @@ const Dashboard = () => {
   const { path, url } = useRouteMatch();
 
   useEffect(() => {
-    fetch('/household')
+    fetch('/api/household')
       .then(res => res.json())
       .then(data => setHousehold(data))
       .catch(err => console.log(err))

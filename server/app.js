@@ -4,10 +4,11 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const auth = require('./routes/auth');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3001;
+var PORT = process.env.PORT || 8080;
 const Household = require('./models/Household');
 const passport = require('./passport/setup');
 
@@ -17,6 +18,14 @@ mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(console.log(`MongoDB connected ${MONGO_URI}`))
   .catch(err => console.log(err));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('./client/build'));
+  app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+1;
 
 // Bodyparser middleware, extended false does not allow nested payloads
 app.use(express.json());
@@ -38,28 +47,21 @@ app.use(passport.session());
 
 // Routes
 app.use('/api/auth', auth);
-app.get('/', (req, res) => res.send('Good morning sunshine!'));
 
 app.post('/expenses', async (req, res) => {
   // const owner = req.session.passport.user;
-  const {
-    amount,
-    debtors,
-    name,
-    category,
-  } = req.body;
+  const { amount, debtors, name, category } = req.body;
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
   const uuid = uuidv4();
-  household.expenses
-    .push({
-      _id: uuid,
-      name,
-      amount,
-      debtors,
-      category,
-      date: Date.now(),
-    });
+  household.expenses.push({
+    _id: uuid,
+    name,
+    amount,
+    debtors,
+    category,
+    date: Date.now(),
+  });
   household.save();
   res.json({
     data: household,
@@ -85,13 +87,13 @@ app.put('/expenses', async (req, res) => {
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
   const index = household.expenses.map(a => a._id).indexOf(id);
-  if(index === -1){
+  if (index === -1) {
     return res.status(404).end();
   }
-  if(name) household.expenses[index].name = name;
-  if(category) household.expenses[index].category = category;
-  if(debtors) household.expenses[index].debtors = debtors;
-  if(amount) household.expenses[index].amount = amount;
+  if (name) household.expenses[index].name = name;
+  if (category) household.expenses[index].category = category;
+  if (debtors) household.expenses[index].debtors = debtors;
+  if (amount) household.expenses[index].amount = amount;
   household.save();
   return res.json(household);
 });
@@ -106,7 +108,12 @@ app.post('/shopping_list', async (req, res) => {
   // OR pass along groupId )
   if (household.owner === owner) {
     const uuid = uuidv4();
-    household.shoppingList.push({ _id: uuid, name, bought: false, date: Date.now() });
+    household.shoppingList.push({
+      _id: uuid,
+      name,
+      bought: false,
+      date: Date.now(),
+    });
     household.save();
     res.json(household);
   }
@@ -127,7 +134,7 @@ app.delete('/shopping_list', async (req, res) => {
 });
 
 // Fetch household data
-app.get('/household', async (req, res) => {
+app.get('/api/household', async (req, res) => {
   const householdId = req.session.household;
   const household = await Household.findById(householdId);
   res.json(household);
@@ -141,7 +148,7 @@ app.post('/budget', async (req, res) => {
   household.categories.push(category);
   household.save();
   res.json(household);
-})
+});
 
 app.put('/budget', async (req, res) => {
   const { category, amount } = req.body;
@@ -154,7 +161,7 @@ app.put('/budget', async (req, res) => {
   household.budgets[index].amount = amount;
   household.save();
   return res.json(household);
-})
+});
 
 app.delete('/budget', async (req, res) => {
   const { category } = req.body;
@@ -166,7 +173,7 @@ app.delete('/budget', async (req, res) => {
     'Utilities',
     'Transportation',
     'Insurance',
-    'Loan Repayments'
+    'Loan Repayments',
   ];
   if (defaultCat.includes(category)) {
     return res.status(403).end();
@@ -177,6 +184,6 @@ app.delete('/budget', async (req, res) => {
   household.categories.splice(catIndex, 1);
   household.save();
   return res.json(household);
-})
+});
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));
