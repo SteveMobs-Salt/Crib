@@ -10,25 +10,25 @@ const HouseholdSchema = new mongoose.Schema(
     budgets: {
       type: Array,
       default: [
-        { category: "Groceries", amount: 0.00 },
-        { category: "Housing", amount: 0.00 },
-        { category: "Utilities", amount: 0.00 },
-        { category: "Transportation", amount: 0.00 },
-        { category: "Utilities", amount: 0.00 },
-        { category: "Loan Repayments", amount: 0.00 },
-        { category: "Entertainment", amount: 0.00 },
-        { category: "Clothing", amount: 0.00 },
-        { category: "Fitness", amount: 0.00 },
-        { category: "Dining", amount: 0.00 },
-        { category: "Other", amount: 0.00 }
-      ]
+        { category: 'Groceries', amount: 0.0 },
+        { category: 'Housing', amount: 0.0 },
+        { category: 'Utilities', amount: 0.0 },
+        { category: 'Transportation', amount: 0.0 },
+        { category: 'Utilities', amount: 0.0 },
+        { category: 'Loan Repayments', amount: 0.0 },
+        { category: 'Entertainment', amount: 0.0 },
+        { category: 'Clothing', amount: 0.0 },
+        { category: 'Fitness', amount: 0.0 },
+        { category: 'Dining', amount: 0.0 },
+        { category: 'Other', amount: 0.0 },
+      ],
     },
     type: {
       type: String,
-      default: "Personal"
+      default: 'Personal',
     },
     name: {
-      type: String
+      type: String,
     },
     expenses: {
       type: Array,
@@ -39,22 +39,33 @@ const HouseholdSchema = new mongoose.Schema(
     tabs: {
       type: Array,
     },
+    referral_code: {
+      type: String,
+      default: function () {
+        let hash = 0;
+        for (let i = 0; i < this.type.length; i++) {
+          hash = this.type.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        let res = (hash & 0x00ffffff).toString(16).toUpperCase();
+        return '00000'.substring(0, 6 - res.length) + res;
+      },
+    },
     categories: {
       type: Array,
       default: [
-        "Groceries",
-        "Housing",
-        "Utilities",
-        "Transportation",
-        "Insurance",
-        "Loan Repayments",
-        "Entertainment",
-        "Clothing",
-        "Fitness",
-        "Dining",
-        "Other"
-      ]
-    }
+        'Groceries',
+        'Housing',
+        'Utilities',
+        'Transportation',
+        'Insurance',
+        'Loan Repayments',
+        'Entertainment',
+        'Clothing',
+        'Fitness',
+        'Dining',
+        'Other',
+      ],
+    },
   },
   { strict: false },
 );
