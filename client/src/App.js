@@ -17,17 +17,27 @@ import JoinGroup from './components/JoinGroup';
 
 function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
-  const [selectedHousehold, setSelectedHousehold] = useState(0);
+  const [selectedHousehold, setSelectedHousehold] = useState(parseInt(localStorage.getItem('selectedHousehold')) || 0);
   // console.log(JSON.parse(localStorage.getItem('households'))[0])
-  // if (localStorage.getItem('households')) {
-  //   const storage = JSON.parse(localStorage.getItem('households'))
-  //   setHousehold(storage[0])
-  // }
+  
   useEffect(() => {
     localStorage.setItem('households', JSON.stringify(household));
-    return () => {
-    }
-  }, [household])
+    localStorage.setItem('selectedHousehold', selectedHousehold);
+    // if (localStorage.getItem('households')) {
+    //   const storage = JSON.parse(localStorage.getItem('households'))
+    //   if(storage.length > 1){
+    //     const {i} = storage.map((a, i) => {
+    //       return {
+    //         ...a, i
+    //       }
+    //     }).find(a => a.type !== "Personal")
+    //     console.log(i)
+    //     setSelectedHousehold(i);
+    //   }
+      
+    // }
+  }, [household, selectedHousehold])
+
 
   const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold };
   return (
@@ -35,18 +45,12 @@ function App() {
       <HouseholdContext.Provider value={householdValue}>
         <Router>
           <Switch>
-            {/* <Route exact path="/">
-          <Home />
-        </Route> */}
             <Route exact path="/">
               <SignUpForm />
             </Route>
             <Route exact path="/signin">
               <SignInForm />
             </Route>
-            {/* <Route path="/user">
-        <About />
-      </Route> */}
             <Route exact path="/dashboard">
               <Dashboard />
             </Route>
@@ -65,7 +69,7 @@ function App() {
             <Route path="/dashboard/expenses/add">
               <CreateExpense />
             </Route>
-            <Route path="/dashboard/expenses/:id">
+            <Route path="/dashboard/expenses/:taskId">
               <ExpenseOverview />
             </Route>
             <Route path="/dashboard/shopping-list">

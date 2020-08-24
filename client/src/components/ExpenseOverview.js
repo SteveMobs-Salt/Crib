@@ -25,21 +25,24 @@ function ExpenseOverview() {
   const [editMode, setEditMode] = useState(false);
 
   const history = useHistory();
-  const { id } = useParams();
+  const { taskId } = useParams();
   const {
     setHousehold,
     household: { expenses, categories },
   } = useContext(HouseholdContext);
   let expense;
   if (expenses) {
-    expense = expenses.find(e => e._id === id);
+    expense = expenses.find(e => e._id === taskId);
     console.log(expense);
   }
 
+
+  // not finished
+  // CONTINUE FROM HERE TOMORROW
   const handleDelete = event => {
     event.preventDefault();
     axios
-      .delete(`/expenses?id=${id}`)
+      .delete(`/expenses?id=${taskId}`)
       .then(data => setHousehold(data.data))
       .catch(err => console.log(err));
     history.go(-1);
@@ -52,7 +55,7 @@ function ExpenseOverview() {
     // const debtors = event.target.expense.debtors.value;
     const category = event.target.category.value;
     axios
-      .put(`/expenses`, { name, id, amount, category })
+      .put(`/expenses`, { name, taskId, amount, category })
       .then(data => setHousehold(data.data))
       .catch(err => console.log(err));
   };

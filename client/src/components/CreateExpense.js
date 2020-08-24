@@ -11,9 +11,15 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 function CreateExpense() {
   const {
     setHousehold,
-    household: { categories },
+    household,
+    selectedHousehold
   } = useContext(HouseholdContext);
   const history = useHistory();
+
+  let categories, id;
+  if(household) {
+    ({categories, _id: id} = household[selectedHousehold])
+  }
 
   const handleCreateExpense = e => {
     e.preventDefault();
@@ -25,12 +31,12 @@ function CreateExpense() {
         name,
         amount,
         category,
+        id
       })
-      .then(plb => {
-        console.log(plb);
-        return plb;
+      .then(data=> {
+        return data.data
       })
-      .then(res => setHousehold(res.data.data))
+      .then(res => setHousehold(res))
       .catch(err => console.log(err));
       history.go(-1)
   };

@@ -30,6 +30,7 @@ const Dashboard = () => {
     fetch('/api/household')
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         // console.log(data)
         // put all households in loclstorage
         setHousehold(data);
