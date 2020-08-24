@@ -80,23 +80,18 @@ const Dashboard = () => {
 
   return (
     <>
-      <Menu customBurgerIcon={false} isOpen={sidebarOpen} right>
-        <a className="menu-item" href="/">Personal</a>
-        <a className="menu-item" href="/about">Groups</a>
+      <Menu customBurgerIcon={false} isOpen={sidebarOpen} onClose={() => setSidebarOpen(!sidebarOpen)} right>
+        <span className="menu-item" >Personal</span>
+        <span className="menu-item" >Groups</span>
         <div>
-          <div className="cs-select cs-skin-underline cs-active" tabIndex="0">
-            <select className="cs-select cs-skin-underline">
-              <option value="" disabled="">Groups</option>
-              <option value="1">Gardenia + Daisies</option>
-              <option value="2">Roses + Stephanotis</option>
-              <option value="3">Peony + Gerbera</option>
-              <option value="4">Orchid + Limonium</option>
-              <option value="5">Iris + Omithoalum</option>
-            </select></div>
+          {household.map((a, index) => {
+            return { ...a, index };
+          }).filter(a => a.type !== "Personal")
+            .map(a => <span onClick={() => setSelectedHousehold(a.index)}>{a.name}</span>)}
         </div>
-        <a className="menu-item" href="/contact">Settings</a>
+        <span className="menu-item" >Settings</span>
 
-        <a className="menu-item" href="/contact">Logout</a>
+        <span onClick={() => handleLogout()}>Logout</span>
       </Menu>
       <div className="dashboard">
         <div className="header">
