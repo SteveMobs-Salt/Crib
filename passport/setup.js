@@ -23,7 +23,7 @@ passport.use(
         // Create new User
         if (!user) {
           const newUser = new User({ email, password });
-          const newHousehold = new Household({ owner: newUser.id });
+          const newHousehold = new Household({ owners: [newUser.id] });
           newHousehold.save();
 
           // Hash password before saving in database

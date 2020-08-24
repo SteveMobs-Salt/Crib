@@ -25,21 +25,24 @@ function ExpenseOverview() {
   const [editMode, setEditMode] = useState(false);
 
   const history = useHistory();
-  const { id } = useParams();
+  const { taskId } = useParams();
   const {
     setHousehold,
     household: { expenses, categories },
   } = useContext(HouseholdContext);
   let expense;
   if (expenses) {
-    expense = expenses.find(e => e._id === id);
+    expense = expenses.find(e => e._id === taskId);
     console.log(expense);
   }
 
+
+  // not finished
+  // CONTINUE FROM HERE TOMORROW
   const handleDelete = event => {
     event.preventDefault();
     axios
-      .delete(`/expenses?id=${id}`)
+      .delete(`/expenses?id=${taskId}`)
       .then(data => setHousehold(data.data))
       .catch(err => console.log(err));
     history.go(-1);
@@ -52,7 +55,7 @@ function ExpenseOverview() {
     // const debtors = event.target.expense.debtors.value;
     const category = event.target.category.value;
     axios
-      .put(`/expenses`, { name, id, amount, category })
+      .put(`/expenses`, { name, taskId, amount, category })
       .then(data => setHousehold(data.data))
       .catch(err => console.log(err));
   };
@@ -77,6 +80,14 @@ function ExpenseOverview() {
         <div className="details">
           <span className="amount">€{expense.amount}</span>
 
+          <div className="name tag">
+            {/* <span className="date-icon">
+              <FontAwesomeIcon icon={faCalendarAlt}  size="lg"/>
+            </span> */}
+            <span className="">
+              {expense.name}
+            </span>
+          </div>
 
           <div className="date tag">
             <span className="date-icon">
@@ -122,7 +133,7 @@ function ExpenseOverview() {
               onSubmit={event => handleEdit(event)}
             >
               <input name="name" type="text" placeholder={expense.name} />
-              <input name="amount" type="number" placeholder={expense.amount} />
+              <input name="amount" type="number" step="0.01" min="0" placeholder={expense.amount} />
               <select name="category" type="string">
                 {categories
                   ? categories.map(category => (

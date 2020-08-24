@@ -14,14 +14,26 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 function CreateBudget() {
   const history = useHistory();
-  const { setHousehold } = useContext(HouseholdContext);
+  const { selectedHousehold, household, setHousehold } = useContext(HouseholdContext);
 
   // REDIRECT AFTER POST
+  let id;
+  if(household) {
+    id = household[selectedHousehold]._id;
+  }
+
+  // Possibly better alternative
+  // let id;
+  // if(household) {
+  //   ({_id: id} = household[selectedHousehold]);
+  // }
+
   const handleCreateBudget = event => {
     event.preventDefault();
     const body = {
       category: event.target.category.value,
-      amount: parseInt(event.target.amount.value),
+      amount: parseFloat(event.target.amount.value),
+      id
     };
     axios
       .post('/budget', body)
@@ -30,7 +42,8 @@ function CreateBudget() {
         return data;
       })
       .then(res => {
-        setHousehold(res);
+        console.log(res)
+        setHousehold(res.data);
         history.go(-2);
       })
       .catch(err => console.log(err));
@@ -49,8 +62,8 @@ function CreateBudget() {
         </nav>
       </div>
       <form onSubmit={event => handleCreateBudget(event)}>
-        <input name="category" type="text" placeholder="Budget type" />
-        <input name="amount" type="number" min="0" placeholder="Amount" />
+        <input name="category" type="text" required placeholder="Budget type" />
+        <input name="amount" type="number" required step="0.01" min="0" placeholder="Amount" />
         <button type="submit">Submit</button>
       </form>
     </div>

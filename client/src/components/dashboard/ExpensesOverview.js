@@ -38,9 +38,14 @@ function ExpensesOverview() {
   const { url } = useRouteMatch();
   const history = useHistory();
   const {
-    household: { expenses },
+    selectedHousehold,
+    household,
   } = useContext(HouseholdContext);
 
+  let expenses;
+  if (household) {
+    ({expenses} = household[selectedHousehold])
+  }
   if (expenses) {
     return (
       <div className="">

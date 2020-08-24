@@ -8,7 +8,6 @@ import {
   useHistory,
 } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
-import { func } from 'prop-types';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -22,26 +21,33 @@ function ShoppingListOverview() {
   const history = useHistory();
   const {
     setHousehold,
-    household: { shoppingList },
+    household,
+    selectedHousehold
   } = useContext(HouseholdContext);
+
+
+  let shoppingList, id;
+  if (household) {
+    ({shoppingList, _id: id} = household[selectedHousehold])
+  }
 
   const handleSubmit = event => {
     event.preventDefault();
     const shoppingItem = event.target.item;
     axios
-      .post('/shopping_list', { name: shoppingItem.value })
+      .post('/shopping_list', { name: shoppingItem.value, id })
       .then(data => setHousehold(data.data))
       .catch(err => console.log(err));
     shoppingItem.value = null;
   };
 
-  const handleDelete = id => {
-    console.log(id);
-    axios
-      .delete(`/shopping_list?id=${id}`)
-      .then(data => setHousehold(data.data))
-      .catch(err => console.log(err));
-  };
+  // const handleDelete = id => {
+  //   console.log(id);
+  //   axios
+  //     .delete(`/shopping_list?id=${id}`)
+  //     .then(data => setHousehold(data.data))
+  //     .catch(err => console.log(err));
+  // };
 
   return (
     <div className="shoppingList-overview">

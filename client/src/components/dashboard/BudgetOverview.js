@@ -16,15 +16,15 @@ import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 function BudgetOverview() {
   const history = useHistory();
   const {
-    household: { budgets, expenses, categories },
+    selectedHousehold,
+    household
   } = useContext(HouseholdContext);
   const { path, url } = useRouteMatch();
   // console.log(budgets, expenses, categories);
   // map over categories, which maps over expenses matching the categories
-  let data = null;
-  if (budgets && expenses && categories) {
-    console.log(budgets);
-    console.log(categories);
+  let data = null, budgets, expenses, categories;
+  if (household) {
+    ({budgets, expenses, categories} = household[selectedHousehold])
     data = categories.map(cat => {
       let total = expenses
         .filter(exp => exp.category === cat)

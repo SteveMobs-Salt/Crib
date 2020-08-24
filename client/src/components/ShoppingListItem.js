@@ -7,16 +7,23 @@ import HouseholdContext from '../contexts/HouseholdContext';
 function ShoppingListItem({item}) {
   const {
     setHousehold,
-    household: { shoppingList },
+    household,
+    selectedHousehold
   } = useContext(HouseholdContext);
 
+  let id;
+  if(household){
+    ({_id: id} = household[selectedHousehold]);
+  }
 
-
-  const handleDelete = id => {
-    console.log(id);
+  const handleDelete = taskId => {
     Axios
-      .delete(`/shopping_list?id=${id}`)
-      .then(data => setHousehold(data.data))
+      .delete(`/shopping_list?taskId=${taskId}&id=${id}`)
+      .then(data => {
+        const copy = [...household];
+        copy[selectedHousehold].shoppingList = copy[selectedHousehold].shoppingList.filter(a=> a._id !== taskId);
+        setHousehold(copy);
+      })
       .catch(err => console.log(err));
   };
   return (
