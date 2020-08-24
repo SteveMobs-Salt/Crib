@@ -188,13 +188,25 @@ app.delete('/budget', async (req, res) => {
   return res.json(household);
 });
 
+app.post('/api/groups/join', async (req, res) => {
+  const { referral_code } = req.body;
+  const household = await Household.findOne({ referral_code: referral_code });
+  console.log(household);
+  console.log(referral_code);
+  household.owners.push(req.session.passport.user);
+  household.markModified('owners');
+  household.save();
+  res.status(202).end();
+})
+
 app.post('/api/groups/create', async (req, res) => {
   const newHousehold = new Household({ owners: [req.session.passport.user] });
   newHousehold.name = req.body.name;
   newHousehold.type = "Group";
-  newHousehold.save();
+  await newHousehold.save();
   res.json(newHousehold.referral_code);
 })
+
 
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

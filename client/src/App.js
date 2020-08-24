@@ -13,6 +13,7 @@ import CategoryBudgetOverview from './components/CategoryBudgetOverview';
 import ExpenseOverview from './components/ExpenseOverview';
 import CreateExpense from './components/CreateExpense';
 import CreateGroup from './components/CreateGroup';
+import JoinGroup from './components/JoinGroup';
 
 function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
@@ -72,6 +73,9 @@ function App() {
             </Route>
             <Route exact path="/create-group">
               <CreateGroup />
+            </Route>
+            <Route exact path="/join-group">
+              <JoinGroup />
             </Route>
           </Switch>
         </Router>

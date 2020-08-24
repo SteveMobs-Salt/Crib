@@ -15,29 +15,6 @@ import {
 } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCoffee,
-  faUtensils,
-  faHamburger,
-  faBolt,
-  faShower,
-  faSubway,
-  faMoneyCheckAlt,
-  faHouseDamage,
-  faHospitalUser,
-  faPiggyBank,
-  faHouseUser,
-  faSwimmer,
-  faCocktail,
-  faUserSecret,
-  faTshirt,
-  faDice,
-  faCalculator,
-  faShoppingBasket,
-  faChevronCircleLeft,
-  faChevronLeft,
-  faPlus,
-  faUsers,
-  faUser,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -103,7 +80,9 @@ const Dashboard = () => {
               }}>{a.name}</span>) : null}
         </div>
         <Link to="/create-group">
-        <span className="menu-item"> Create group </span></Link>
+          <span className="menu-item"> Create group </span></Link>
+        <Link to="/join-group">
+          <span className="menu-item"> Join group </span></Link>
         <span className="menu-item" >Settings</span>
 
         <span onClick={() => handleLogout()}>Logout</span>
