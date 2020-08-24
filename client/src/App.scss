@@ -79,7 +79,7 @@ a:visited {
 }
 
 .app {
-  margin: 10px;
+  // margin: 10px;
 }
 
 .expenses-compact {
@@ -114,7 +114,7 @@ a:visited {
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
-  margin-top: 25px;
+  // margin-top: 25px;
   margin-bottom: 25px;
 
   nav {
@@ -252,7 +252,7 @@ a:visited {
     .text {
       display: flex;
       justify-content: space-between;
-      .title { 
+      .title {
         font-weight: 800;
         font-size: 1.4em;
       }
@@ -261,7 +261,7 @@ a:visited {
       }
       padding-bottom: 10px;
     }
-    
+
     .progress {
       margin: 0 auto;
       // height: 50px;
@@ -280,18 +280,18 @@ a:visited {
       background-color: rgb(218, 218, 218);
       border-radius: 10px;
     }
-    
+
     #myBar {
       width: 10%;
       height: 20px;
       border-radius: 10px;
-  
+
       background-color: rgb(248, 92, 92);
     }
-    
+
   }
 
-  
+
 
   &.shopping {
     border-color: rgba(141, 255, 170, 0.2);
@@ -677,9 +677,9 @@ a:visited {
     }
     .tag {
       // width: 120%;
-      
+
       margin-bottom: 10px;
-      
+
       padding: 3px 15px;
       line-height: 40px;
       background: purple;
@@ -687,7 +687,7 @@ a:visited {
       color: white;
       border: 2px solid #ffffff;
       box-shadow: 0 3px 4px rgba(0, 0, 0, 0.10), 0 3px 4px rgba(0, 0, 0, 0.10);
-      
+
       &.category {
         background: #5A99F6;
         display: flex;
@@ -818,4 +818,70 @@ a:visited {
 
     }
   }
+}
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }

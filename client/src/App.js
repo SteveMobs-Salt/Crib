@@ -20,7 +20,7 @@ function App() {
   // if (localStorage.getItem('households')) {
   //   const storage = JSON.parse(localStorage.getItem('households'))
   //   setHousehold(storage[0])
-  // } 
+  // }
   useEffect(() => {
     localStorage.setItem('households', JSON.stringify(household));
     return () => {
@@ -30,50 +30,49 @@ function App() {
   const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold };
   return (
     <div className="app">
-    <HouseholdContext.Provider value={householdValue}>
-    <Router>
-
-      <Switch>
-        {/* <Route exact path="/">
+      <HouseholdContext.Provider value={householdValue}>
+        <Router>
+          <Switch>
+            {/* <Route exact path="/">
           <Home />
         </Route> */}
-        <Route exact path="/">
-          <SignUpForm />
-        </Route>
-        <Route exact path="/signin">
-          <SignInForm />
-        </Route>
-        {/* <Route path="/user">
+            <Route exact path="/">
+              <SignUpForm />
+            </Route>
+            <Route exact path="/signin">
+              <SignInForm />
+            </Route>
+            {/* <Route path="/user">
         <About />
       </Route> */}
-        <Route exact path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route exact path="/dashboard/budget">
-          <BudgetOverview />
-        </Route>
-        <Route path="/dashboard/budget/add">
-          <CreateBudget />
-        </Route>
-        <Route path="/dashboard/budget/:category">
-          <CategoryBudgetOverview />
-        </Route>
-        <Route exact path="/dashboard/expenses">
-          <ExpensesOverview />
-        </Route>
-        <Route path="/dashboard/expenses/add">
-          <CreateExpense />
-        </Route>
-        <Route path="/dashboard/expenses/:id">
-          <ExpenseOverview />
-        </Route>
-        <Route path="/dashboard/shopping-list">
-          <ShoppingListOverview />
-        </Route>
-      </Switch>
-    </Router>
-  </HouseholdContext.Provider>
-  </div>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/dashboard/budget">
+              <BudgetOverview />
+            </Route>
+            <Route path="/dashboard/budget/add">
+              <CreateBudget />
+            </Route>
+            <Route path="/dashboard/budget/:category">
+              <CategoryBudgetOverview />
+            </Route>
+            <Route exact path="/dashboard/expenses">
+              <ExpensesOverview />
+            </Route>
+            <Route path="/dashboard/expenses/add">
+              <CreateExpense />
+            </Route>
+            <Route path="/dashboard/expenses/:id">
+              <ExpenseOverview />
+            </Route>
+            <Route path="/dashboard/shopping-list">
+              <ShoppingListOverview />
+            </Route>
+          </Switch>
+        </Router>
+      </HouseholdContext.Provider>
+    </div>
   );
 }
 
