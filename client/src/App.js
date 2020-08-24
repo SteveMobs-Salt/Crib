@@ -4,7 +4,7 @@ import SignUpForm from './components/SignUp';
 import SignInForm from './components/SignIn';
 import Dashboard from './components/Dashboard';
 import HouseholdContext from './contexts/HouseholdContext';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BudgetOverview from './components/dashboard/BudgetOverview';
 import ExpensesOverview from './components/dashboard/ExpensesOverview';
 import ShoppingListOverview from './components/dashboard/ShoppingListOverview';
@@ -14,15 +14,20 @@ import ExpenseOverview from './components/ExpenseOverview';
 import CreateExpense from './components/CreateExpense';
 
 function App() {
-  const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('localHousehold')) || '');
-
+  const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
+  const [selectedHousehold, setSelectedHousehold] = useState(0);
+  // console.log(JSON.parse(localStorage.getItem('households'))[0])
+  // if (localStorage.getItem('households')) {
+  //   const storage = JSON.parse(localStorage.getItem('households'))
+  //   setHousehold(storage[0])
+  // } 
   useEffect(() => {
-    localStorage.setItem('localHousehold', JSON.stringify(household));
+    localStorage.setItem('households', JSON.stringify(household));
     return () => {
     }
   }, [household])
 
-  const householdValue = { household, setHousehold };
+  const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold };
   return (
     <div className="app">
     <HouseholdContext.Provider value={householdValue}>

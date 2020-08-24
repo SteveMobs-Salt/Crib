@@ -41,7 +41,11 @@ const Dashboard = () => {
   useEffect(() => {
     fetch('/api/household')
       .then(res => res.json())
-      .then(data => setHousehold(data))
+      .then(data => {
+        // console.log(data)
+        // put all households in loclstorage
+        setHousehold(data)
+      })
       .catch(err => console.log(err))
   }, [])
 

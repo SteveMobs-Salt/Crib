@@ -16,7 +16,8 @@ router.post('/register_login', (req, res, next) => {
       if (err) {
         return res.status(400).json({ errors: err });
       }
-      const household = await Household.findOne({ owner: user.id }).exec();
+      const household = await Household.aggregate([{ $match : { owners: {$in : [user.id]} }}]).exec();
+      // console.log(household)
       req.session.household = household.id;
       return res.status(200).json({
         success: `logged in as ${user.id}`,

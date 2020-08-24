@@ -136,7 +136,9 @@ app.delete('/shopping_list', async (req, res) => {
 // Fetch household data
 app.get('/api/household', async (req, res) => {
   const householdId = req.session.household;
-  const household = await Household.findById(householdId);
+  const owner = req.session.passport.user;
+  const household = await Household.aggregate([{ $match : { owners: {$in : [owner]} }}]).exec();
+  // const household = await Household.findById(householdId);
   res.json(household);
 });
 

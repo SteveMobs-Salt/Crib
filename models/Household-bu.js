@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 // Create Schema
 const HouseholdSchema = new mongoose.Schema(
   {
-    owners: {
-      type: Array,
+    owner: {
+      type: String,
+      unique: true,
       required: true,
     },
     budgets: {
@@ -22,13 +23,6 @@ const HouseholdSchema = new mongoose.Schema(
         { category: "Dining", amount: 0.00 },
         { category: "Other", amount: 0.00 }
       ]
-    },
-    type: {
-      type: String,
-      default: "Personal"
-    },
-    name: {
-      type: String
     },
     expenses: {
       type: Array,
