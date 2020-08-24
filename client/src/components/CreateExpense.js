@@ -18,7 +18,7 @@ function CreateExpense() {
   const handleCreateExpense = e => {
     e.preventDefault();
     const name = e.target.name.value;
-    const amount = parseInt(e.target.amount.value);
+    const amount = parseFloat(e.target.amount.value);
     const category = e.target.category.value;
     axios
       .post('/expenses', {
@@ -50,7 +50,7 @@ function CreateExpense() {
 
       <form onSubmit={e => handleCreateExpense(e)}>
         <input type="text" placeholder="Name" name="name" id="" />
-        <input type="number" placeholder="Amount" name="amount" min="0" />
+        <input type="number" placeholder="Amount" step="0.01" name="amount" min="0" />
         <select name="category" id="">
           {categories
             ? categories.map(c => <option value={c}>{c}</option>)

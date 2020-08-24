@@ -21,7 +21,7 @@ function CreateBudget() {
     event.preventDefault();
     const body = {
       category: event.target.category.value,
-      amount: parseInt(event.target.amount.value),
+      amount: parseFloat(event.target.amount.value),
     };
     axios
       .post('/budget', body)
@@ -49,8 +49,8 @@ function CreateBudget() {
         </nav>
       </div>
       <form onSubmit={event => handleCreateBudget(event)}>
-        <input name="category" type="text" placeholder="Budget type" />
-        <input name="amount" type="number" min="0" placeholder="Amount" />
+        <input name="category" type="text" required placeholder="Budget type" />
+        <input name="amount" type="number" required step="0.01" min="0" placeholder="Amount" />
         <button type="submit">Submit</button>
       </form>
     </div>

@@ -130,7 +130,7 @@ function ExpenseOverview() {
               onSubmit={event => handleEdit(event)}
             >
               <input name="name" type="text" placeholder={expense.name} />
-              <input name="amount" type="number" placeholder={expense.amount} />
+              <input name="amount" type="number" step="0.01" min="0" placeholder={expense.amount} />
               <select name="category" type="string">
                 {categories
                   ? categories.map(category => (
