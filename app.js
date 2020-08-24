@@ -137,7 +137,7 @@ app.delete('/shopping_list', async (req, res) => {
 app.get('/api/household', async (req, res) => {
   const householdId = req.session.household;
   const owner = req.session.passport.user;
-  const household = await Household.aggregate([{ $match : { owners: {$in : [owner]} }}]).exec();
+  const household = await Household.aggregate([{ $match: { owners: { $in: [owner] } } }]).exec();
   // const household = await Household.findById(householdId);
   res.json(household);
 });
@@ -187,5 +187,14 @@ app.delete('/budget', async (req, res) => {
   household.save();
   return res.json(household);
 });
+
+app.post('/api/groups/create', async (req, res) => {
+  const newHousehold = new Household({ owners: [req.session.passport.user] });
+  newHousehold.name = req.body.name;
+  newHousehold.type = "Group";
+  newHousehold.save();
+  res.json(newHousehold.referral_code);
+})
+
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

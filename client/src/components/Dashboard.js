@@ -60,9 +60,15 @@ const Dashboard = () => {
       .catch(err => console.log(err));
   }, []);
 
-  let expenses, budgets, shoppingList;
+  let expenses, budgets, shoppingList, personalIndex;
   if (household) {
-    ({ expenses, budgets, shoppingList } = household[selectedHousehold])
+    ({ expenses, budgets, shoppingList } = household[selectedHousehold]);
+    personalIndex = household.map((a, index) => {
+      return { ...a, index }
+    })
+      .find(a => a.type === "Personal")
+      .index
+    console.log(personalIndex);
   }
 
   let totalBudget = 0,
@@ -81,14 +87,23 @@ const Dashboard = () => {
   return (
     <>
       <Menu customBurgerIcon={false} isOpen={sidebarOpen} onClose={() => setSidebarOpen(!sidebarOpen)} right>
-        <span className="menu-item" >Personal</span>
+        <span className="menu-item" onClick={() => {
+          setSelectedHousehold(personalIndex);
+          setSidebarOpen(!sidebarOpen)
+        }}>Personal</span>
         <span className="menu-item" >Groups</span>
         <div>
-          {household.map((a, index) => {
-            return { ...a, index };
-          }).filter(a => a.type !== "Personal")
-            .map(a => <span onClick={() => setSelectedHousehold(a.index)}>{a.name}</span>)}
+          {household && household.length > 1 ?
+            household.map((a, index) => {
+              return { ...a, index };
+            }).filter(a => a.type !== "Personal")
+              .map(a => <span onClick={() => {
+                setSelectedHousehold(a.index);
+                setSidebarOpen(!sidebarOpen)
+              }}>{a.name}</span>) : null}
         </div>
+        <Link to="/create-group">
+        <span className="menu-item"> Create group </span></Link>
         <span className="menu-item" >Settings</span>
 
         <span onClick={() => handleLogout()}>Logout</span>

@@ -12,6 +12,7 @@ import CreateBudget from './components/CreateBudget';
 import CategoryBudgetOverview from './components/CategoryBudgetOverview';
 import ExpenseOverview from './components/ExpenseOverview';
 import CreateExpense from './components/CreateExpense';
+import CreateGroup from './components/CreateGroup';
 
 function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
@@ -68,6 +69,9 @@ function App() {
             </Route>
             <Route path="/dashboard/shopping-list">
               <ShoppingListOverview />
+            </Route>
+            <Route exact path="/create-group">
+              <CreateGroup />
             </Route>
           </Switch>
         </Router>

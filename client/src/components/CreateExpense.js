@@ -49,7 +49,7 @@ function CreateExpense() {
       </div>
 
       <form onSubmit={e => handleCreateExpense(e)}>
-        <input type="text" placeholder="Name" name="name" id="" />
+        <input type="text" placeholder="Name" name="name" />
         <input type="number" placeholder="Amount" step="0.01" name="amount" min="0" />
         <select name="category" id="">
           {categories
