@@ -23,7 +23,7 @@ function CreateGroup() {
     }
 
     return (
-        <div className="create-group">
+        <div className="join-group create">
             <div className="header">
                 <nav>
                     <FontAwesomeIcon
@@ -34,11 +34,14 @@ function CreateGroup() {
                     <h2>Create group</h2>
                 </nav>
             </div>
+            <div className="form">
 
+            
             <form onSubmit={e => handleCreateGroup(e)}>
-                <input type="text" placeholder="Group Name" name="name" />
+                <input type="text" placeholder="Enter group name.." name="name" />
                 <button type="submit">Create</button>
             </form>
+            </div>
         </div>
     )
 }

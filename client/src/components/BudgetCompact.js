@@ -25,7 +25,7 @@ const BudgetCompact = ({ budget, spent }) => {
     <div className="compact budget">
       <div className="text">
         <span className="title">Budget</span>
-        <span className="details">€{budget}</span>
+        <span className="details">€{parseInt(budget)}</span>
       </div>
       {/* <div className="progress">
         <CircularProgressbarWithChildren

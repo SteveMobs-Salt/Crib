@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import HouseholdContext from '../contexts/HouseholdContext';
-import {
-  useHistory,
-  useParams,
-} from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,6 +10,11 @@ import {
   faFileInvoiceDollar,
   faTrash,
   faEdit,
+  faCreditCard,
+  faCashRegister,
+  faSearchDollar,
+  faCommentDollar,
+  faCommentsDollar,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import Select from 'react-select';
@@ -23,12 +25,9 @@ function ExpenseOverview() {
 
   const history = useHistory();
   const { expenseId } = useParams();
-  const {
-    user,
-    setHousehold,
-    household,
-    selectedHousehold
-  } = useContext(HouseholdContext);
+  const { user, setHousehold, household, selectedHousehold } = useContext(
+    HouseholdContext,
+  );
   let expense, expenses, categories, id, type;
   if (household) {
     ({ expenses, categories, _id: id, type } = household[selectedHousehold]);
@@ -36,6 +35,7 @@ function ExpenseOverview() {
   if (expenses) {
     expense = expenses.find(e => e._id === expenseId);
   }
+
 
   useEffect(() => {
     setSelectedDebtors(expense.debtors);
@@ -50,7 +50,9 @@ function ExpenseOverview() {
 
       .then(data => {
         const copy = [...household];
-        copy[selectedHousehold].expenses = copy[selectedHousehold].expenses.filter(a => a._id !== expenseId);
+        copy[selectedHousehold].expenses = copy[
+          selectedHousehold
+        ].expenses.filter(a => a._id !== expenseId);
         setHousehold(copy);
       })
       .catch(err => console.log(err));
@@ -70,24 +72,25 @@ function ExpenseOverview() {
       .put(`/expenses`, { name, expenseId, amount, category, id, debtors })
       .then(data => {
         setHousehold(data.data);
-      }
-      )
+      })
       .catch(err => console.log(err));
   };
 
   let owners;
   if (household) {
-    ({ owners } = household[selectedHousehold])
-    owners = owners.filter(a => a.userId !== user.userId).map(a => {
-      return {
-        value: a.userId,
-        label: a.name
-      }
-    })
+    ({ owners } = household[selectedHousehold]);
+    owners = owners
+      .filter(a => a.userId !== user.userId)
+      .map(a => {
+        return {
+          value: a.userId,
+          label: a.name,
+        };
+      });
   }
   const onSelect = selectedOptions => {
-    setSelectedDebtors(selectedOptions)
-  }
+    setSelectedDebtors(selectedOptions);
+  };
 
   return (
     <div className="expense-overview">
@@ -113,9 +116,7 @@ function ExpenseOverview() {
             {/* <span className="date-icon">
               <FontAwesomeIcon icon={faCalendarAlt}  size="lg"/>
             </span> */}
-            <span className="">
-              {expense.name}
-            </span>
+            <span className="">{expense.name}</span>
           </div>
 
           <div className="date tag">
@@ -130,30 +131,50 @@ function ExpenseOverview() {
             <span className="category-icon">
               <FontAwesomeIcon icon={faFileInvoiceDollar} size="lg" />
             </span>
-            <span className="">
-              {expense.category}
-            </span>
+            <span className="">{expense.category}</span>
           </div>
+          {expense.debtors && expense.creditor !== user.userId ? (
+            <div className="debt tag">
+              <span className="date-icon">
+                <FontAwesomeIcon icon={faCommentsDollar} size="lg" />
+              </span>
+              <span className="">
+                You owe €{expense.amount / (expense.debtors.length + 1)}
+              </span>
+            </div>
+          ) : null}
+          {expense.debtors && expense.creditor === user.userId ? (
+            <div className="debt tag">
+              <span className="date-icon">
+                <FontAwesomeIcon icon={faCommentsDollar} size="lg" />
+              </span>
+              <span className="">
+                Each member owes you €
+                {expense.amount / (expense.debtors.length + 1)}
+              </span>
+            </div>
+          ) : null}
         </div>
-        <div className="actions">
-          <button
-            className="edit"
-
-            name="editExpense"
-            type="button"
-            onClick={() => setEditMode(!editMode)}
-          >
-            <FontAwesomeIcon icon={faEdit} />
-          </button>
-          <button
-            className="remove"
-            name="removeExpense"
-            type="button"
-            onClick={event => handleDelete(event)}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-        </div>
+        {expense.creditor === user.userId ? (
+          <div className="actions">
+            <button
+              className="edit"
+              name="editExpense"
+              type="button"
+              onClick={() => setEditMode(!editMode)}
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </button>
+            <button
+              className="remove"
+              name="removeExpense"
+              type="button"
+              onClick={event => handleDelete(event)}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </div>
+        ) : null}
 
         {editMode ? (
           <div className="edit-form">
@@ -162,24 +183,39 @@ function ExpenseOverview() {
               onSubmit={event => handleEdit(event)}
             >
               <input name="name" type="text" placeholder={expense.name} />
-              <input name="amount" type="number" step="0.01" min="0" placeholder={expense.amount} />
+              <input
+                name="amount"
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder={expense.amount}
+              />
               <select name="category" type="string">
                 {categories
-                  ? categories.map(category => (
-                    <option value={category}>{category}</option>
-                  ))
+                  ? categories.map(category =>
+                      category === expense.category ? (
+                        <option value={category} selected>
+                          {category}
+                        </option>
+                      ) : (
+                        <option value={category}>{category}</option>
+                      ),
+                    )
                   : null}
               </select>
               {/* <input placeholder={expense.debtors}/> */}
-              {type === "Group" ? <Select
-                options={owners}
-                isMulti
-                name="debtors"
-                onChange={onSelect}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                defaultValue={expense.debtors}
-              /> : null}
+              {type === 'Group' ? (
+                <Select
+                  options={owners}
+                  isMulti
+                  name="debtors"
+                  onChange={onSelect}
+                  className="debtors-select-container"
+                  classNamePrefix="debtors-select"
+                  defaultValue={expense.debtors}
+                  // styles={}
+                />
+              ) : null}
               <button type="submit">Submit</button>
             </form>
           </div>

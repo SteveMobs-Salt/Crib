@@ -57,16 +57,16 @@ function BudgetOverview() {
       </div>
       <div className="numbers-overview">
         <span className="budget-total">
+          <span>Budget</span>
           <span className="number">
             ${budgets ? `${budgets.reduce((a, c) => a + c.amount, 0)}` : null}
           </span>
-          <span>Total Budget</span>
         </span>
         <span className="spent-total">
+          <span>Spent</span>
           <span className="number">
-            ${expenses ? `${expenses.reduce((a, c) => a + c.amount, 0)}` : null}
+            ${expenses ? `${(expenses.reduce((a, c) => a + c.amount, 0)).toFixed(2)}` : null}
           </span>
-          <span>Total Spent</span>
         </span>
       </div>
       {/* {budgets.map( budget => <p>{budget}</p>)} */}

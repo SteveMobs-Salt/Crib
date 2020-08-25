@@ -26,7 +26,7 @@ function JoinGroup() {
     }
 // Search through users and find name - for object ID and name
     return (
-        <div className="create-group">
+        <div className="join-group">
             <div className="header">
                 <nav>
                     <FontAwesomeIcon
@@ -37,12 +37,13 @@ function JoinGroup() {
                     <h2>Join Group</h2>
                 </nav>
             </div>
-
+            <div className="form">
             <form onSubmit={e => handleJoinGroup(e)}>
-                <input required type="text" placeholder="Referral code" name="referral_code" />
+                <input required type="text" placeholder="Enter referral code..." name="referral_code" />
                 {/* <input required type="text" placeholder="Your username" name="name" /> */}
                 <button type="submit">Join</button>
             </form>
+            </div>
         </div>
     )
 }

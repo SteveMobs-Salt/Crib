@@ -48,7 +48,7 @@ function ExpensesOverview() {
   }
   if (expenses) {
     return (
-      <div className="">
+      <div className="expenses-overview">
         <div className="header">
           <nav>
             <FontAwesomeIcon icon={faChevronLeft} size="lg" onClick={() => history.go(-1)}/>

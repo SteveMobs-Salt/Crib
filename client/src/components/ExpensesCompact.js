@@ -9,7 +9,7 @@ const ExpensesCompact = ({ expenses }) => {
   let total = 0;
   let latest = [];
   if (expenses) {
-    total = expenses.reduce((a, c) => a + c.amount, 0);
+    total = parseInt(expenses.reduce((a, c) => a + c.amount, 0));
     latest = expenses.sort((a, b) => b.date - a.date).slice(0, 2);
   }
 

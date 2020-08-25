@@ -41,18 +41,20 @@ function CreateExpense() {
     history.go(-1);
   };
   let owners;
-  if(household){
-    ({owners} = household[selectedHousehold])
-    owners = owners.filter( a => a.userId !== user.userId).map(a=> {
-      return {
-        value: a.userId,
-        label: a.name
-      }
-    })
+  if (household) {
+    ({ owners } = household[selectedHousehold]);
+    owners = owners
+      .filter(a => a.userId !== user.userId)
+      .map(a => {
+        return {
+          value: a.userId,
+          label: a.name,
+        };
+      });
   }
   const onSelect = selectedOptions => {
-    setSelectedDebtors(selectedOptions)
-  }
+    setSelectedDebtors(selectedOptions);
+  };
 
   return (
     <div className="create-expense">
@@ -82,14 +84,16 @@ function CreateExpense() {
             : null}
         </select>
 
-        {type === "Group" ? <Select
-          options={owners}
-          isMulti
-          name="debtors"
-          onChange={onSelect}
-          className="basic-multi-select"
-          classNamePrefix="select"
-        /> : null}
+        {type === 'Group' ? (
+          <Select
+            options={owners}
+            isMulti
+            name="debtors"
+            onChange={onSelect}
+            className="debtors-select-container"
+            classNamePrefix="debtors-select"
+          />
+        ) : null}
         <button type="submit">Create</button>
       </form>
     </div>

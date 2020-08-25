@@ -98,7 +98,7 @@ const Dashboard = () => {
           {/* <button onClick={() => setSelectedHousehold(selectedHousehold + 1)} type="button">Change Group</button> */}
           {/* <Link to={`${url}/add`}> */}
           <div className="household-views">
-            <FontAwesomeIcon icon={faBars} size="lg" className="person" onClick={() => setSidebarOpen(!sidebarOpen)} />
+            <FontAwesomeIcon icon={faBars} size="lg" className="menu" onClick={() => setSidebarOpen(!sidebarOpen)} />
             {/* <FontAwesomeIcon
             icon={faUsers}
             size="lg"

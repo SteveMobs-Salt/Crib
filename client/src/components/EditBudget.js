@@ -35,12 +35,12 @@ function EditBudget() {
     history.go(-2);
   };
   const handleDeleteBudget = () => {
-      console.log(category, id)
+    console.log(category, id);
     axios
       .delete(`/budget?id=${id}&category=${category}`)
       .then(res => setHousehold(res.data))
       .catch(err => console.log(err));
-      history.go(-2);
+    history.go(-2);
   };
   const defaultCat = [
     'Groceries',
@@ -57,7 +57,7 @@ function EditBudget() {
   ];
 
   return (
-    <div className="create-group">
+    <div className="edit-budget">
       <div className="header">
         <nav>
           <FontAwesomeIcon
@@ -65,30 +65,33 @@ function EditBudget() {
             size="lg"
             onClick={() => history.go(-1)}
           />
-          <h2>Edit {category}</h2>
+          <h2>Edit {category} Budget</h2>
         </nav>
         {defaultCat.includes(category) ? null : (
+          
           <FontAwesomeIcon
             icon={faTrashAlt}
             size="lg"
+            className="header-icon"
             onClick={() => handleDeleteBudget()}
           />
         )}
       </div>
-
-      <form onSubmit={e => handleEditBudget(e)}>
-        {defaultCat.includes(category) ? null : (
-          <input type="text" placeholder="Budget Name" name="category" />
-        )}
-        <input
-          type="number"
-          step="0.01"
-          min="0"
-          placeholder="Amount"
-          name="amount"
-        />
-        <button type="submit">Edit</button>
-      </form>
+      <div className="form">
+        <form onSubmit={e => handleEditBudget(e)}>
+          {defaultCat.includes(category) ? null : (
+            <input type="text" placeholder="Budget Name" name="category" />
+          )}
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            placeholder="Amount"
+            name="amount"
+          />
+          <button type="submit">Edit</button>
+        </form>
+      </div>
     </div>
   );
 }

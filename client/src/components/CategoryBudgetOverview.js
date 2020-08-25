@@ -89,7 +89,7 @@ function CategoryBudgetOverview() {
   }
 
   return (
-    <div>
+    <div className="category-budget-overview">
       <div className="header">
         <nav>
           <FontAwesomeIcon
@@ -127,11 +127,14 @@ function CategoryBudgetOverview() {
       <div>
         {catExpenses
           ? catExpenses.map(a => (
+            <Link to={`/dashboard/expenses/${a._id}`}>
               <ExpenseCompactView
                 name={a.name}
                 amount={a.amount}
                 category={category}
+                date={a.date}
               />
+            </Link>
             ))
           : null}
       </div>
