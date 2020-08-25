@@ -167,14 +167,31 @@ app.post('/budget', async (req, res) => {
 });
 
 app.put('/budget', async (req, res) => {
-  const { category, amount } = req.body;
-  const householdId = req.session.household;
-  const household = await Household.findById(householdId);
-  const index = household.budgets.map(b => b.category).indexOf(category);
+  const { category, amount, id, previousCategory } = req.query;
+  console.log(category, amount, id);
+  // const householdId = req.session.household;
+  const household = await Household.findById(id);
+  const index = household.budgets.map(b => b.category).indexOf(previousCategory);
+  console.log(index);
   if (index === -1) {
     return res.status(404).end();
   }
-  household.budgets[index].amount = amount;
+  if (amount) {
+    household.budgets[index].amount = amount;
+  }
+  if (category) {
+    household.budgets[index].category = category;
+    household.categories[index] = category;
+    household.expenses = household.expenses.map(a => {
+      if (a.category === previousCategory) {
+        return { ...a, category };
+      }
+      return a;
+    })
+  }
+  household.markModified('expenses');
+  household.markModified('categories');
+  household.markModified('budgets');
   household.save();
   return res.json(household);
 });
