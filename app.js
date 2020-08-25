@@ -257,12 +257,15 @@ app.delete('/budget', async (req, res) => {
 app.post('/api/groups/join', async (req, res) => {
   const { referral_code } = req.body;
   const household = await Household.findOne({ referral_code: referral_code });
-  console.log(household);
-  console.log(referral_code);
+  if(household.owners.includes(req.session.passport.user)){
+    return res.json({
+      message: "Already joined group"
+    })
+  }
   household.owners.push(req.session.passport.user);
   household.markModified('owners');
   household.save();
-  res.status(202).end();
+  return res.status(202).end();
 })
 
 app.post('/api/groups/create', async (req, res) => {
