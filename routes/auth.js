@@ -18,11 +18,11 @@ router.post('/register_login', (req, res, next) => {
       }
       const household = await Household.aggregate([{ $match : { owners: {$in : [user.id]} }}]).exec();
       // console.log(household)
-      req.session.household = household.id;
+      req.session.name = user.name;
       return res.status(200).json({
         success: `logged in as ${user.id}`,
         user: user.id,
-        household: household.id,
+        name: user.name
       });
     });
   })(req, res, next);

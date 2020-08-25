@@ -22,7 +22,8 @@ const SignInForm = () => {
         axios
             .post('/api/auth/register_login', userData)
             .then(res => {
-                setUser(res.data.user);
+                setUser({userId: res.data.user,
+                    name: res.data.name });
                 history.push('/dashboard');
             })
             .catch(err => {

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { BrowserRouter as Router, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,7 +43,7 @@ function CreateExpense() {
   let owners;
   if(household){
     ({owners} = household[selectedHousehold])
-    owners = owners.filter( a => a.userId !== user).map(a=> {
+    owners = owners.filter( a => a.userId !== user.userId).map(a=> {
       return {
         value: a.userId,
         label: a.name

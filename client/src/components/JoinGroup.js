@@ -17,7 +17,7 @@ function JoinGroup() {
         e.preventDefault();
         axios.post('/api/groups/join', {
             referral_code: e.target.referral_code.value,
-            name: e.target.name.value,
+            // name: e.target.name.value,
         })
             .then(response => setHousehold(response.data))
             .catch(err => console.log(err));
@@ -40,7 +40,7 @@ function JoinGroup() {
 
             <form onSubmit={e => handleJoinGroup(e)}>
                 <input required type="text" placeholder="Referral code" name="referral_code" />
-                <input required type="text" placeholder="Your username" name="name" />
+                {/* <input required type="text" placeholder="Your username" name="name" /> */}
                 <button type="submit">Join</button>
             </form>
         </div>

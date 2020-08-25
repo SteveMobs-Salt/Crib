@@ -78,7 +78,7 @@ function ExpenseOverview() {
   let owners;
   if (household) {
     ({ owners } = household[selectedHousehold])
-    owners = owners.filter(a => a.userId !== user).map(a => {
+    owners = owners.filter(a => a.userId !== user.userId).map(a => {
       return {
         value: a.userId,
         label: a.name

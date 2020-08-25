@@ -144,6 +144,7 @@ app.delete('/shopping_list', async (req, res) => {
 // Fetch household data
 app.all('/api/household', async (req, res) => {
   const userId = req.session.passport.user;
+  console.log(userId)
   const household = await Household.aggregate([
     {
       $match: {
@@ -244,7 +245,7 @@ app.delete('/budget', async (req, res) => {
 });
 
 app.post('/api/groups/join', async (req, res) => {
-  const { referral_code, name } = req.body;
+  const { referral_code } = req.body;
   const household = await Household.findOne({ referral_code: referral_code });
   //TODO fix if statement (array of objects now instead of strings)
   const ownersArray = household.owners.map(a=> a.userId); 
@@ -253,15 +254,16 @@ app.post('/api/groups/join', async (req, res) => {
   }
   household.owners.push({
     userId: req.session.passport.user,
-    name,
+    name: req.session.name,
   });
   household.markModified('owners');
   household.save();
   return res.redirect('/api/household');
 });
 
+// add name for group owner/creator
 app.post('/api/groups/create', async (req, res) => {
-  const newHousehold = new Household({ owners: [req.session.passport.user] });
+  const newHousehold = new Household({ owners: [{userId: req.session.passport.user, name: req.session.name}] });
   newHousehold.name = req.body.name;
   newHousehold.type = 'Group';
   await newHousehold.save();
