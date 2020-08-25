@@ -22,20 +22,21 @@ function CreateExpense() {
     const name = e.target.name.value;
     const amount = parseFloat(e.target.amount.value);
     const category = e.target.category.value;
-    // const debtors = selectedDebtors ? selectedDebtors.map(a=> a.userId)
-    // axios
-    //   .post('/expenses', {
-    //     name,
-    //     amount,
-    //     category,
-    //     id,
-    //   })
-    //   .then(data => {
-    //     return data.data;
-    //   })
-    //   .then(res => setHousehold(res))
-    //   .catch(err => console.log(err));
-    // history.go(-1);
+    const debtors = selectedDebtors ? selectedDebtors.map(a=> a.value) : null;
+    axios
+      .post('/expenses', {
+        name,
+        amount,
+        category,
+        id,
+        debtors,
+      })
+      .then(data => {
+        return data.data;
+      })
+      .then(res => setHousehold(res))
+      .catch(err => console.log(err));
+    history.go(-1);
   };
   let owners;
   if(household){

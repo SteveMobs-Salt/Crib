@@ -60,6 +60,7 @@ app.post('/expenses', async (req, res) => {
     name,
     amount,
     debtors,
+    creditor: req.session.passport.user,
     category,
     date: Date.now(),
   });

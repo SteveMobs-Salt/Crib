@@ -19,11 +19,13 @@ import EditBudget from './components/EditBudget';
 function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
   const [selectedHousehold, setSelectedHousehold] = useState(parseInt(localStorage.getItem('selectedHousehold')) || 0);
+  const [user, setUser] = useState(localStorage.getItem('user') || '');
   // console.log(JSON.parse(localStorage.getItem('households'))[0])
 
   useEffect(() => {
     localStorage.setItem('households', JSON.stringify(household));
     localStorage.setItem('selectedHousehold', selectedHousehold);
+    localStorage.setItem('user', user);
     // if (localStorage.getItem('households')) {
     //   const storage = JSON.parse(localStorage.getItem('households'))
     //   if(storage.length > 1){
@@ -37,10 +39,10 @@ function App() {
     //   }
 
     // }
-  }, [household, selectedHousehold])
+  }, [household, selectedHousehold, user])
 
 
-  const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold };
+  const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold, user, setUser };
   return (
     <div className="app">
       <HouseholdContext.Provider value={householdValue}>

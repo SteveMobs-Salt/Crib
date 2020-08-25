@@ -3,13 +3,14 @@ import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
+import HouseholdContext from '../contexts/HouseholdContext';
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const history = useHistory();
-
+    const { setUser } = useContext(HouseholdContext);
     const onSubmit = event => {
         event.preventDefault();
 
@@ -21,6 +22,7 @@ const SignInForm = () => {
         axios
             .post('/api/auth/register_login', userData)
             .then(res => {
+                setUser(res.data.user);
                 history.push('/dashboard');
             })
             .catch(err => {

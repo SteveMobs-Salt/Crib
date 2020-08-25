@@ -28,7 +28,10 @@ const Dashboard = () => {
   const history = useHistory();
   useEffect(() => {
     fetch('/api/household')
-      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        return res.json()
+      })
       .then(data => {
         console.log(data)
         // console.log(data)
