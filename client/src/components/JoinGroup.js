@@ -17,11 +17,14 @@ function JoinGroup() {
         e.preventDefault();
         axios.post('/api/groups/join', {
             referral_code: e.target.referral_code.value,
+            name: e.target.name.value,
         })
             .then(response => console.log(response))
             .catch(err => console.log(err));
-    }
 
+        history.go(-1);
+    }
+// Search through users and find name - for object ID and name
     return (
         <div className="create-group">
             <div className="header">
@@ -36,7 +39,8 @@ function JoinGroup() {
             </div>
 
             <form onSubmit={e => handleJoinGroup(e)}>
-                <input type="text" placeholder="Referral code" name="referral_code" />
+                <input required type="text" placeholder="Referral code" name="referral_code" />
+                <input required type="text" placeholder="Your username" name="name" />
                 <button type="submit">Join</button>
             </form>
         </div>

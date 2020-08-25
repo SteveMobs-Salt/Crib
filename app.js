@@ -278,14 +278,20 @@ app.delete('/budget', async (req, res) => {
 });
 
 app.post('/api/groups/join', async (req, res) => {
-  const { referral_code } = req.body;
+  const { referral_code, name } = req.body;
   const household = await Household.findOne({ referral_code: referral_code });
+
+  //TODO fix if statement (array of objects now instead of strings)
+
   if (household.owners.includes(req.session.passport.user)) {
     return res.json({
       message: 'Already joined group',
     });
   }
-  household.owners.push(req.session.passport.user);
+  household.owners.push({
+    userId: req.session.passport.user,
+    name,
+  });
   household.markModified('owners');
   household.save();
   return res.status(202).end();
