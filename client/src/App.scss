@@ -166,15 +166,15 @@ a:visited {
 }
 
 .compact {
-  border: 2px solid #f3f3f3;
+  border: 2px solid #ccc;
   border-radius: 10px;
   margin-bottom: 10px;
   background: #fff;
   // background: rgba(255,255,255, 0.1);
   padding: 10px;
   color: #333;
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); light
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.23);
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25), 0 2px 5px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 
   .shopping-item {
@@ -232,7 +232,7 @@ a:visited {
   .compact-extitle {
     display: flex;
     justify-content: space-between;
-
+    margin-bottom: 10px;
     .title {
       font-weight: 800;
       font-size: 1.4em;
@@ -246,7 +246,7 @@ a:visited {
   }
 
   &.budget {
-    border-color: rgba(84, 144, 255, 0.2);
+    // border-color: rgba(84, 144, 255, 0.2);
     display: flex;
     flex-direction: column;
 
@@ -294,7 +294,7 @@ a:visited {
   }
 
   &.shopping {
-    border-color: rgba(141, 255, 170, 0.2);
+    // border-color: rgba(141, 255, 170, 0.2);
     display: flex;
     flex-direction: column;
     // background-image: url("./images/patterns/simple/simple3.png");
@@ -304,7 +304,7 @@ a:visited {
   }
 
   &.expenses {
-    border-color: rgba(228, 141, 255, 0.2);
+    // border-color: rgba(228, 141, 255, 0.2);
     display: flex;
     flex-direction: column;
   }
@@ -371,7 +371,11 @@ a:visited {
 }
 
 .shoppingList-overview {
+  overscroll-behavior: contain;
   padding: 30px 20px;
+  color: white;
+  background:rgb(77, 200, 139);
+  height: 100vh;
   form {
     display: flex;
     justify-content: space-between;
@@ -382,14 +386,30 @@ a:visited {
       height: 48px;
       font-weight: 600;
 
-      font-size: 1em;
+      font-size: 1.2em;
       padding-left: 15px;
       border-radius: 10px;
-      border: 2px solid #f3f3f3;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.23);
-
+      border: 3px solid #fff;
+      background: transparent;
+      // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.23);
+      color: white;
+      outline: none;
       &::placeholder {
-        color: rgb(196, 193, 193);
+        color: white;
+        font-weight: 600;
+
+      font-size: 1.1em;
+      outline: none;
+      &:focus {
+        border: none;
+        outline: none;
+      }
+      &:focus-within{
+        border: none;
+      }
+      &:focus-visible{
+        border: none;
+      }
       }
     }
 
@@ -405,7 +425,7 @@ a:visited {
 
       svg {
         // font-size: 1.2em;
-        color: rgb(133, 235, 133);
+        color: white;
       }
     }
   }
@@ -564,23 +584,26 @@ a:visited {
   padding: 30px 20px;
   background: rgb(37, 126, 179);
   color: white;
+  overscroll-behavior: contain;
+  overflow-y: hidden;
   .numbers-overview {
     display: flex;
-    justify-content: space-between;
-    font-size: 1.3em;
+    justify-content: space-around;
+    font-size: 1.5em;
     font-weight: 400;
     margin-bottom: 10px;
-    background: white;
+    background: rgba(255,255,255,1);
     padding: 15px;
     border-radius: 10px;
-    border: 2px solid #f3f3f3;
+    // border: 2px solid rgb(78, 149, 241);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.23);
-    color: rgb(57, 134, 179);;
+    color: rgb(57, 134, 179);
     .budget-total {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-content: center;
+      // align-content: center;
+      align-items: center;
 
       span {
         // display: block;
@@ -589,16 +612,16 @@ a:visited {
         // color: rgb(37, 126, 179);
       }
       .number {
-        font-size: 1.4em;
+        font-size: 1.5em;
         font-weight: 600;
-        // color: rgb(130, 209, 255);
+        color: rgb(33, 78, 104);
       }
     }
     .spent-total {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-content: center;
+      align-items: center;
       span {
         // display: block;
         // text-align: right;
@@ -606,8 +629,9 @@ a:visited {
         // color: rgb(158, 57, 57);
       }
       .number {
-        font-size: 1.4em;
+        font-size: 1.5em;
         font-weight: 600;
+        color: rgb(33, 78, 104);
 
         // color: rgb(255, 88, 88);
       }
@@ -779,6 +803,10 @@ a:visited {
 }
 
 .create-expense {
+  padding: 30px 20px;
+  background: rgb(160, 32, 128);
+  height: 100vh;
+  color: white;
   form {
     margin: 0 auto 20px auto;
     width: 90%;
@@ -789,10 +817,12 @@ a:visited {
       margin-bottom: 10px;
       border-radius: 10px;
       border: 2px solid #e4e4e4;
-      color: #444;
+      color: #fff;
       font-weight: 700;
+      background: transparent;
+      outline: none;
       &::placeholder {
-        color: #444;
+        color: #fff;
         font-weight: 700;
       }
     }
@@ -801,9 +831,12 @@ a:visited {
       margin-bottom: 10px;
       border-radius: 10px;
       border: 2px solid #e4e4e4;
-      background: white;
+      background: transparent;
       background: url('http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png')
-        no-repeat right #fff;
+        no-repeat right transparent;
+        color: white;
+        font-weight: 700;
+        outline: none;
       -webkit-appearance: none;
       background-size: 11px 11px;
       background-position-x: 96%;
@@ -963,6 +996,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
       flex-direction: column;
       align-self: center;
       input {
+        outline: none;
         padding: 15px;
         background: transparent;
         margin-bottom: 10px;
@@ -994,12 +1028,20 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .dashboard { 
   padding: 30px 20px;
-
+  background: #F47C6B;
+  // magenta / burgundy color
+  // background: rgb(136, 22, 107);
+  color: white;
+  height: 100vh;
 }
 
 
 .expenses-overview {
   padding: 30px 20px;
+  color: white;
+  // background: rgb(236, 125, 125);
+  background: rgb(160, 32, 128);
+  // background: rgb(136, 22, 107);
 }
 
 

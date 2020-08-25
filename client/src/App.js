@@ -19,7 +19,7 @@ import EditBudget from './components/EditBudget';
 function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
   const [selectedHousehold, setSelectedHousehold] = useState(parseInt(localStorage.getItem('selectedHousehold')) || 0);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || '');
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   // console.log(JSON.parse(localStorage.getItem('households'))[0])
 
   useEffect(() => {

@@ -49,25 +49,25 @@ function BudgetOverview() {
             size="lg"
             onClick={() => history.go(-1)}
           />
-          <h2>Budget</h2>
+          <h2>Budget Overview</h2>
         </nav>
         <Link to={`${url}/add`}>
           <FontAwesomeIcon icon={faPlus} size="lg" />
         </Link>
       </div>
       <div className="numbers-overview">
-        <span className="budget-total">
+        <div className="budget-total">
           <span>Budget</span>
           <span className="number">
-            ${budgets ? `${budgets.reduce((a, c) => a + c.amount, 0)}` : null}
+          € {budgets ? `${parseInt(budgets.reduce((a, c) => a + c.amount, 0))}` : null}
           </span>
-        </span>
-        <span className="spent-total">
+        </div>
+        <div className="spent-total">
           <span>Spent</span>
           <span className="number">
-            ${expenses ? `${(expenses.reduce((a, c) => a + c.amount, 0)).toFixed(2)}` : null}
+          € {expenses ? `${parseInt(expenses.reduce((a, c) => a + c.amount, 0))}` : null}
           </span>
-        </span>
+        </div>
       </div>
       {/* {budgets.map( budget => <p>{budget}</p>)} */}
       {/* <BudgetChart /> */}
