@@ -19,7 +19,7 @@ function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
   const [selectedHousehold, setSelectedHousehold] = useState(parseInt(localStorage.getItem('selectedHousehold')) || 0);
   // console.log(JSON.parse(localStorage.getItem('households'))[0])
-  
+
   useEffect(() => {
     localStorage.setItem('households', JSON.stringify(household));
     localStorage.setItem('selectedHousehold', selectedHousehold);
@@ -34,7 +34,7 @@ function App() {
     //     console.log(i)
     //     setSelectedHousehold(i);
     //   }
-      
+
     // }
   }, [household, selectedHousehold])
 
@@ -69,7 +69,7 @@ function App() {
             <Route path="/dashboard/expenses/add">
               <CreateExpense />
             </Route>
-            <Route path="/dashboard/expenses/:taskId">
+            <Route path="/dashboard/expenses/:expenseId">
               <ExpenseOverview />
             </Route>
             <Route path="/dashboard/shopping-list">

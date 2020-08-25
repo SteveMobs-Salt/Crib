@@ -25,15 +25,18 @@ function ExpenseOverview() {
   const [editMode, setEditMode] = useState(false);
 
   const history = useHistory();
-  const { taskId } = useParams();
+  const { expenseId } = useParams();
   const {
     setHousehold,
-    household: { expenses, categories },
+    household,
+    selectedHousehold
   } = useContext(HouseholdContext);
-  let expense;
+  let expense, expenses, categories, id;
+  if (household) {
+    ({ expenses, categories, _id: id } = household[selectedHousehold]);
+  }
   if (expenses) {
-    expense = expenses.find(e => e._id === taskId);
-    console.log(expense);
+    expense = expenses.find(e => e._id === expenseId);
   }
 
 
@@ -42,8 +45,15 @@ function ExpenseOverview() {
   const handleDelete = event => {
     event.preventDefault();
     axios
-      .delete(`/expenses?id=${taskId}`)
-      .then(data => setHousehold(data.data))
+      .delete(`/expenses?expenseId=${expenseId}&id=${id}`)
+
+      //TODO Make sure to delete item from expenses
+
+      .then(data => {
+        const copy = [...household];
+        copy[selectedHousehold].expenses = copy[selectedHousehold].expenses.filter(a => a._id !== expenseId);
+        setHousehold(copy);
+      })
       .catch(err => console.log(err));
     history.go(-1);
   };
@@ -51,12 +61,24 @@ function ExpenseOverview() {
   const handleEdit = event => {
     event.preventDefault();
     const name = event.target.name.value;
-    const amount = parseInt(event.target.amount.value);
-    // const debtors = event.target.expense.debtors.value;
+    const amount = parseFloat(event.target.amount.value);
+    // const debtors = event.target.debtors.value;
     const category = event.target.category.value;
     axios
-      .put(`/expenses`, { name, taskId, amount, category })
-      .then(data => setHousehold(data.data))
+
+      //TODO Make sure to edit item in expenses
+
+      .put(`/expenses`, { name, expenseId, amount, category, id })
+      .then(data => {
+        const copy = [...household];
+        const index = copy[selectedHousehold].expenses.map(a => a._id).indexOf(expenseId);
+        if (name) copy[selectedHousehold].expenses[index].name = name;
+        if (category) copy[selectedHousehold].expenses[index].category = category;
+        // if (debtors) copy[selectedHousehold].expenses[index].debtors = debtors;
+        if (amount) copy[selectedHousehold].expenses[index].amount = amount;
+        setHousehold(copy);
+      }
+      )
       .catch(err => console.log(err));
   };
 
@@ -75,7 +97,7 @@ function ExpenseOverview() {
 
       <div className="receipt compact">
         <div className="icon">
-          <FontAwesomeIcon icon={faReceipt}  size="lg"/>
+          <FontAwesomeIcon icon={faReceipt} size="lg" />
         </div>
         <div className="details">
           <span className="amount">€{expense.amount}</span>
@@ -91,7 +113,7 @@ function ExpenseOverview() {
 
           <div className="date tag">
             <span className="date-icon">
-              <FontAwesomeIcon icon={faCalendarAlt}  size="lg"/>
+              <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
             </span>
             <span className="">
               {moment(expense.date).format('MMM Do YYYY')}
@@ -99,16 +121,16 @@ function ExpenseOverview() {
           </div>
           <div className="category tag">
             <span className="category-icon">
-              <FontAwesomeIcon icon={faFileInvoiceDollar} size="lg"/>
+              <FontAwesomeIcon icon={faFileInvoiceDollar} size="lg" />
             </span>
             <span className="">
-                {expense.category}
+              {expense.category}
             </span>
           </div>
         </div>
         <div className="actions">
           <button
-          className="edit"
+            className="edit"
 
             name="editExpense"
             type="button"
@@ -117,7 +139,7 @@ function ExpenseOverview() {
             <FontAwesomeIcon icon={faEdit} />
           </button>
           <button
-          className="remove"
+            className="remove"
             name="removeExpense"
             type="button"
             onClick={event => handleDelete(event)}
@@ -137,8 +159,8 @@ function ExpenseOverview() {
               <select name="category" type="string">
                 {categories
                   ? categories.map(category => (
-                      <option value={category}>{category}</option>
-                    ))
+                    <option value={category}>{category}</option>
+                  ))
                   : null}
               </select>
               {/* <input placeholder={expense.debtors}/> */}

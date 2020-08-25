@@ -68,21 +68,22 @@ app.post('/expenses', async (req, res) => {
   res.redirect('/api/household');
 });
 
+// FIXED
 app.delete('/expenses', async (req, res) => {
-  const { id } = req.query;
-  const householdId = req.session.household;
-  const household = await Household.findById(householdId);
-  const index = household.expenses.map(a => a._id).indexOf(id);
+  const { id, expenseId } = req.query;
+  // const householdId = req.session.household;
+  const household = await Household.findById(id);
+  const index = household.expenses.map(a => a._id).indexOf(expenseId);
   if (index === -1) {
     return res.status(404).end();
   }
   household.expenses.splice(index, 1);
+  household.markModified('expenses');
   household.save();
-  console.log(id);
-  return res.json(household);
+  return res.status(202).end();
 });
 
-
+//TODO NEED TO ADD DEBTORS - NEARLY FIXED
 app.put('/expenses', async (req, res) => {
   const { name, expenseId, amount, debtors, category, id } = req.body;
   // const householdId = req.session.household;
@@ -97,7 +98,7 @@ app.put('/expenses', async (req, res) => {
   if (amount) household.expenses[index].amount = amount;
   household.markModified('expenses');
   household.save();
-  return res.redirect('/api/household');
+  return res.status(200).end();
 });
 
 // TODO have session; expense body posted to household id
