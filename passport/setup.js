@@ -16,16 +16,15 @@ passport.deserializeUser((id, done) => {
 
 // Local Strategy
 passport.use(
-  new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  new LocalStrategy({ usernameField: 'email', passwordField:'password', passReqToCallback:true }, (req, email, password, done) => {
     // Match User
     User.findOne({ email: email })
       .then(user => {
         // Create new User
         if (!user) {
-          const newUser = new User({ email, password });
-          const newHousehold = new Household({ owners: [newUser.id] });
+          const newUser = new User({ email, password, name: req.body.name });
+          const newHousehold = new Household({ owners: [{ name: "", userId: newUser.id}] });
           newHousehold.save();
-
           // Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {

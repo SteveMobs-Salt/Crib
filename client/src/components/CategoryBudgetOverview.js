@@ -7,6 +7,7 @@ import {
   Link,
   useHistory,
   useParams,
+  useRouteMatch,
 } from 'react-router-dom';
 import ExpenseCompactView from './dashboard/ExpenseCompactView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,6 +24,7 @@ import {
   faUserSecret,
   faUtensils,
   faDice,
+  faEdit,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   CircularProgressbarWithChildren,
@@ -32,11 +34,16 @@ import {
 function CategoryBudgetOverview() {
   const history = useHistory();
   const { category } = useParams();
+  const { path, url } = useRouteMatch();
   const {
-    household: { budgets, expenses },
+    selectedHousehold,
+    household
   } = useContext(HouseholdContext);
-  let amount, catExpenses, percent;
+  let amount, catExpenses, percent, budgets, expenses;
   let budgetTotal=0, catExpensesTotal=0;
+  if(household) {
+    ({budgets, expenses} = household[selectedHousehold])
+  }
   if (budgets && expenses) {
     let budget = budgets.find(a => a.category === category);
     amount = budget.amount;
@@ -92,9 +99,9 @@ function CategoryBudgetOverview() {
           />
           <h2>{category}</h2>
         </nav>
-        {/* <Link to={`${url}/add`}>
-            <FontAwesomeIcon icon={faPlus} size="lg" />
-          </Link> */}
+        <Link to={`${url}/edit`}>
+            <FontAwesomeIcon icon={faEdit} size="lg" />
+          </Link>
       </div>
 
       {/* add button to edit / delete budget????? */}

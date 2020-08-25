@@ -1,24 +1,21 @@
-import React, { useContext } from 'react';
-import {
-  BrowserRouter as Router,
-  useHistory,
-} from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import Select from 'react-select';
 
 function CreateExpense() {
-  const {
-    setHousehold,
-    household,
-    selectedHousehold
-  } = useContext(HouseholdContext);
+  const { user, setHousehold, household, selectedHousehold } = useContext(
+    HouseholdContext,
+  );
+  const [selectedDebtors, setSelectedDebtors] = useState([]);
   const history = useHistory();
 
-  let categories, id;
-  if(household) {
-    ({categories, _id: id} = household[selectedHousehold])
+  let categories, id, type;
+  if (household) {
+    ({ categories, _id: id, type } = household[selectedHousehold]);
   }
 
   const handleCreateExpense = e => {
@@ -26,20 +23,36 @@ function CreateExpense() {
     const name = e.target.name.value;
     const amount = parseFloat(e.target.amount.value);
     const category = e.target.category.value;
+    // const debtors = selectedDebtors ? selectedDebtors.map(a=> a.value) : null;
+    const debtors = selectedDebtors ? selectedDebtors : null;
     axios
       .post('/expenses', {
         name,
         amount,
         category,
-        id
+        id,
+        debtors,
       })
-      .then(data=> {
-        return data.data
+      .then(data => {
+        return data.data;
       })
       .then(res => setHousehold(res))
       .catch(err => console.log(err));
-      history.go(-1)
+    history.go(-1);
   };
+  let owners;
+  if(household){
+    ({owners} = household[selectedHousehold])
+    owners = owners.filter( a => a.userId !== user.userId).map(a=> {
+      return {
+        value: a.userId,
+        label: a.name
+      }
+    })
+  }
+  const onSelect = selectedOptions => {
+    setSelectedDebtors(selectedOptions)
+  }
 
   return (
     <div className="create-expense">
@@ -56,12 +69,27 @@ function CreateExpense() {
 
       <form onSubmit={e => handleCreateExpense(e)}>
         <input type="text" placeholder="Name" name="name" />
-        <input type="number" placeholder="Amount" step="0.01" name="amount" min="0" />
+        <input
+          type="number"
+          placeholder="Amount"
+          step="0.01"
+          name="amount"
+          min="0"
+        />
         <select name="category" id="">
           {categories
             ? categories.map(c => <option value={c}>{c}</option>)
             : null}
         </select>
+
+        {type === "Group" ? <Select
+          options={owners}
+          isMulti
+          name="debtors"
+          onChange={onSelect}
+          className="basic-multi-select"
+          classNamePrefix="select"
+        /> : null}
         <button type="submit">Create</button>
       </form>
     </div>

@@ -14,15 +14,18 @@ import ExpenseOverview from './components/ExpenseOverview';
 import CreateExpense from './components/CreateExpense';
 import CreateGroup from './components/CreateGroup';
 import JoinGroup from './components/JoinGroup';
+import EditBudget from './components/EditBudget';
 
 function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
   const [selectedHousehold, setSelectedHousehold] = useState(parseInt(localStorage.getItem('selectedHousehold')) || 0);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || '');
   // console.log(JSON.parse(localStorage.getItem('households'))[0])
-  
+
   useEffect(() => {
     localStorage.setItem('households', JSON.stringify(household));
     localStorage.setItem('selectedHousehold', selectedHousehold);
+    localStorage.setItem('user', JSON.stringify(user));
     // if (localStorage.getItem('households')) {
     //   const storage = JSON.parse(localStorage.getItem('households'))
     //   if(storage.length > 1){
@@ -34,12 +37,12 @@ function App() {
     //     console.log(i)
     //     setSelectedHousehold(i);
     //   }
-      
+
     // }
-  }, [household, selectedHousehold])
+  }, [household, selectedHousehold, user])
 
 
-  const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold };
+  const householdValue = { household, setHousehold, selectedHousehold, setSelectedHousehold, user, setUser };
   return (
     <div className="app">
       <HouseholdContext.Provider value={householdValue}>
@@ -60,8 +63,11 @@ function App() {
             <Route path="/dashboard/budget/add">
               <CreateBudget />
             </Route>
-            <Route path="/dashboard/budget/:category">
+            <Route exact path="/dashboard/budget/:category">
               <CategoryBudgetOverview />
+            </Route>
+            <Route exact path="/dashboard/budget/:category/edit">
+              <EditBudget />
             </Route>
             <Route exact path="/dashboard/expenses">
               <ExpensesOverview />
@@ -69,7 +75,7 @@ function App() {
             <Route path="/dashboard/expenses/add">
               <CreateExpense />
             </Route>
-            <Route path="/dashboard/expenses/:taskId">
+            <Route path="/dashboard/expenses/:expenseId">
               <ExpenseOverview />
             </Route>
             <Route path="/dashboard/shopping-list">
@@ -81,6 +87,7 @@ function App() {
             <Route exact path="/join-group">
               <JoinGroup />
             </Route>
+
           </Switch>
         </Router>
       </HouseholdContext.Provider>

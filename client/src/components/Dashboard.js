@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import UserContext from '../contexts/UserContext';
 import BudgetCompact from './BudgetCompact';
@@ -6,9 +6,6 @@ import ExpensesCompact from './ExpensesCompact';
 import ShoppingListCompact from './ShoppingListCompact';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useRouteMatch,
   useHistory,
@@ -28,25 +25,24 @@ const Dashboard = () => {
   const history = useHistory();
   useEffect(() => {
     fetch('/api/household')
-      .then(res => res.json())
+      .then(res => {
+        return res.json()
+      })
       .then(data => {
-        console.log(data)
-        // console.log(data)
-        // put all households in loclstorage
         setHousehold(data);
       })
       .catch(err => console.log(err));
   }, []);
 
-  let expenses, budgets, shoppingList, personalIndex;
+  let expenses= [], budgets, shoppingList, personalIndex;
   if (household) {
+    console.log(household);
     ({ expenses, budgets, shoppingList } = household[selectedHousehold]);
     personalIndex = household.map((a, index) => {
       return { ...a, index }
     })
       .find(a => a.type === "Personal")
       .index
-    console.log(personalIndex);
   }
 
   let totalBudget = 0,
@@ -58,7 +54,12 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     fetch('/api/auth/logout')
-      .then(res => history.push('/signin'))
+      .then(res => {
+        history.push('/signin')
+        localStorage.removeItem('households');
+        localStorage.removeItem('user');
+        localStorage.removeItem('selectedHousehold');
+      })
       .catch(err => console.log(err));
   };
 
