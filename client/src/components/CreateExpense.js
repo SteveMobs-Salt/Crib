@@ -13,9 +13,9 @@ function CreateExpense() {
   const [selectedDebtors, setSelectedDebtors] = useState([]);
   const history = useHistory();
 
-  let categories, id;
+  let categories, id, type;
   if (household) {
-    ({ categories, _id: id } = household[selectedHousehold]);
+    ({ categories, _id: id, type } = household[selectedHousehold]);
   }
 
   const handleCreateExpense = e => {
@@ -81,14 +81,15 @@ function CreateExpense() {
             ? categories.map(c => <option value={c}>{c}</option>)
             : null}
         </select>
-        <Select
+
+        {type === "Group" ? <Select
           options={owners}
           isMulti
           name="debtors"
           onChange={onSelect}
           className="basic-multi-select"
           classNamePrefix="select"
-        />
+        /> : null}
         <button type="submit">Create</button>
       </form>
     </div>

@@ -10,7 +10,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 function JoinGroup() {
-    const { setHousehold, household: { categories } } = useContext(HouseholdContext);
+    const { setHousehold } = useContext(HouseholdContext);
     const history = useHistory();
 
     const handleJoinGroup = e => {
@@ -19,7 +19,7 @@ function JoinGroup() {
             referral_code: e.target.referral_code.value,
             name: e.target.name.value,
         })
-            .then(response => console.log(response))
+            .then(response => setHousehold(response.data))
             .catch(err => console.log(err));
 
         history.go(-1);

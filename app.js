@@ -83,11 +83,9 @@ app.delete('/expenses', async (req, res) => {
   household.save();
   return res.status(202).end();
 });
-
-//TODO NEED TO ADD DEBTORS - NEARLY FIXED
+// FIXED
 app.put('/expenses', async (req, res) => {
   const { name, expenseId, amount, debtors, category, id } = req.body;
-  // const householdId = req.session.household;
   const household = await Household.findById(id);
   const index = household.expenses.map(a => a._id).indexOf(expenseId);
   if (index === -1) {
@@ -102,7 +100,6 @@ app.put('/expenses', async (req, res) => {
   return res.redirect('/api/household');
 });
 
-// TODO have session; expense body posted to household id
 //FIXED
 app.post('/shopping_list', async (req, res) => {
   const owner = req.session.passport.user;
@@ -146,10 +143,7 @@ app.delete('/shopping_list', async (req, res) => {
 
 // Fetch household data
 app.all('/api/household', async (req, res) => {
-  // const householdId = req.session.household;
   const userId = req.session.passport.user;
-  // const household = await Household.aggregate([{ $match: { owners.name: owner } }]).exec();
-
   const household = await Household.aggregate([
     {
       $match: {
@@ -163,16 +157,6 @@ app.all('/api/household', async (req, res) => {
       },
     },
   ]).exec();
-  console.log(household)
-  // {
-  //   owners: { $all: [{
-  //     $elemMatch: {userId: "5f44fa370d6d88001721e57a"}
-
-  //     }]
-
-  //   }
-  // }
-  // const household = await Household.findById(householdId);
   res.json(household);
 });
 
@@ -180,7 +164,6 @@ app.all('/api/household', async (req, res) => {
 app.post('/budget', async (req, res) => {
   console.log(req.body);
   const { category, amount, id } = req.body;
-  // const householdId = req.session.household;
   const household = await Household.findById(id);
   household.budgets.push({ category, amount });
   household.categories.push(category);
@@ -242,25 +225,7 @@ app.put('/budget', async (req, res) => {
 
 app.delete('/budget', async (req, res) => {
   const { category, id } = req.query;
-  console.log(category, id);
-  // const householdId = req.session.household;
   const household = await Household.findById(id);
-  // const defaultCat = [
-  //   'Groceries',
-  //   'Housing',
-  //   'Utilities',
-  //   'Transportation',
-  //   'Insurance',
-  //   'Loan Repayments',
-  //   'Entertainment',
-  //   'Clothing',
-  //   'Dining',
-  //   'Fitness',
-  //   'Other'
-  // ];
-  // if (defaultCat.includes(category)) {
-  //   return res.status(403).end();
-  // }
   const budgetIndex = household.budgets.map(b => b.category).indexOf(category);
   const catIndex = household.categories.indexOf(category);
   household.budgets.splice(budgetIndex, 1);
@@ -281,13 +246,10 @@ app.delete('/budget', async (req, res) => {
 app.post('/api/groups/join', async (req, res) => {
   const { referral_code, name } = req.body;
   const household = await Household.findOne({ referral_code: referral_code });
-
   //TODO fix if statement (array of objects now instead of strings)
-
-  if (household.owners.includes(req.session.passport.user)) {
-    return res.json({
-      message: 'Already joined group',
-    });
+  const ownersArray = household.owners.map(a=> a.userId); 
+  if (ownersArray.includes(req.session.passport.user)) {
+    return res.redirect('/api/household');
   }
   household.owners.push({
     userId: req.session.passport.user,
@@ -295,7 +257,7 @@ app.post('/api/groups/join', async (req, res) => {
   });
   household.markModified('owners');
   household.save();
-  return res.status(202).end();
+  return res.redirect('/api/household');
 });
 
 app.post('/api/groups/create', async (req, res) => {

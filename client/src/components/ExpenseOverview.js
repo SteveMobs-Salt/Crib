@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
   useHistory,
   useParams,
 } from 'react-router-dom';
@@ -13,7 +8,6 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronLeft,
-  faPlus,
   faReceipt,
   faCalendarAlt,
   faFileInvoiceDollar,
@@ -35,9 +29,9 @@ function ExpenseOverview() {
     household,
     selectedHousehold
   } = useContext(HouseholdContext);
-  let expense, expenses, categories, id;
+  let expense, expenses, categories, id, type;
   if (household) {
-    ({ expenses, categories, _id: id } = household[selectedHousehold]);
+    ({ expenses, categories, _id: id, type } = household[selectedHousehold]);
   }
   if (expenses) {
     expense = expenses.find(e => e._id === expenseId);
@@ -47,8 +41,6 @@ function ExpenseOverview() {
     setSelectedDebtors(expense.debtors);
   }, [editMode]);
 
-  // not finished
-  // CONTINUE FROM HERE TOMORROW
   const handleDelete = event => {
     event.preventDefault();
     axios
@@ -69,7 +61,6 @@ function ExpenseOverview() {
     event.preventDefault();
     const name = event.target.name.value;
     const amount = parseFloat(event.target.amount.value);
-    // const debtors = event.target.debtors.value;
     const category = event.target.category.value;
     const debtors = selectedDebtors ? selectedDebtors : [];
     axios
@@ -78,13 +69,6 @@ function ExpenseOverview() {
 
       .put(`/expenses`, { name, expenseId, amount, category, id, debtors })
       .then(data => {
-        // const copy = [...household];
-        // const index = copy[selectedHousehold].expenses.map(a => a._id).indexOf(expenseId);
-        // if (name) copy[selectedHousehold].expenses[index].name = name;
-        // if (category) copy[selectedHousehold].expenses[index].category = category;
-        // if (debtors) copy[selectedHousehold].expenses[index].debtors = debtors;
-        // if (amount) copy[selectedHousehold].expenses[index].amount = amount;
-        // setHousehold(copy);
         setHousehold(data.data);
       }
       )
@@ -187,7 +171,7 @@ function ExpenseOverview() {
                   : null}
               </select>
               {/* <input placeholder={expense.debtors}/> */}
-              <Select
+              {type === "Group" ? <Select
                 options={owners}
                 isMulti
                 name="debtors"
@@ -195,7 +179,7 @@ function ExpenseOverview() {
                 className="basic-multi-select"
                 classNamePrefix="select"
                 defaultValue={expense.debtors}
-              />
+              /> : null}
               <button type="submit">Submit</button>
             </form>
           </div>
