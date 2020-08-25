@@ -4,7 +4,7 @@ import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import Select from 'react-select';
+import Select from '@saboya/react-select';
 function CreateExpense() {
   const { setHousehold, household, selectedHousehold } = useContext(
     HouseholdContext,
@@ -42,8 +42,8 @@ function CreateExpense() {
     ({owners} = household[selectedHousehold])
     owners = owners.map(a=> {
       return {
-        value: a,
-        label: a
+        value: a.userId,
+        label: a.name
       }
     })
   }

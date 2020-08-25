@@ -118,22 +118,22 @@ app.post('/shopping_list', async (req, res) => {
       bought: false,
       date: Date.now(),
     });
-    household.markModified('shoppingList')
+    household.markModified('shoppingList');
     household.save();
-    res.redirect('/api/household')
+    res.redirect('/api/household');
   }
 });
 
 // FIXED
 app.delete('/shopping_list', async (req, res) => {
   const { taskId, id } = req.query;
-  console.log('made it to the endpoint', taskId, id)
+  console.log('made it to the endpoint', taskId, id);
   // const householdId = req.session.household;
   const household = await Household.findById(id);
-  console.log(household)
+  console.log(household);
   /* eslint no-underscore-dangle: 0 */
   const index = household.shoppingList.map(a => a._id).indexOf(taskId);
-  console.log(index)
+  console.log(index);
   if (index === -1) {
     return res.status(404).end();
   }
@@ -143,20 +143,41 @@ app.delete('/shopping_list', async (req, res) => {
   return res.status(202).end();
 });
 
-
-
 // Fetch household data
 app.all('/api/household', async (req, res) => {
   // const householdId = req.session.household;
-  const owner = req.session.passport.user;
-  const household = await Household.aggregate([{ $match: { owners: { $in: [owner] } } }]).exec();
+  const userId = req.session.passport.user;
+  // const household = await Household.aggregate([{ $match: { owners.name: owner } }]).exec();
+
+  const household = await Household.aggregate([
+    {
+      $match: {
+        owners: {
+          $all: [
+            {
+              $elemMatch: { userId },
+            },
+          ],
+        },
+      },
+    },
+  ]).exec();
+  console.log(household)
+  // {
+  //   owners: { $all: [{
+  //     $elemMatch: {userId: "5f44fa370d6d88001721e57a"}
+
+  //     }]
+
+  //   }
+  // }
   // const household = await Household.findById(householdId);
   res.json(household);
 });
 
 // FIXED
 app.post('/budget', async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   const { category, amount, id } = req.body;
   // const householdId = req.session.household;
   const household = await Household.findById(id);
@@ -191,7 +212,9 @@ app.put('/budget', async (req, res) => {
   // }
 
   const household = await Household.findById(id);
-  const index = household.budgets.map(b => b.category).indexOf(previousCategory);
+  const index = household.budgets
+    .map(b => b.category)
+    .indexOf(previousCategory);
   console.log(index);
   if (index === -1) {
     return res.status(404).end();
@@ -207,7 +230,7 @@ app.put('/budget', async (req, res) => {
         return { ...a, category };
       }
       return a;
-    })
+    });
   }
   household.markModified('expenses');
   household.markModified('categories');
@@ -218,7 +241,7 @@ app.put('/budget', async (req, res) => {
 
 app.delete('/budget', async (req, res) => {
   const { category, id } = req.query;
-  console.log(category, id)
+  console.log(category, id);
   // const householdId = req.session.household;
   const household = await Household.findById(id);
   // const defaultCat = [
@@ -242,14 +265,14 @@ app.delete('/budget', async (req, res) => {
   household.budgets.splice(budgetIndex, 1);
   household.categories.splice(catIndex, 1);
   household.expenses = household.expenses.map(a => {
-    if(a.category === category){ 
-      return { ...a, category: "Other" }
+    if (a.category === category) {
+      return { ...a, category: 'Other' };
     }
     return a;
-  })
-  household.markModified('budgets')
-  household.markModified('categories')
-  household.markModified('expenses')
+  });
+  household.markModified('budgets');
+  household.markModified('categories');
+  household.markModified('expenses');
   household.save();
   return res.redirect('/api/household');
 });
@@ -257,25 +280,23 @@ app.delete('/budget', async (req, res) => {
 app.post('/api/groups/join', async (req, res) => {
   const { referral_code } = req.body;
   const household = await Household.findOne({ referral_code: referral_code });
-  if(household.owners.includes(req.session.passport.user)){
+  if (household.owners.includes(req.session.passport.user)) {
     return res.json({
-      message: "Already joined group"
-    })
+      message: 'Already joined group',
+    });
   }
   household.owners.push(req.session.passport.user);
   household.markModified('owners');
   household.save();
   return res.status(202).end();
-})
+});
 
 app.post('/api/groups/create', async (req, res) => {
   const newHousehold = new Household({ owners: [req.session.passport.user] });
   newHousehold.name = req.body.name;
-  newHousehold.type = "Group";
+  newHousehold.type = 'Group';
   await newHousehold.save();
   res.json(newHousehold.referral_code);
-})
-
-
+});
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));
