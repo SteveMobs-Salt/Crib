@@ -99,7 +99,7 @@ app.put('/expenses', async (req, res) => {
   if (amount) household.expenses[index].amount = amount;
   household.markModified('expenses');
   household.save();
-  return res.status(200).end();
+  return res.redirect('/api/household');
 });
 
 // TODO have session; expense body posted to household id

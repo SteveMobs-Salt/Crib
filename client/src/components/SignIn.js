@@ -47,8 +47,8 @@ const SignInForm = () => {
                 </div>
             </form>
             <p className="log-type">
-        <Link to="/">Sign up</Link>
-      </p>
+                <Link to="/">Sign up</Link>
+            </p>
             {/* <Link to="/">Sign up here</Link> */}
         </div>
     )

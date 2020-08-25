@@ -4,12 +4,13 @@ import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import Select from '@saboya/react-select';
+import Select from 'react-select';
+
 function CreateExpense() {
-  const { setHousehold, household, selectedHousehold } = useContext(
+  const { user, setHousehold, household, selectedHousehold } = useContext(
     HouseholdContext,
   );
-  const [selectedDebtors, setSelectedDebtors] = useState([])
+  const [selectedDebtors, setSelectedDebtors] = useState([]);
   const history = useHistory();
 
   let categories, id;
@@ -22,7 +23,8 @@ function CreateExpense() {
     const name = e.target.name.value;
     const amount = parseFloat(e.target.amount.value);
     const category = e.target.category.value;
-    const debtors = selectedDebtors ? selectedDebtors.map(a=> a.value) : null;
+    // const debtors = selectedDebtors ? selectedDebtors.map(a=> a.value) : null;
+    const debtors = selectedDebtors ? selectedDebtors : null;
     axios
       .post('/expenses', {
         name,
@@ -41,7 +43,7 @@ function CreateExpense() {
   let owners;
   if(household){
     ({owners} = household[selectedHousehold])
-    owners = owners.map(a=> {
+    owners = owners.filter( a => a.userId !== user).map(a=> {
       return {
         value: a.userId,
         label: a.name
