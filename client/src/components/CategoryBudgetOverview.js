@@ -36,10 +36,14 @@ function CategoryBudgetOverview() {
   const { category } = useParams();
   const { path, url } = useRouteMatch();
   const {
-    household: { budgets, expenses },
+    selectedHousehold,
+    household
   } = useContext(HouseholdContext);
-  let amount, catExpenses, percent;
+  let amount, catExpenses, percent, budgets, expenses;
   let budgetTotal=0, catExpensesTotal=0;
+  if(household) {
+    ({budgets, expenses} = household[selectedHousehold])
+  }
   if (budgets && expenses) {
     let budget = budgets.find(a => a.category === category);
     amount = budget.amount;

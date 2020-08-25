@@ -172,6 +172,24 @@ app.put('/budget', async (req, res) => {
   const { category, amount, id, previousCategory } = req.query;
   console.log(category, amount, id);
   // const householdId = req.session.household;
+
+  // const defaultCat = [
+  //   'Groceries',
+  //   'Housing',
+  //   'Utilities',
+  //   'Transportation',
+  //   'Insurance',
+  //   'Loan Repayments',
+  //   'Entertainment',
+  //   'Clothing',
+  //   'Dining',
+  //   'Fitness',
+  //   'Other'
+  // ];
+  // if(defaultCat.includes(previousCategory)){
+  //   return res.status(403).end();
+  // }
+
   const household = await Household.findById(id);
   const index = household.budgets.map(b => b.category).indexOf(previousCategory);
   console.log(index);
@@ -179,7 +197,7 @@ app.put('/budget', async (req, res) => {
     return res.status(404).end();
   }
   if (amount) {
-    household.budgets[index].amount = parseFloat(amount);
+    household.budgets[index].amount = Number(amount);
   }
   if (category) {
     household.budgets[index].category = category;
@@ -199,26 +217,41 @@ app.put('/budget', async (req, res) => {
 });
 
 app.delete('/budget', async (req, res) => {
-  const { category } = req.body;
-  const householdId = req.session.household;
-  const household = await Household.findById(householdId);
-  const defaultCat = [
-    'Groceries',
-    'Housing',
-    'Utilities',
-    'Transportation',
-    'Insurance',
-    'Loan Repayments',
-  ];
-  if (defaultCat.includes(category)) {
-    return res.status(403).end();
-  }
+  const { category, id } = req.query;
+  console.log(category, id)
+  // const householdId = req.session.household;
+  const household = await Household.findById(id);
+  // const defaultCat = [
+  //   'Groceries',
+  //   'Housing',
+  //   'Utilities',
+  //   'Transportation',
+  //   'Insurance',
+  //   'Loan Repayments',
+  //   'Entertainment',
+  //   'Clothing',
+  //   'Dining',
+  //   'Fitness',
+  //   'Other'
+  // ];
+  // if (defaultCat.includes(category)) {
+  //   return res.status(403).end();
+  // }
   const budgetIndex = household.budgets.map(b => b.category).indexOf(category);
   const catIndex = household.categories.indexOf(category);
   household.budgets.splice(budgetIndex, 1);
   household.categories.splice(catIndex, 1);
+  household.expenses = household.expenses.map(a => {
+    if(a.category === category){ 
+      return { ...a, category: "Other" }
+    }
+    return a;
+  })
+  household.markModified('budgets')
+  household.markModified('categories')
+  household.markModified('expenses')
   household.save();
-  return res.json(household);
+  return res.redirect('/api/household');
 });
 
 app.post('/api/groups/join', async (req, res) => {
