@@ -143,9 +143,11 @@ app.delete('/shopping_list', async (req, res) => {
   return res.status(202).end();
 });
 
+
+
 // Fetch household data
-app.get('/api/household', async (req, res) => {
-  const householdId = req.session.household;
+app.all('/api/household', async (req, res) => {
+  // const householdId = req.session.household;
   const owner = req.session.passport.user;
   const household = await Household.aggregate([{ $match: { owners: { $in: [owner] } } }]).exec();
   // const household = await Household.findById(householdId);
@@ -177,7 +179,7 @@ app.put('/budget', async (req, res) => {
     return res.status(404).end();
   }
   if (amount) {
-    household.budgets[index].amount = amount;
+    household.budgets[index].amount = parseFloat(amount);
   }
   if (category) {
     household.budgets[index].category = category;
@@ -193,7 +195,7 @@ app.put('/budget', async (req, res) => {
   household.markModified('categories');
   household.markModified('budgets');
   household.save();
-  return res.json(household);
+  return res.redirect('/api/household');
 });
 
 app.delete('/budget', async (req, res) => {

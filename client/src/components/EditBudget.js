@@ -8,6 +8,7 @@ import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { set } from 'mongoose';
 
 
 function EditBudget() {
@@ -25,10 +26,10 @@ function EditBudget() {
 
     const handleEditBudget = e => {
         e.preventDefault();
-        axios.put(`/budget?category=${e.target.category.value}&amount=${parseFloat(e.target.amount.value)}&id=${id}&previousCategory=${category}`)
-            .then(response => console.log(response))
+        axios.put(`/budget?category=${e.target.category.value}&amount=${e.target.amount.value}&id=${id}&previousCategory=${category}`)
+            .then(response => setHousehold(response.data))
             .catch(err => console.log(err));
-        history.go(-3);
+        history.go(-2);
     }
 
     return (
