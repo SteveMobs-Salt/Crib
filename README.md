@@ -37,7 +37,7 @@ If a member of a household purchases an item they can add the expense and select
 __Note__: This app was built as part of a two-week project and it's a work in progress.
 Additional features will be added.
 
-![ShoppingList](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingList2.gif) ![Expenses](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/addExpense2.gif) ![Budget](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets3.gif)
+![ShoppingList](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingList2.gif) ![Budget](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets3.gif) ![Expenses](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/addExpense2.gif) 
 
 ## Requirements
 
