@@ -85,7 +85,7 @@ const Dashboard = () => {
                 })
                 .filter(a => a.type !== 'Personal')
                 .map(a => (
-                  <li className="group-name"
+                  <li key={a._id} className="group-name"
                     onClick={() => {
                       setSelectedHousehold(a.index);
                       setSidebarOpen(!sidebarOpen);

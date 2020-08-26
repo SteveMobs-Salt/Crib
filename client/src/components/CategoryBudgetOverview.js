@@ -128,7 +128,7 @@ function CategoryBudgetOverview() {
       <div>
         {catExpenses
           ? catExpenses.map(a => (
-            <Link to={`/dashboard/expenses/${a._id}`}>
+            <Link key={a._id} to={`/dashboard/expenses/${a._id}`}>
               <ExpenseCompactView
                 name={a.name}
                 amount={a.amount}

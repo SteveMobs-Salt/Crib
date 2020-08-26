@@ -885,6 +885,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .menu-item {
+  outline:none;
   color: white;
   font-size: 1.3em;
   font-weight: 600;
