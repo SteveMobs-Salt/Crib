@@ -25,6 +25,9 @@ Each user has access to a personal version of the features below as well as a sh
 
 Add and remove items on the go.
 
+![Alt Text](https://giphy.com/gifs/shopping-list-SqSeZr2u1ZPv6DB4hK)
+<iframe src="https://giphy.com/embed/SqSeZr2u1ZPv6DB4hK" width="270" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="">via GIPHY</a></p>
+
 #### Budget
 
 Set up a budget for your household that creates an overview of the latest balance.
