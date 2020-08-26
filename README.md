@@ -25,12 +25,12 @@ Each user has access to a personal version of the features below as well as a sh
 
 Add and remove items on the go.
 
-![alt text](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
-
 #### Budget
 
 Set up a budget for your household that creates an overview of the latest balance.
 When an item is purchased or a service paid for, and it is added to the expenses feature under the budget category, it will be automatically deducted from that part of the budget.
+
+![alt text](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
 
 #### Split expenses
 
