@@ -28,12 +28,10 @@ function ExpenseOverview() {
   let expense, expenses, categories, id, type;
   if (household) {
     ({ expenses, categories, _id: id, type } = household[selectedHousehold]);
-    console.log(expenses)
   }
   if (expenses) {
     expense = expenses.find(e => e._id === expenseId);
   }
-  console.log(expenses)
   useEffect(() => {
 
     setSelectedDebtors(expense.debtors);

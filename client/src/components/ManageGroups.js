@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faRunning } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faRunning, faFingerprint, faPeopleArrows, faUsers, faWalking, faBarcode, faShareSquare, faShareAlt, faEye, faPiggyBank, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {
@@ -11,7 +11,9 @@ import axios from 'axios';
 
 function ManageGroups() {
   const history = useHistory();
-  const { user, household, setHousehold, setSelectedHousehold } = useContext(HouseholdContext);
+  const { user, household, setHousehold, setSelectedHousehold } = useContext(
+    HouseholdContext,
+  );
 
   let householdsArray;
   if (household) {
@@ -37,7 +39,7 @@ function ManageGroups() {
       .delete(`/api/groups/leave?id=${id}&userId=${user.userId}`)
       .then(data => {
         setHousehold(data.data);
-        setSelectedHousehold(0)
+        setSelectedHousehold(0);
         history.go(-1);
       })
       .catch(err => console.log(err));
@@ -86,12 +88,44 @@ function ManageGroups() {
                       </span>
                     </CircularProgressbarWithChildren>
                   </div>
-                  <span className="code">Group code: {a.code}</span>
-                  <span className="expenses">
+                  {/* <div className="blocks">
+                    <div className="block">
+                    <span className="code"><FontAwesomeIcon icon={faPiggyBank} size="lg" /></span>
+                      <p>€{a.budgetAmount}</p>
+                    </div>
+                    <div className="block">
+                    <span className="code"><FontAwesomeIcon icon={faCashRegister} size="lg" /></span>
+                      <p>
+                        €{a.expenseAmount}
+                      </p>
+                    </div>
+                  </div> */}
+                  <div className="blocks">
+                    <div className="block">
+                    {/* <span className="code"><FontAwesomeIcon icon={faBarcode} size="lg" /></span> */}
+                    <span className="code"><FontAwesomeIcon icon={faShareAlt} size="lg" /></span>
+                    {/* <span className="code"><FontAwesomeIcon icon={faShareSquare} size="lg" /></span> */}
+                    {/* <span className="code">Code</span> */}
+
+                      <p>{a.code}</p>
+                    </div>
+                    <div className="block">
+                    <span className="code"><FontAwesomeIcon icon={faUsers} size="lg" /></span>
+
+                      {/* <span className="members">Members</span> */}
+                      <p>
+                        {a.members} {a.members > 1  ? 'members' : 'member'}
+                      </p>
+                    </div>
+                  </div>
+                  {/* <span className="expenses">
                     Total expenses: €{a.expenseAmount}
-                  </span>
-                  <span className="members">Group members: {a.members}</span>
-                  <button type="button" onClick={() => handleLeaveGroup(a.id)}>
+                  </span> */}
+                  <button type="button" >
+                    View 
+                    {/* <FontAwesomeIcon icon={faEye} size="lg" /> */}
+                  </button>
+                  <button className="leave" type="button" onClick={() => handleLeaveGroup(a.id)}>
                     Leave Group <FontAwesomeIcon icon={faRunning} size="lg" />
                   </button>
                 </li>

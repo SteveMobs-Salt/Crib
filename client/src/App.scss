@@ -45,7 +45,6 @@ body {
   // position: fixed;
   // overflow: hidden;
   // -webkit-overflow-scrolling: touch;
-
 }
 
 #root {
@@ -162,7 +161,7 @@ a:visited {
     }
 
     .menu {
-      font-size: 1.5em
+      font-size: 1.5em;
     }
   }
 }
@@ -555,7 +554,6 @@ a:visited {
   padding: 30px 20px;
   color: #fff;
 
-
   .edit-form {
     margin-top: 15px;
     display: flex;
@@ -679,7 +677,6 @@ a:visited {
         .date-icon {
           width: 50px;
           margin-right: 20px;
-
         }
       }
 
@@ -710,7 +707,6 @@ a:visited {
       width: auto;
       display: flex;
       justify-content: center;
-
 
       button {
         font-size: 1.7em;
@@ -764,7 +760,8 @@ a:visited {
       border-radius: 10px;
       border: 2px solid #e4e4e4;
       background: transparent;
-      background: url('./images/arrows/white_arrow_down.png') no-repeat right transparent;
+      background: url('./images/arrows/white_arrow_down.png') no-repeat right
+        transparent;
       color: white;
       font-weight: 700;
       outline: none;
@@ -833,7 +830,6 @@ a:visited {
       // background: transparent;
       color: #222;
       background: white;
-
     }
   }
 }
@@ -888,7 +884,7 @@ button {
 }
 
 .menu-item {
-  outline:none;
+  outline: none;
   color: white;
   font-size: 1.3em;
   font-weight: 600;
@@ -900,7 +896,6 @@ button {
 
   &.join {
     color: rgb(139, 139, 235);
-
   }
 
   &.logout {
@@ -1038,7 +1033,6 @@ button {
           color: #444;
           outline: none;
         }
-
       }
     }
   }
@@ -1088,11 +1082,10 @@ button {
 
 .dashboard {
   padding: 30px 20px;
-  background: #F47C6B;
+  background: #f47c6b;
   color: white;
   height: 100vh;
 }
-
 
 .expenses-overview {
   padding: 30px 20px;
@@ -1112,10 +1105,9 @@ button {
   }
 }
 
-
 .category-budget-overview {
   padding: 30px 20px;
-  background: #3E98C6;
+  background: #3e98c6;
   color: white;
   min-height: 100vh;
 }
@@ -1197,14 +1189,12 @@ button {
   }
 }
 
-
 .manage-groups {
   padding: 30px 20px;
   background: rgb(57, 57, 57);
   color: white;
   min-height: 100vh;
 }
-
 
 .manage-groups {
   background-color: rgb(165, 165, 165);
@@ -1224,19 +1214,59 @@ button {
       flex-direction: column;
 
       li {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.15);
+        border: 2px solid rgb(209, 209, 209);
         border-radius: 10px;
         background: #fff;
         margin-bottom: 15px;
-        padding: 12px;
-        padding-bottom: 20px;
+        padding: 5px;
+        // padding-bottom: 20px;
         width: 100%;
         display: flex;
         flex-direction: column;
 
+        .blocks {
+          // border:1px solid red;
+          display: flex;
+          height: 50px;
+          margin-bottom: 20px;
+          .block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+            // border:1px solid black;
+            .code {
+              font-weight: 800;
+              font-size: 1.2em;
+              // color: rgb(80, 80, 80);
+              color: rgb(83, 82, 82);
+              margin-bottom: 5px;
+            }
+            .members {
+              font-weight: 800;
+              font-size: 1em;
+              color: rgb(80, 80, 80);
+            }
+            p {
+              font-weight: 600;
+              font-size: 1.3em;
+              color: rgb(34, 34, 34);
+            }
+            // align-content: center;
+            * {
+              // justify-self: center;
+              align-self: center;
+              margin: 0;
+              padding: 0;
+            }
+          }
+        }
+
         .name {
           font-weight: 800;
           font-size: 1.4em;
-          align-self: left;
+          align-self: center;
           margin-bottom: 20px;
         }
 
@@ -1244,16 +1274,22 @@ button {
           padding: 10px;
           margin-left: 15px;
           margin-right: 15px;
+          margin-bottom: 10px;
           border-radius: 10px;
-          border: 2px solid #e4e4e4;
           font-size: 1.1em;
           font-weight: 600;
           background: white;
-          color: #444;
+          border: 2px solid #e4e4e4;
+          color: #555;
+          &.leave {
+            border: 2px solid #f8a8a8;
+            color: #e07070;
+          }
         }
       }
 
-      .code, .expenses {
+      .code,
+      .expenses {
         margin-top: 15px;
         margin-left: 30px;
         font-size: 18px;
@@ -1261,19 +1297,20 @@ button {
       }
 
       .members {
-        margin-top:15px;
+        margin-top: 15px;
         margin-left: 30px;
         margin-bottom: 15px;
         font-size: 18px;
         font-weight: 600;
       }
 
-      .budget-amount, .budget-percent {
+      .budget-amount,
+      .budget-percent {
         font-size: 20px;
         align-self: center;
         font-weight: 600;
       }
-      .manage-progress-bar{
+      .manage-progress-bar {
         width: 40%;
         align-self: center;
         margin-bottom: 15px;
