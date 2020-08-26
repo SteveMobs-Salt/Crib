@@ -25,6 +25,8 @@ Each user has access to a personal version of the features below as well as a sh
 
 Add and remove items on the go.
 
+![alt text](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingListGif.gif)
+
 #### Budget
 
 Set up a budget for your household that creates an overview of the latest balance.
