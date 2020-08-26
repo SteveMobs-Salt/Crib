@@ -23,7 +23,7 @@ passport.use(
         // Create new User
         if (!user) {
           const newUser = new User({ email, password, name: req.body.name });
-          const newHousehold = new Household({ owners: [{ name: "", userId: newUser.id}] });
+          const newHousehold = new Household({ owners: [{ name: newUser.name, userId: newUser.id}] });
           newHousehold.save();
           // Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {
