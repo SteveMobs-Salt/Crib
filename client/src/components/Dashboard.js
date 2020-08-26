@@ -31,7 +31,6 @@ const Dashboard = () => {
 
   let expenses = [], budgets, shoppingList, personalIndex;
   if (household) {
-    console.log(household);
     ({ expenses, budgets, shoppingList } = household[selectedHousehold]);
     personalIndex = household
       .map((a, index) => {

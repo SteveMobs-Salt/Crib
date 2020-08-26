@@ -33,11 +33,9 @@ function CreateBudget() {
     axios
       .post('/budget', body)
       .then(data => {
-        console.log(data);
         return data;
       })
       .then(res => {
-        console.log(res)
         setHousehold(res.data);
         history.go(-2);
       })

@@ -59,7 +59,7 @@ function ShoppingListOverview() {
         shoppingList
           .sort((a, b) => b.date - a.date)
           .map(item => (
-            <ShoppingListItem item={item}/>
+            <ShoppingListItem key={item.name} item={item}/>
           ))
       ) : (
         <p>Add items to buy here</p>

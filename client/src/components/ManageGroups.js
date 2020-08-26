@@ -30,7 +30,6 @@ function ManageGroups() {
           id: a._id,
         };
       });
-    console.log(householdsArray);
   }
 
   const handleLeaveGroup = id => {

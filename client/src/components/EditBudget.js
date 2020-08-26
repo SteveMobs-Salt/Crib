@@ -34,7 +34,6 @@ function EditBudget() {
     history.go(-2);
   };
   const handleDeleteBudget = () => {
-    console.log(category, id);
     axios
       .delete(`/budget?id=${id}&category=${category}`)
       .then(res => setHousehold(res.data))

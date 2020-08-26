@@ -155,7 +155,6 @@ app.all('/api/household', async (req, res) => {
 
 // FIXED
 app.post('/budget', async (req, res) => {
-  console.log(req.body);
   const { category, amount, id } = req.body;
   const household = await Household.findById(id);
   household.budgets.push({ category, amount });
@@ -168,12 +167,10 @@ app.post('/budget', async (req, res) => {
 
 app.put('/budget', async (req, res) => {
   const { category, amount, id, previousCategory } = req.query;
-  console.log(category, amount, id);
   const household = await Household.findById(id);
   const index = household.budgets
     .map(b => b.category)
     .indexOf(previousCategory);
-  console.log(index);
   if (index === -1) {
     return res.status(404).end();
   }
@@ -248,11 +245,8 @@ app.post('/api/groups/create', async (req, res) => {
 
 app.delete('/api/groups/leave', async (req, res) => {
   const { id, userId } = req.query;
-  console.log(id, userId);
   const household = await Household.findById(id);
-  console.log(household);
   const index = household.owners.map(a => a.userId).indexOf(userId);
-  console.log(index);
   if (index === -1) {
     return res.status(404).end();
   }

@@ -20,8 +20,6 @@ function CreateGroup() {
         name: e.target.name.value,
       })
       .then(response => {
-        // respose.data = group ref
-        console.log(response);
         setReferral(response.data);
       })
       .catch(err => console.log(err));

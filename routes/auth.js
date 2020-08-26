@@ -12,17 +12,16 @@ router.post('/register_login', (req, res, next) => {
     if (!user) {
       return res.status(400).json({ errors: 'No user found' });
     }
-    req.logIn(user, async function (err) {
+    req.logIn(user, async err => {
       if (err) {
         return res.status(400).json({ errors: err });
       }
-      const household = await Household.aggregate([{ $match : { owners: {$in : [user.id]} }}]).exec();
-      // console.log(household)
+      // const household = await Household.aggregate([{ $match : { owners: {$in : [user.id]} }}]).exec();
       req.session.name = user.name;
       return res.status(200).json({
         success: `logged in as ${user.id}`,
         user: user.id,
-        name: user.name
+        name: user.name,
       });
     });
   })(req, res, next);

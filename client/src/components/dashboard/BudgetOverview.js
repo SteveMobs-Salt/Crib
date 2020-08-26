@@ -66,8 +66,8 @@ function BudgetOverview() {
         </div>
       </div>
       {data ? (
-        data.map(cat => (
-          <Link to={`${url}/${cat.category}`}>
+        data.map((cat, i) => (
+          <Link key={i} to={`${url}/${cat.category}`}>
             <CategoryBudgetCompact
               category={cat.category}
               spent={cat.spent}

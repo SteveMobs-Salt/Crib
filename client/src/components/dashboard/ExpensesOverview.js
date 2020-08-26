@@ -37,7 +37,7 @@ function ExpensesOverview() {
         </div>
         {/* map over <ExpenseCompactView />  */}
         {expenses.length ? expenses.map(expense => (
-          <Link to={`${url}/${expense._id}`}>
+          <Link key={expense._id} to={`${url}/${expense._id}`}>
             <ExpenseCompactView
               category={expense.category}
               amount={expense.amount}
