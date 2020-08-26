@@ -3,11 +3,13 @@
 
 ## Contents
 
- - [About](https://github.com/SteveMobs-Salt/SteveMobsProject#About)
- - [Requirements](https://github.com/ISteveMobs-Salt/SteveMobsProject#Hackathon-requirements)
+ - [About](https://github.com/SteveMobs-Salt/SteveMobsProject#about)
+ - [Features](https://github.com/SteveMobs-Salt/SteveMobsProject#features)
+ - [Requirements](https://github.com/ISteveMobs-Salt/SteveMobsProject#requirements)
  - [Tech](https://github.com/SteveMobs-Salt/SteveMobsProject#tech)
-    - [Client-side](https://github.com/SteveMobs-Salt/SteveMobsProject#frontend)
-    - [Server-side](https://github.com/SteveMobs-Salt/SteveMobsProject#backend)
+    - [Client-side](https://github.com/SteveMobs-Salt/SteveMobsProject#client-side)
+    - [Server-side](https://github.com/SteveMobs-Salt/SteveMobsProject#server-side)
+ - [Features to come](https://github.com/SteveMobs-Salt/SteveMobsProject#featuresToCome)
  
  ## About
  
@@ -17,20 +19,20 @@ Crib sets out to simplify the way you budget, record and keep track of your expe
 
 Many of us are sharing a household or are often making plans with friends and family, and want a way to make it simple to plan together. With Crib you can make as many groups as you like in which members share budgets, expenses, and lists. If you happen to be the one that picks up the tab on your night out or does the group's shopping, you can simply split the expense between group members who will be notified about how much they need to pay you. 
 
-### Features
+## Features
 
 Each user has access to a personal version of the features below as well as a shared version in the groups that they belong to. 
 
-#### Shopping list
+### Shopping list
 
 Add and remove items on the go.
 
-#### Budget
+### Budget
 
 Set up a budget for your household that creates an overview of the latest balance.
 When an item is purchased or a service paid for, and it is added to the expenses feature under the budget category, it will be automatically deducted from that part of the budget.
 
-#### Split expenses
+### Split expenses
 
 If a member of a household purchases an item they can add the expense and select whom in the group will be sharing the expense. Those members will be able to see how much they owe that member on the expense. 
 
