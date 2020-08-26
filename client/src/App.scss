@@ -836,7 +836,7 @@ a:visited {
       width: auto;
       display: flex;
       justify-content: center;
-      
+
 
       button {
         font-size: 1.7em;
@@ -1182,5 +1182,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
         color: #fff;
       }
     }
+  }
+}
+
+.total-budget {
+  text-align: center;
+  font-size: 20px;
+  .percent {
+    font-size: 35px;
+    font-weight: bold;
   }
 }

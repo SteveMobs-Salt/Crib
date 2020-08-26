@@ -112,16 +112,22 @@ function CategoryBudgetOverview() {
           value={percent}
           background
           backgroundPadding={6}
+          // text={`${parseInt(percent)}% of total budget`}
           styles={buildStyles({
             strokeLinecap: 'butt',
             pathTransitionDuration: 1,
             pathColor: `rgba(255, 255, 255, 1)`,
             textColor: '#fff',
-            textSize: '25px',
+            textSize: '10px',
             trailColor: `rgba(62, 152, 199, 1)`,
             backgroundColor: '#3e98c7',
           })}>
-          <FontAwesomeIcon icon={icon} size="5x" />
+            <div className="total-budget">
+            <span className="percent">{`${parseInt(percent)}%`}</span>
+            <br />
+            {`of total budget`}
+            </div>
+          {/* <FontAwesomeIcon icon={icon} size="5x" /> */}
         </CircularProgressbarWithChildren>
       </div>
       <div>

@@ -14,7 +14,7 @@ const HouseholdSchema = new mongoose.Schema(
         { category: 'Housing', amount: 0.0 },
         { category: 'Utilities', amount: 0.0 },
         { category: 'Transportation', amount: 0.0 },
-        { category: 'Utilities', amount: 0.0 },
+        { category: 'Insurance', amount: 0.0 },
         { category: 'Loan Repayments', amount: 0.0 },
         { category: 'Entertainment', amount: 0.0 },
         { category: 'Clothing', amount: 0.0 },

@@ -57,8 +57,12 @@ function CategoryBudgetCompact({ category, spent, limit, transactions }) {
   }
 
   let percent = 0;
+  let noBudget = false;
   if (category && spent && limit) {
     percent = (spent * 100) / limit;
+  }
+  if (limit === 0) {
+    noBudget = true;
   }
   return (
     <div className="compact">
@@ -67,7 +71,7 @@ function CategoryBudgetCompact({ category, spent, limit, transactions }) {
           <div className="category-icon">
             <div className="category-progress-bar">
               <CircularProgressbarWithChildren
-                value={percent}
+                value={percent > 100 ? percent -100 : percent}
                 styles={buildStyles({
                   strokeLinecap: 'round',
                   pathTransitionDuration: 1,
@@ -86,7 +90,7 @@ function CategoryBudgetCompact({ category, spent, limit, transactions }) {
           </div>
           <div className="info">
             <span className="category">{category}</span>
-            <span className="name">{ percent > 100 ? `${parseInt(percent-100)}% over budget` : `${parseInt(percent)}% of budget`}</span>
+            <span className="name">{ noBudget ? 'No budget set' : percent > 100 ? `${parseInt(percent-100)}% over budget` : `${parseInt(percent)}% of budget`}</span>
           </div>
         </div>
         <div className="numbers">
