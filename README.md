@@ -30,14 +30,14 @@ Add and remove items on the go.
 Set up a budget for your household that creates an overview of the latest balance.
 When an item is purchased or a service paid for, and it is added to the expenses feature under the budget category, it will be automatically deducted from that part of the budget.
 
-![ShoppingList](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingList2.gif) ![Expenses](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/addExpense2.gif) ![Budget](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
-
 #### Split expenses
 
 If a member of a household purchases an item they can add the expense and select whom in the group will be sharing the expense. Those members will be able to see how much they owe that member on the expense. 
 
 __Note__: This app was built as part of a two-week project and it's a work in progress.
 Additional features will be added.
+
+![ShoppingList](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingList2.gif) ![Expenses](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/addExpense2.gif) ![Budget](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
 
 ## Requirements
 
