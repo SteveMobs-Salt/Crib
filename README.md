@@ -25,7 +25,7 @@ Each user has access to a personal version of the features below as well as a sh
 
 Add and remove items on the go.
 
-![alt text](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingListGif.gif)
+![alt text](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
 
 #### Budget
 
