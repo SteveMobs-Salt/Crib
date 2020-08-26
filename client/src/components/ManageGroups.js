@@ -7,11 +7,11 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from 'react-circular-progressbar';
-
+import axios from 'axios';
 
 function ManageGroups() {
   const history = useHistory();
-  const { household, setHousehold } = useContext(HouseholdContext);
+  const { user, household, setHousehold } = useContext(HouseholdContext);
 
   let householdsArray;
   if (household) {
@@ -29,6 +29,16 @@ function ManageGroups() {
       }
     })
     console.log(householdsArray);
+  }
+
+  const handleLeaveGroup = (id) => {
+    axios
+      .delete(`/api/groups/leave?id=${id}&userId=${user.userId}`)
+      .then(data => { 
+        setHousehold(data.data) 
+      })
+      .catch(err => console.log(err));
+    history.go(-1);
   }
 
   return (
@@ -68,7 +78,7 @@ function ManageGroups() {
             <span className="code">Group code: {a.code}</span>
             <span className="expenses">Total expenses: €{a.expenseAmount}</span>
             <span className="members">Group members: {a.members}</span>
-            <button type="button">Leave Group <FontAwesomeIcon icon={faRunning} size="lg" /></button>
+            <button type="button" onClick={() => handleLeaveGroup(a.id)}>Leave Group <FontAwesomeIcon icon={faRunning} size="lg" /></button>
           </li>) : "Join group first"}
         </ul>
       </div>

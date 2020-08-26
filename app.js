@@ -169,25 +169,6 @@ app.post('/budget', async (req, res) => {
 app.put('/budget', async (req, res) => {
   const { category, amount, id, previousCategory } = req.query;
   console.log(category, amount, id);
-  // const householdId = req.session.household;
-
-  // const defaultCat = [
-  //   'Groceries',
-  //   'Housing',
-  //   'Utilities',
-  //   'Transportation',
-  //   'Insurance',
-  //   'Loan Repayments',
-  //   'Entertainment',
-  //   'Clothing',
-  //   'Dining',
-  //   'Fitness',
-  //   'Other'
-  // ];
-  // if(defaultCat.includes(previousCategory)){
-  //   return res.status(403).end();
-  // }
-
   const household = await Household.findById(id);
   const index = household.budgets
     .map(b => b.category)
@@ -264,5 +245,21 @@ app.post('/api/groups/create', async (req, res) => {
   await newHousehold.save();
   res.json(newHousehold.referral_code);
 });
+
+app.delete('/api/groups/leave', async (req, res) => {
+  const { id, userId } = req.query;
+  console.log(id, userId);
+  const household = await Household.findById(id);
+  console.log(household);
+  const index = household.owners.map(a => a.userId).indexOf(userId);
+  console.log(index);
+  if (index === -1) {
+    return res.status(404).end();
+  }
+  household.owners.splice(index, 1);
+  household.markModified('owners');
+  household.save();
+  return res.redirect('/api/household');
+})
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));
