@@ -5,11 +5,11 @@
 
  - [About](https://github.com/SteveMobs-Salt/SteveMobsProject#about)
  - [Features](https://github.com/SteveMobs-Salt/SteveMobsProject#features)
- - [Requirements](https://github.com/ISteveMobs-Salt/SteveMobsProject#requirements)
+ - [Demo](https://github.com/SteveMobs-Salt/SteveMobsProject#demo)
  - [Tech](https://github.com/SteveMobs-Salt/SteveMobsProject#tech)
     - [Client-side](https://github.com/SteveMobs-Salt/SteveMobsProject#client-side)
     - [Server-side](https://github.com/SteveMobs-Salt/SteveMobsProject#server-side)
- - [Features to come](https://github.com/SteveMobs-Salt/SteveMobsProject#featuresToCome)
+ - [Features to come](https://github.com/SteveMobs-Salt/SteveMobsProject#features-to-come)
  
  ## About
  
@@ -36,18 +36,11 @@ When an item is purchased or a service paid for, and it is added to the expenses
 
 If a member of a household purchases an item they can add the expense and select whom in the group will be sharing the expense. Those members will be able to see how much they owe that member on the expense. 
 
-__Note__: This app was built as part of a two-week project and it's a work in progress.
-Additional features will be added.
+__Note__: This app is a MVP and additional features will be added.
+
+## Demo
 
 ![ShoppingList](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingList2.gif) ![Budget](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets3.gif) ![Expenses](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/addExpense2.gif) 
-
-## Requirements
-
-- Time period: two weeks.
-- Implement a client-side.
-- Implement a server-side.
-- Utilise a database.
-- Deploy.
 
 ## Tech
 
