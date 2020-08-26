@@ -75,10 +75,9 @@ const Dashboard = () => {
         >
           Personal
         </span>
-
         <div className="menu-groups">
+            <span className="menu-item" onClick={() => history.push('/groups')}>Manage Groups</span>
           <ul className="">
-            <span className="menu-item">Groups</span>
           {household && household.length > 1
             ? household
                 .map((a, index) => {

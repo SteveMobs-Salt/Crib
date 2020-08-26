@@ -1173,3 +1173,44 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-weight: bold;
   }
 }
+
+
+.manage-groups {
+  padding: 30px 20px;
+  background: rgb(57, 57, 57);
+  color: white;
+  min-height: 100vh;
+}
+
+
+.manage-groups {
+  .group-list {
+    display: flex;
+    ul {
+      color: #222;
+      width: 100vw;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      li{
+        border-radius: 10px;
+        background: #fff;
+        margin-bottom: 15px;
+        padding: 12px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        // span {
+        //   display: block;
+        // }
+        .name {
+          font-weight: 600;
+          font-size: 1.4em;
+          align-self: center;
+        }
+      }
+    }
+  }
+}
