@@ -3,12 +3,12 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import HouseholdContext from '../contexts/HouseholdContext';
+
 
 function CreateGroup() {
   const {
-    setHousehold,
     user,
-    household: { categories },
   } = useContext(HouseholdContext);
   const history = useHistory();
   const [referral, setReferral] = useState(null);
