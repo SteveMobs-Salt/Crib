@@ -103,8 +103,7 @@ const Dashboard = () => {
         <Link to="/join-group">
           <span className="menu-item join"> Join group </span>
         </Link>
-        <span className="menu-item">Settings</span>
-
+        {/* <span className="menu-item">Settings</span> */}
         <span className="menu-item logout" onClick={() => handleLogout()}>Logout</span>
       </Menu>
       <div className="dashboard">
