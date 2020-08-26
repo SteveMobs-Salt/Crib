@@ -17,11 +17,13 @@ const SignUpForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
+    var urlParams = new URLSearchParams(window.location.search);
 
     const userData = {
       email,
       password,
       name,
+      referral: urlParams.has('referral') ? urlParams.get('referral') : null
     };
     axios
       .post('/api/auth/register_login', userData)

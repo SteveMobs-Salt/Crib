@@ -33,7 +33,7 @@ function CreateGroup() {
         .share({
           title: 'Crib - Join Group',
           text: `${user.name} invited you to join their household. Your referral code is: ${referral}`,
-          url: 'https://desolate-hollows-89856.herokuapp.com/',
+          url: `https://desolate-hollows-89856.herokuapp.com/?referral=${referral}`,
         })
         .then(() => console.log('Successful share'))
         .catch(error => console.log('Error sharing', error));
