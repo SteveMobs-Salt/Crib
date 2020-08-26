@@ -41,8 +41,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overscroll-behavior-y: none;
+  // position: fixed;
+  overflow: hidden;
+  // -webkit-overflow-scrolling: touch;
+
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  
 }
 
 input[type='text'],
