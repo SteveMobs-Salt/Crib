@@ -42,17 +42,17 @@ body {
   text-rendering: optimizeLegibility;
   overscroll-behavior-y: none;
   // position: fixed;
-  overflow: hidden;
+  // overflow: hidden;
   // -webkit-overflow-scrolling: touch;
 
 }
 
-.app {
-  width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
+// .app {
+//   width: 100vw;
+//   height: 100vh;
+//   overflow-y: scroll;
+//   -webkit-overflow-scrolling: touch;
+// }
 
 input[type='text'],
 input[type='number'],
@@ -63,6 +63,7 @@ textarea {
 
 input {
   font-family: 'Nunito', sans-serif;
+  outline: none;
 }
 
 a:link {
@@ -487,12 +488,13 @@ a:visited {
   width: 300px;
   margin: 0 auto;
   color: white;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .budgets-overview {
   padding: 30px 20px;
   background: rgb(37, 126, 179);
+  min-height: 100vh;
   color: white;
   overscroll-behavior: contain;
   overflow-y: hidden;
@@ -769,12 +771,18 @@ a:visited {
       border-radius: 10px;
       border: 1px solid #fff;
       font-size: 16px;
-      background: rgb(197, 247, 197);
+      font-weight: 600;
+      background: #fff;
+      color: #111;
     }
   }
 }
 
 .create-budget {
+  padding: 30px 20px;
+  min-height: 100vh;
+  background: rgb(240, 164, 23);
+  color: white;
   form {
     margin: 0 auto 20px auto;
     width: 90%;
@@ -785,12 +793,13 @@ a:visited {
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 10px;
-      border: 2px solid #e4e4e4;
-      color: #444;
+      border: 2px solid #fff;
+      color: #fff;
       font-weight: 700;
-
+      background: transparent;
+      outline: none;
       &::placeholder {
-        color: #444;
+        color: #fff;
         font-weight: 700;
       }
     }
@@ -799,16 +808,22 @@ a:visited {
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 10px;
-      border: 2px solid #e4e4e4;
-      background: none;
+      border: 2px solid #fff;
+      background: transparent;
+      color: white;
     }
 
     button {
       padding: 10px;
+      // color: #fff;
       border-radius: 10px;
-      border: 2px solid #e4e4e4;
-      font-size: 16px;
-      background: rgb(197, 247, 197);
+      border: 2px solid #fff;
+      font-size: 17px;
+      font-weight: 600;
+      // background: transparent;
+      color: #222;
+      background: white;
+
     }
   }
 }
@@ -914,6 +929,34 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background-position-x: right;
     background-position-y: top;
     background-repeat: no-repeat;
+    .referral {
+      // background: white;
+      color: white;
+      border-radius: 10px;
+      // height: 50px;
+      font-size: 2em;
+      text-align: center;
+      padding: 20px;
+      margin-top:100px;
+      min-height:400px;
+      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 2px 2px rgba(0, 0, 0, 0.23);
+      .code {
+        font-weight: 700;
+      }
+    }
+    .form {
+      form {
+        button {
+          // background: #9C5B30;
+          background: #ffffff;
+          // background: #9C5B30;
+          border: 1px solid white;
+          color: #444;
+          outline: none;
+        }
+        
+      }
+    }
   }
 
   .form {
@@ -978,6 +1021,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .category-budget-overview {
   padding: 30px 20px;
+  background:#3E98C6;
+  color: white;
+  min-height: 100vh;
 }
 
 .edit-budget {
@@ -995,12 +1041,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
     }
   }
 
-  background: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9');
+  // background: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9');
+  background: url('https://images.unsplash.com/photo-1580508174046-170816f65662?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max');
   background-size: 150vh;
   background-repeat: no-repeat;
-  background-position-x: -300px;
+  background-position-x: -400px;
 
-  background-position-y: top;
+  background-position-y: bottom;
 
   .form {
     height: 80%;
@@ -1023,7 +1070,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
         font-weight: 700;
         text-align: center;
         font-size: 1.3em;
-
+        outline: none;
         &::placeholder {
           color: #fff;
           text-align: center;
@@ -1037,8 +1084,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
         border: 2px solid #e4e4e4;
         font-size: 1.3em;
         font-weight: 600;
-        background: rgb(38, 155, 233);
-        color: #fff;
+        background: white;
+        // background: rgb(38, 155, 233);
+        color: #444;
       }
     }
   }

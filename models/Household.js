@@ -43,8 +43,8 @@ const HouseholdSchema = new mongoose.Schema(
       type: String,
       default: function () {
         let hash = 0;
-        for (let i = 0; i < this.type.length; i++) {
-          hash = this.type.charCodeAt(i) + ((hash << 5) - hash);
+        for (let i = 0; i < this.id.length; i++) {
+          hash = this.id.charCodeAt(i) + ((hash << 5) - hash);
         }
         let res = (hash & 0x00ffffff).toString(16).toUpperCase();
         return '00000'.substring(0, 6 - res.length) + res;

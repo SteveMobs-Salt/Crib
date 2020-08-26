@@ -257,8 +257,9 @@ app.post('/api/groups/join', async (req, res) => {
 app.post('/api/groups/create', async (req, res) => {
   const newHousehold = new Household({
     owners: [{ userId: req.session.passport.user, name: req.session.name }],
+    name: req.body.name
   });
-  newHousehold.name = req.body.name;
+  // newHousehold.name = req.body.name;
   newHousehold.type = 'Group';
   await newHousehold.save();
   res.json(newHousehold.referral_code);

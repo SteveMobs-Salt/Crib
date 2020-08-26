@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     BrowserRouter as Router,
     useHistory,
@@ -10,16 +10,33 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 function CreateGroup() {
-    const { setHousehold, household: { categories } } = useContext(HouseholdContext);
+    const { setHousehold, user, household: { categories } } = useContext(HouseholdContext);
     const history = useHistory();
+    const [referral, setReferral] = useState(null)
 
     const handleCreateGroup = e => {
         e.preventDefault();
         axios.post('/api/groups/create', {
             name: e.target.name.value,
         })
-            .then(response => console.log(response))
+            .then(response => {
+                // respose.data = group ref
+                console.log(response)
+                setReferral(response.data)
+            })
             .catch(err => console.log(err));
+    }
+
+    const handleShare = () => {
+        if (navigator.share) {
+            navigator.share({
+              title: 'Crib - Join Group',
+              text: `${user.name} invited you to join their household. Your referral code is: ${referral}`,
+              url: 'https://desolate-hollows-89856.herokuapp.com/',
+            })
+              .then(() => console.log('Successful share'))
+              .catch((error) => console.log('Error sharing', error));
+          }
     }
 
     return (
@@ -34,14 +51,17 @@ function CreateGroup() {
                     <h2>Create group</h2>
                 </nav>
             </div>
+            { referral ? <div className="referral" type="button" onClick={() => handleShare()}> Your group's referral code: <span className="code">{referral}</span></div> : 
             <div className="form">
 
             
             <form onSubmit={e => handleCreateGroup(e)}>
+                
                 <input type="text" placeholder="Enter group name.." name="name" />
-                <button type="submit">Create</button>
+                <button type="submit">Create</button> 
             </form>
             </div>
+}
         </div>
     )
 }
