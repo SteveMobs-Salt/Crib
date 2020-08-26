@@ -9,6 +9,7 @@
  - [Tech](https://github.com/SteveMobs-Salt/SteveMobsProject#tech)
     - [Client-side](https://github.com/SteveMobs-Salt/SteveMobsProject#client-side)
     - [Server-side](https://github.com/SteveMobs-Salt/SteveMobsProject#server-side)
+    - [Deployment](https://github.com/SteveMobs-Salt/SteveMobsProject#deployment)
  - [Features to come](https://github.com/SteveMobs-Salt/SteveMobsProject#features-to-come)
  
  ## About
@@ -57,6 +58,10 @@ __Note__: This app is a MVP and additional features will be added.
 - [Express](http://expressjs.com/)
 - [Passport](http://www.passportjs.org/)
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)
+
+### Deployment
+
+- [Heroku](https://www.heroku.com/)
 
 ## Features to come: 
 
