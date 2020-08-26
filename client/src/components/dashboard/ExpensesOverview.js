@@ -24,7 +24,6 @@ function ExpensesOverview() {
   if (household) {
     ({expenses} = household[selectedHousehold])
   }
-  if (expenses) {
     return (
       <div className="expenses-overview">
         <div className="header">
@@ -37,7 +36,7 @@ function ExpensesOverview() {
           </Link>
         </div>
         {/* map over <ExpenseCompactView />  */}
-        {expenses.map(expense => (
+        {expenses.length ? expenses.map(expense => (
           <Link to={`${url}/${expense._id}`}>
             <ExpenseCompactView
               category={expense.category}
@@ -46,19 +45,10 @@ function ExpensesOverview() {
               date={expense.date}
             />
           </Link>
-        ))}
+        )) : (<div className="no-expense"><span>Add your first expense</span></div>)}
         {/* add expense button/link to navigate to /dashboard/expenses/add  */}
       </div>
     );
-  }
-  return (
-    <div>
-      <i className="fa fa-chevron-left" onClick={() => history.go(-1)}></i>
-      <h2>Expenses</h2>
-      <p>please add some expenses</p>
-      {/* add expense button/link to navigate to /dashboard/expenses/add  */}
-    </div>
-  );
 }
 
 export default ExpensesOverview;
