@@ -38,9 +38,9 @@ const SignInForm = () => {
                 <h1>Welcome Back</h1>
             </header>
             <form onSubmit={onSubmit}>
-                <input type='email' placeholder="Email"
+                <input type='email' placeholder="Email" autocomplete="on"
                     required onChange={event => setEmail(event.target.value)} />
-                <input type='password' placeholder="Password"
+                <input type='password' placeholder="Password" autocomplete="on"
                     required onChange={event => setPassword(event.target.value)} />
                 <div className="actions">
                     <h1>Sign In</h1>
