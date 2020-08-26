@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     useHistory,
 } from 'react-router-dom';
-import HouseholdContext from '../contexts/HouseholdContext';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 function CreateGroup() {
-    const { setHousehold, household: { categories } } = useContext(HouseholdContext);
     const history = useHistory();
 
     const handleCreateGroup = e => {
@@ -35,11 +33,11 @@ function CreateGroup() {
             </div>
             <div className="form">
 
-            
-            <form onSubmit={e => handleCreateGroup(e)}>
-                <input type="text" placeholder="Enter group name.." name="name" />
-                <button type="submit">Create</button>
-            </form>
+
+                <form onSubmit={e => handleCreateGroup(e)}>
+                    <input type="text" placeholder="Enter group name.." name="name" />
+                    <button type="submit">Create</button>
+                </form>
             </div>
         </div>
     )

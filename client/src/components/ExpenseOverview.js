@@ -35,7 +35,7 @@ function ExpenseOverview() {
 
   useEffect(() => {
     setSelectedDebtors(expense.debtors);
-  }, [editMode]);
+  }, [editMode, expense.debtors]);
 
   const handleDelete = event => {
     event.preventDefault();

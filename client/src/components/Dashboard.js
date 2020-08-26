@@ -31,7 +31,7 @@ const Dashboard = () => {
         setHousehold(data);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [setHousehold]);
 
   let expenses = [], budgets, shoppingList, personalIndex;
   if (household) {
