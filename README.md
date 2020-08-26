@@ -30,7 +30,7 @@ Add and remove items on the go.
 Set up a budget for your household that creates an overview of the latest balance.
 When an item is purchased or a service paid for, and it is added to the expenses feature under the budget category, it will be automatically deducted from that part of the budget.
 
-![alt text](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
+![ShoppingList](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/shoppingList2.gif) ![Expenses](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/addExpense2.gif) ![Budget](https://github.com/SteveMobs-Salt/SteveMobsProject/blob/master/readmeGifs/budgets2.gif)
 
 #### Split expenses
 
