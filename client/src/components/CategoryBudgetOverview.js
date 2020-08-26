@@ -31,13 +31,15 @@ import {
 function CategoryBudgetOverview() {
   const history = useHistory();
   const { category } = useParams();
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const {
     selectedHousehold,
     household
   } = useContext(HouseholdContext);
+  // amount is assigned a value and is used but linting does not recognize
+  // eslint-disable-next-line 
   let amount, catExpenses, percent, budgets, expenses;
-  let budgetTotal = 0, catExpensesTotal = 0;
+  // let budgetTotal = 0, catExpensesTotal = 0;
   if (household) {
     ({ budgets, expenses } = household[selectedHousehold])
   }
@@ -47,7 +49,8 @@ function CategoryBudgetOverview() {
     catExpenses = expenses.filter(a => a.category === category);
     percent = (catExpenses.reduce((a, c) => a + c.amount, 0) * 100) / budgets.reduce((a, c) => a + c.amount, 0)
   }
-
+  // Switch can be null and it shouldn't be a problem
+  // eslint-disable-next-line 
   let icon = null;
   switch (category) {
     case 'Entertainment':

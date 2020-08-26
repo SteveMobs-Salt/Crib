@@ -102,7 +102,7 @@ app.put('/expenses', async (req, res) => {
 
 //FIXED
 app.post('/shopping_list', async (req, res) => {
-  const owner = req.session.passport.user;
+  // const owner = req.session.passport.user;
   const { name, id } = req.body;
   const household = await Household.findById(id);
   const uuid = uuidv4();

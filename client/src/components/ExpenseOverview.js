@@ -189,14 +189,14 @@ function ExpenseOverview() {
               <select name="category" type="string">
                 {categories
                   ? categories.map(category =>
-                      category === expense.category ? (
-                        <option value={category} selected>
-                          {category}
-                        </option>
-                      ) : (
+                    category === expense.category ? (
+                      <option value={category} selected>
+                        {category}
+                      </option>
+                    ) : (
                         <option value={category}>{category}</option>
                       ),
-                    )
+                  )
                   : null}
               </select>
               {/* <input placeholder={expense.debtors}/> */}
@@ -209,7 +209,7 @@ function ExpenseOverview() {
                   className="debtors-select-container"
                   classNamePrefix="debtors-select"
                   defaultValue={expense.debtors}
-                  // styles={}
+                // styles={}
                 />
               ) : null}
               <button type="submit">Submit</button>

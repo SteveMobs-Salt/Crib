@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import UserContext from '../contexts/UserContext';
 import {
-  BrowserRouter as Router,
   Link,
   useHistory,
 } from 'react-router-dom';

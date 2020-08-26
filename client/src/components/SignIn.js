@@ -8,7 +8,7 @@ import HouseholdContext from '../contexts/HouseholdContext';
 const SignInForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    const name = useState('');
     const history = useHistory();
     const { setUser } = useContext(HouseholdContext);
     const onSubmit = event => {

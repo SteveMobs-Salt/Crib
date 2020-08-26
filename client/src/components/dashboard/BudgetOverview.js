@@ -15,7 +15,7 @@ function BudgetOverview() {
     selectedHousehold,
     household
   } = useContext(HouseholdContext);
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
 
   // map over categories, which maps over expenses matching the categories
   let data = null, budgets, expenses, categories;
