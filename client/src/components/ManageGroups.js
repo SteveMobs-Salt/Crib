@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faRunning, faFingerprint, faPeopleArrows, faUsers, faWalking, faBarcode, faShareSquare, faShareAlt, faEye, faPiggyBank, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faRunning, faUsers, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {

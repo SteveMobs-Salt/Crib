@@ -206,11 +206,11 @@ function ExpenseOverview() {
                 {categories
                   ? categories.map(category =>
                     category === expense.category ? (
-                      <option value={category} selected>
+                      <option key={category} value={category} selected>
                         {category}
                       </option>
                     ) : (
-                        <option value={category}>{category}</option>
+                        <option key={category} value={category}>{category}</option>
                       ),
                   )
                   : null}
