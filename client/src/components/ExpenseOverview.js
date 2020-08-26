@@ -22,6 +22,7 @@ import Select from 'react-select';
 function ExpenseOverview() {
   const [editMode, setEditMode] = useState(false);
   const [selectedDebtors, setSelectedDebtors] = useState([]);
+  
 
   const history = useHistory();
   const { expenseId } = useParams();
@@ -31,15 +32,20 @@ function ExpenseOverview() {
   let expense, expenses, categories, id, type;
   if (household) {
     ({ expenses, categories, _id: id, type } = household[selectedHousehold]);
+    console.log(expenses)
   }
   if (expenses) {
     expense = expenses.find(e => e._id === expenseId);
   }
-
-
+  console.log(expenses)
   useEffect(() => {
+
     setSelectedDebtors(expense.debtors);
   }, [editMode]);
+  
+  // useEffect(() => {
+  //     setSelectedDebtors([expense.debtors]);
+  // }, [])
 
   const handleDelete = event => {
     event.preventDefault();
@@ -74,6 +80,8 @@ function ExpenseOverview() {
         setHousehold(data.data);
       })
       .catch(err => console.log(err));
+      setSelectedDebtors([]);
+      setEditMode(false);
   };
 
   let owners;
@@ -143,14 +151,34 @@ function ExpenseOverview() {
               </span>
             </div>
           ) : null}
-          {expense.debtors && expense.creditor === user.userId ? (
+          {expense.debtors.length && expense.creditor === user.userId ? (
             <div className="debt tag">
               <span className="date-icon">
                 <FontAwesomeIcon icon={faCommentsDollar} size="lg" />
               </span>
               <span className="">
-                Each member owes you €
-                {expense.amount / (expense.debtors.length + 1)}
+                {expense.debtors.length === 1
+                  ? `${expense.debtors[0].label} owes you €${
+                      expense.amount / (expense.debtors.length + 1)
+                    }`
+                  : expense.debtors.length === 2
+                  ? `${expense.debtors
+                      .map(a => a.label)
+                      .join(' and ')} each owe you ${
+                      expense.amount / (expense.debtors.length + 1)
+                    }`
+                  : // ? `${expense.debtors.splice(0, (expense.debtors.length -1) )
+                    //     .map(a => a.label)
+                    //     .join(', ')} and ${expense.debtors[expense.debtors.length-1]} each owe you ${
+                    //     expense.amount / (expense.debtors.length + 1)
+                    //   }`
+                    expense.debtors.length > 2 
+                    ? `${expense.debtors.slice(0, (expense.debtors.length -1) )
+                          .map(a => a.label)
+                          .join(', ')} and ${expense.debtors[expense.debtors.length -1].label} each owe you €${expense.amount / (expense.debtors.length + 1)}` : ''
+                  }
+                {/* // Each member owes you €
+                // {expense.amount / (expense.debtors.length + 1)} */}
               </span>
             </div>
           ) : null}

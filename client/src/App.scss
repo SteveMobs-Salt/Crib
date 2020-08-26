@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 16px;
+  overscroll-behavior-y: none ;
 }
 
 *,
@@ -47,12 +48,12 @@ body {
 
 }
 
-// .app {
-//   width: 100vw;
-//   height: 100vh;
-//   overflow-y: scroll;
-//   -webkit-overflow-scrolling: touch;
-// }
+#root {
+  // width: 100vw;
+  // height: 100vh;
+  // overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
 
 input[type='text'],
 input[type='number'],
@@ -167,7 +168,7 @@ a:visited {
 }
 
 .compact {
-  border: 2px solid #ccc;
+  border: 2px solid #fff;
   border-radius: 10px;
   margin-bottom: 10px;
   background: #fff;
@@ -269,7 +270,7 @@ a:visited {
     }
 
     #myBar {
-      width: 10%;
+      width: 0%;
       height: 20px;
       border-radius: 10px;
       background-color: rgb(248, 92, 92);
@@ -655,31 +656,35 @@ a:visited {
 
       &.category {
         background: #fff;
-        display: flex;
-        justify-content: center;
+        // display: flex;
+        // justify-content: space-around;
         color: #444;
         border: 2px solid #e4e4e4;
-
+        // text-align: center;
         .category-icon {
-          width: 40px;
+          width: 50px;
+          margin-right: 20px;
+          // text-align: right;
         }
       }
 
       &.date {
-        display: flex;
-        justify-content: center;
+        // display: flex;
+        // justify-content: space-between;
         background: #fff;
         color: #444;
         border: 2px solid #e4e4e4;
 
         .date-icon {
-          width: 40px;
+          width: 50px;
+          margin-right: 20px;
+
         }
       }
 
       &.name {
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         background: #fff;
         color: #444;
         border: 2px solid #e4e4e4;
@@ -687,13 +692,15 @@ a:visited {
 
       &.debt {
         display: flex;
-        justify-content: center;
+        // justify-content: space-between;
         background: #fff;
         color: #444;
         border: 2px solid #e4e4e4;
 
         .date-icon {
           width: 40px;
+          align-self: center;
+          // margin-right:10px
         }
       }
     }
@@ -874,6 +881,24 @@ Note: Beware of modifying this element as it can break the animations - you shou
   font-size: 1.15em;
 }
 
+.menu-item {
+  color: white;
+  font-size:1.3em;
+  font-weight: 600;
+  &.create {
+    color: rgb(139, 139, 235);
+    // color: rgb(120, 120, 211);
+  }
+  &.join {
+    color: rgb(139, 139, 235);
+    
+  }
+
+  &.logout {
+    margin-top: 20px;
+  }
+}
+
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
   fill: #373a47;
@@ -890,6 +915,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: inline-block;
 }
 
+.menu-groups {
+  ul {
+    li {
+      margin-left: 10px;
+      color: white;
+      font-size:1.1em;
+      font-weight: 600;
+    }
+  }
+}
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
@@ -898,14 +933,42 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .debtors-select-container {
   border-radius: 10px;
   border: 2px solid #e4e4e4;
-  color: #444;
+  color: #fff;
   font-weight: 700;
 
   .debtors-select__control {
     border: none;
-    background: #fff;
+    background: transparent;
     border-radius: 10px;
+    color: #fff;
   }
+      .debtors-select__placeholder {
+        color: #fff;
+      }
+      .debtors-select-placeholder {
+        color: #fff;
+      }
+      .debtors-select-Input{
+        color: #fff;
+      }
+      .debtors-select-input{
+        color: #fff;
+      }
+      .debtors-select__Input{
+        color: #fff;
+      }
+      .debtors-select__input{
+        color: #fff;
+        align-self: center;
+      }
+      .debtors-select__multi-value__label{
+        color: #222;
+        background: white;
+      }
+      .debtors-select__menu{
+        color: #222;
+        background: white;
+      }
 }
 
 .join-group {
@@ -1016,6 +1079,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
   height: auto;
   min-height: 100vh;
   background: rgb(160, 32, 128);
+
+  .no-expense {
+    // text-align: center;
+    display: flex;
+    height: 40vh;
+    justify-content: center;
+    // align-content: center;
+    align-items: center;
+    // width: 100vw;
+  }
 }
 
 

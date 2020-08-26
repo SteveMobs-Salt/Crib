@@ -47,7 +47,7 @@ const BudgetCompact = ({ budget, spent }) => {
       </div> */}
 
       <div id="myProgress">
-        <div id="myBar" style={{ width: `${percent}%` }}></div>
+        <div id="myBar" style={{ width: `${percent < 100 ? percent : 100}%` }}></div>
       </div>
 
       {/* <h4>{amount && expenseTotal ? `Total Budget: ${amount}` : null}</h4>
