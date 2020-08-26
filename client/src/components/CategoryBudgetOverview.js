@@ -122,11 +122,11 @@ function CategoryBudgetOverview() {
             trailColor: `rgba(62, 152, 199, 1)`,
             backgroundColor: '#3e98c7',
           })}>
-            <div className="total-budget">
+            {percent ? <div className="total-budget">
             <span className="percent">{`${parseInt(percent)}%`}</span>
             <br />
             {`of total budget`}
-            </div>
+            </div> : amount > 0 ? 'Add an expense' : 'Set a budget'}
           {/* <FontAwesomeIcon icon={icon} size="5x" /> */}
         </CircularProgressbarWithChildren>
       </div>
