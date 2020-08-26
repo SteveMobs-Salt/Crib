@@ -63,8 +63,6 @@ Additional features will be added.
 
 ## Features to come: 
 
-__Shopping list__: 
-
 __Split expenses__: 
 - Notifications are sent to members when an expense is split with them with details of the transaction.
 - Tabs to keep track of how much members owe each other and an option to settle up the tab.
