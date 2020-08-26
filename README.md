@@ -13,9 +13,14 @@
  
 Have you ever wished you had one app that could organise your household? 
 
-Crib sets out to simplify the way you budget, record and keep track of your expenses and add items to your shopping list on the go. Many of us are sharing a household or are often making plans with friends and family and want a way to make it simple to plan together. With Crib you can make as many groups as you like in which members share budgets, expenses, and lists. If you happen to be the one that picks up the tab on your night out or does the group's shopping, you can simply split the expense between group members who will be notified about how much they need to pay you. 
+Crib sets out to simplify the way you budget, record and keep track of your expenses, and add items to your shopping list on the go. 
+
+Many of us are sharing a household or are often making plans with friends and family, and want a way to make it simple to plan together. 
+With Crib you can make as many groups as you like in which members share budgets, expenses, and lists. If you happen to be the one that picks up the tab on your night out or does the group's shopping, you can simply split the expense between group members who will be notified about how much they need to pay you. 
 
 ### Core features
+
+Each user has access to a personal version of the features below as well as a shared version in the groups that they belong to. 
 
 #### Shopping list
 
