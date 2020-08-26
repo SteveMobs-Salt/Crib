@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
-  const { userID } = useContext(UserContext);
+  // const { userID } = useContext(UserContext);
   const { setHousehold, household, selectedHousehold, setSelectedHousehold } = useContext(
     HouseholdContext,
   );

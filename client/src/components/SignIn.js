@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import HouseholdContext from '../contexts/HouseholdContext';
@@ -50,7 +50,6 @@ const SignInForm = () => {
             <p className="log-type">
                 <Link to="/">Sign up</Link>
             </p>
-            {/* <Link to="/">Sign up here</Link> */}
         </div>
     )
 }

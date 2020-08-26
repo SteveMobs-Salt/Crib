@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import SignUpForm from './components/SignUp';
 import SignInForm from './components/SignIn';
@@ -20,25 +20,11 @@ function App() {
   const [household, setHousehold] = useState(JSON.parse(localStorage.getItem('households')) || '');
   const [selectedHousehold, setSelectedHousehold] = useState(parseInt(localStorage.getItem('selectedHousehold')) || 0);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
-  // console.log(JSON.parse(localStorage.getItem('households'))[0])
 
   useEffect(() => {
     localStorage.setItem('households', JSON.stringify(household));
     localStorage.setItem('selectedHousehold', selectedHousehold);
     localStorage.setItem('user', JSON.stringify(user));
-    // if (localStorage.getItem('households')) {
-    //   const storage = JSON.parse(localStorage.getItem('households'))
-    //   if(storage.length > 1){
-    //     const {i} = storage.map((a, i) => {
-    //       return {
-    //         ...a, i
-    //       }
-    //     }).find(a => a.type !== "Personal")
-    //     console.log(i)
-    //     setSelectedHousehold(i);
-    //   }
-
-    // }
   }, [household, selectedHousehold, user])
 
 

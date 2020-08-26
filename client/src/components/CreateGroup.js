@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import {
-    BrowserRouter as Router,
     useHistory,
 } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';

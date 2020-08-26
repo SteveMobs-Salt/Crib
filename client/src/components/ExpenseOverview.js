@@ -10,10 +10,6 @@ import {
   faFileInvoiceDollar,
   faTrash,
   faEdit,
-  faCreditCard,
-  faCashRegister,
-  faSearchDollar,
-  faCommentDollar,
   faCommentsDollar,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';

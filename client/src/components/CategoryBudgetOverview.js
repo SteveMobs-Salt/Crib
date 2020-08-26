@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useHistory,
   useParams,
@@ -40,9 +37,9 @@ function CategoryBudgetOverview() {
     household
   } = useContext(HouseholdContext);
   let amount, catExpenses, percent, budgets, expenses;
-  let budgetTotal=0, catExpensesTotal=0;
-  if(household) {
-    ({budgets, expenses} = household[selectedHousehold])
+  let budgetTotal = 0, catExpensesTotal = 0;
+  if (household) {
+    ({ budgets, expenses } = household[selectedHousehold])
   }
   if (budgets && expenses) {
     let budget = budgets.find(a => a.category === category);
@@ -100,19 +97,14 @@ function CategoryBudgetOverview() {
           <h2>{category}</h2>
         </nav>
         <Link to={`${url}/edit`}>
-            <FontAwesomeIcon icon={faEdit} size="lg" />
-          </Link>
+          <FontAwesomeIcon icon={faEdit} size="lg" />
+        </Link>
       </div>
-
-      {/* add button to edit / delete budget????? */}
-      {/* dashboard/budget/'category'/edit */}
-      {/* <h3>{amount}</h3> */}
       <div className="category-progress-overview">
         <CircularProgressbarWithChildren
           value={percent}
           background
           backgroundPadding={6}
-          // text={`${parseInt(percent)}% of total budget`}
           styles={buildStyles({
             strokeLinecap: 'butt',
             pathTransitionDuration: 1,
@@ -122,12 +114,11 @@ function CategoryBudgetOverview() {
             trailColor: `rgba(62, 152, 199, 1)`,
             backgroundColor: '#3e98c7',
           })}>
-            <div className="total-budget">
+          <div className="total-budget">
             <span className="percent">{`${parseInt(percent)}%`}</span>
             <br />
             {`of total budget`}
-            </div>
-          {/* <FontAwesomeIcon icon={icon} size="5x" /> */}
+          </div>
         </CircularProgressbarWithChildren>
       </div>
       <div>
@@ -141,7 +132,7 @@ function CategoryBudgetOverview() {
                 date={a.date}
               />
             </Link>
-            ))
+          ))
           : null}
       </div>
     </div>

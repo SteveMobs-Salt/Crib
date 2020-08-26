@@ -71,26 +71,23 @@ function CategoryBudgetCompact({ category, spent, limit, transactions }) {
           <div className="category-icon">
             <div className="category-progress-bar">
               <CircularProgressbarWithChildren
-                value={percent > 100 ? percent -100 : percent}
+                value={percent > 100 ? percent - 100 : percent}
                 styles={buildStyles({
                   strokeLinecap: 'round',
                   pathTransitionDuration: 1,
                   pathColor: percent > 100 ? `rgba(255, 62, 52, 1)` : `rgba(62, 152, 199, 1)`,
                   textColor: '#444',
-                  // textSize: '50px',
                   trailColor: '#dfdfdf',
                   backgroundColor: '#3e98c7',
                 })}
               >
                 <FontAwesomeIcon icon={icon} size="sm" />
-
-                {/* <i className="fas fa-2x fa-piggy-bank"></i> */}
               </CircularProgressbarWithChildren>
             </div>
           </div>
           <div className="info">
             <span className="category">{category}</span>
-            <span className="name">{ noBudget ? 'No budget set' : percent > 100 ? `${parseInt(percent-100)}% over budget` : `${parseInt(percent)}% of budget`}</span>
+            <span className="name">{noBudget ? 'No budget set' : percent > 100 ? `${parseInt(percent - 100)}% over budget` : `${parseInt(percent)}% of budget`}</span>
           </div>
         </div>
         <div className="numbers">

@@ -1,23 +1,16 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCoffee,
   faUtensils,
-  faHamburger,
-  faBolt,
   faShower,
   faSubway,
   faMoneyCheckAlt,
-  faHouseDamage,
   faHospitalUser,
-  faPiggyBank,
   faHouseUser,
   faSwimmer,
   faCocktail,
   faUserSecret,
-  faTshirt,
   faDice,
-  faCalculator,
   faShoppingBasket,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
