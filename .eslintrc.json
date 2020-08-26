@@ -5,6 +5,7 @@
     "salt/react/hooks"
   ],
   "rules": {
+    "no-unused-vars": 2,
     "react/jsx-closing-bracket-location": [
       "error",
       {
@@ -20,5 +21,17 @@
         ]
       }
     ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    },
+    "env": {
+      "es6": true
+    }
   }
 }

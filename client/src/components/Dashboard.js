@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import UserContext from '../contexts/UserContext';
 import BudgetCompact from './BudgetCompact';
 import ExpensesCompact from './ExpensesCompact';
 import ShoppingListCompact from './ShoppingListCompact';
@@ -10,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
-  const { userID } = useContext(UserContext);
   const {
     setHousehold,
     household,
@@ -18,7 +16,7 @@ const Dashboard = () => {
     setSelectedHousehold,
   } = useContext(HouseholdContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const history = useHistory();
   useEffect(() => {
     fetch('/api/household')
@@ -29,12 +27,9 @@ const Dashboard = () => {
         setHousehold(data);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [setHousehold]);
 
-  let expenses = [],
-    budgets,
-    shoppingList,
-    personalIndex;
+  let expenses = [], budgets, shoppingList, personalIndex;
   if (household) {
     console.log(household);
     ({ expenses, budgets, shoppingList } = household[selectedHousehold]);
@@ -116,11 +111,8 @@ const Dashboard = () => {
       <div className="dashboard">
         <div className="header">
           <nav>
-            {/* <FontAwesomeIcon icon={faChevronLeft} size="lg" onClick={() => history.go(-1)}/> */}
             <h2>Dashboard</h2>
           </nav>
-          {/* <button onClick={() => setSelectedHousehold(selectedHousehold + 1)} type="button">Change Group</button> */}
-          {/* <Link to={`${url}/add`}> */}
           <div className="household-views">
             <FontAwesomeIcon
               icon={faBars}
@@ -128,25 +120,14 @@ const Dashboard = () => {
               className="menu"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             />
-            {/* <FontAwesomeIcon
-            icon={faUsers}
-            size="lg"
-            className="group"
-            onClick={() => handleLogout()}
-          /> */}
           </div>
-          {/* </Link> */}
         </div>
-
-        {/* /dashboard/budget */}
         <Link to={`${url}/budget`}>
           <BudgetCompact budget={totalBudget} spent={totalSpent} />
         </Link>
-        {/* /dashboard/expenses */}
         <Link to={`${url}/expenses`}>
           <ExpensesCompact expenses={expenses} />
         </Link>
-        {/* /dashboard/shopping-list */}
         <Link to={`${url}/shopping-list`}>
           <ShoppingListCompact items={shoppingList} />
         </Link>

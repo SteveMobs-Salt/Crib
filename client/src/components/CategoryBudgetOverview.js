@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useHistory,
   useParams,
@@ -34,15 +31,17 @@ import {
 function CategoryBudgetOverview() {
   const history = useHistory();
   const { category } = useParams();
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const {
     selectedHousehold,
     household
   } = useContext(HouseholdContext);
+  // amount is assigned a value and is used but linting does not recognize
+  // eslint-disable-next-line 
   let amount, catExpenses, percent, budgets, expenses;
-  let budgetTotal=0, catExpensesTotal=0;
-  if(household) {
-    ({budgets, expenses} = household[selectedHousehold])
+  // let budgetTotal = 0, catExpensesTotal = 0;
+  if (household) {
+    ({ budgets, expenses } = household[selectedHousehold])
   }
   if (budgets && expenses) {
     let budget = budgets.find(a => a.category === category);
@@ -50,7 +49,8 @@ function CategoryBudgetOverview() {
     catExpenses = expenses.filter(a => a.category === category);
     percent = (catExpenses.reduce((a, c) => a + c.amount, 0) * 100) / budgets.reduce((a, c) => a + c.amount, 0)
   }
-
+  // Switch can be null and it shouldn't be a problem
+  // eslint-disable-next-line 
   let icon = null;
   switch (category) {
     case 'Entertainment':
@@ -100,19 +100,14 @@ function CategoryBudgetOverview() {
           <h2>{category}</h2>
         </nav>
         <Link to={`${url}/edit`}>
-            <FontAwesomeIcon icon={faEdit} size="lg" />
-          </Link>
+          <FontAwesomeIcon icon={faEdit} size="lg" />
+        </Link>
       </div>
-
-      {/* add button to edit / delete budget????? */}
-      {/* dashboard/budget/'category'/edit */}
-      {/* <h3>{amount}</h3> */}
       <div className="category-progress-overview">
         <CircularProgressbarWithChildren
           value={percent}
           background
           backgroundPadding={6}
-          // text={`${parseInt(percent)}% of total budget`}
           styles={buildStyles({
             strokeLinecap: 'butt',
             pathTransitionDuration: 1,
@@ -141,7 +136,7 @@ function CategoryBudgetOverview() {
                 date={a.date}
               />
             </Link>
-            ))
+          ))
           : null}
       </div>
     </div>

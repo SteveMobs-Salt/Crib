@@ -10,10 +10,6 @@ import {
   faFileInvoiceDollar,
   faTrash,
   faEdit,
-  faCreditCard,
-  faCashRegister,
-  faSearchDollar,
-  faCommentDollar,
   faCommentsDollar,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
@@ -42,10 +38,6 @@ function ExpenseOverview() {
 
     setSelectedDebtors(expense.debtors);
   }, [editMode]);
-  
-  // useEffect(() => {
-  //     setSelectedDebtors([expense.debtors]);
-  // }, [])
 
   const handleDelete = event => {
     event.preventDefault();
@@ -167,18 +159,12 @@ function ExpenseOverview() {
                       .join(' and ')} each owe you ${
                       expense.amount / (expense.debtors.length + 1)
                     }`
-                  : // ? `${expense.debtors.splice(0, (expense.debtors.length -1) )
-                    //     .map(a => a.label)
-                    //     .join(', ')} and ${expense.debtors[expense.debtors.length-1]} each owe you ${
-                    //     expense.amount / (expense.debtors.length + 1)
-                    //   }`
+                  :
                     expense.debtors.length > 2 
                     ? `${expense.debtors.slice(0, (expense.debtors.length -1) )
                           .map(a => a.label)
                           .join(', ')} and ${expense.debtors[expense.debtors.length -1].label} each owe you €${expense.amount / (expense.debtors.length + 1)}` : ''
                   }
-                {/* // Each member owes you €
-                // {expense.amount / (expense.debtors.length + 1)} */}
               </span>
             </div>
           ) : null}
@@ -221,14 +207,14 @@ function ExpenseOverview() {
               <select name="category" type="string">
                 {categories
                   ? categories.map(category =>
-                      category === expense.category ? (
-                        <option value={category} selected>
-                          {category}
-                        </option>
-                      ) : (
+                    category === expense.category ? (
+                      <option value={category} selected>
+                        {category}
+                      </option>
+                    ) : (
                         <option value={category}>{category}</option>
                       ),
-                    )
+                  )
                   : null}
               </select>
               {/* <input placeholder={expense.debtors}/> */}
@@ -241,7 +227,7 @@ function ExpenseOverview() {
                   className="debtors-select-container"
                   classNamePrefix="debtors-select"
                   defaultValue={expense.debtors}
-                  // styles={}
+                // styles={}
                 />
               ) : null}
               <button type="submit">Submit</button>

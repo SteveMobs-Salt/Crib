@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import {
-    BrowserRouter as Router,
     useHistory,
 } from 'react-router-dom';
 import HouseholdContext from '../contexts/HouseholdContext';
@@ -17,14 +16,12 @@ function JoinGroup() {
         e.preventDefault();
         axios.post('/api/groups/join', {
             referral_code: e.target.referral_code.value,
-            // name: e.target.name.value,
         })
             .then(response => setHousehold(response.data))
             .catch(err => console.log(err));
-
         history.go(-1);
     }
-// Search through users and find name - for object ID and name
+    // Search through users and find name - for object ID and name
     return (
         <div className="join-group">
             <div className="header">
@@ -38,11 +35,10 @@ function JoinGroup() {
                 </nav>
             </div>
             <div className="form">
-            <form onSubmit={e => handleJoinGroup(e)}>
-                <input required type="text" placeholder="Enter referral code..." name="referral_code" />
-                {/* <input required type="text" placeholder="Your username" name="name" /> */}
-                <button type="submit">Join</button>
-            </form>
+                <form onSubmit={e => handleJoinGroup(e)}>
+                    <input required type="text" placeholder="Enter referral code..." name="referral_code" />
+                    <button type="submit">Join</button>
+                </form>
             </div>
         </div>
     )

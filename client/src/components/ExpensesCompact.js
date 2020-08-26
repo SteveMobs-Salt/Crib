@@ -1,9 +1,5 @@
 import React from 'react'
 import ExpenseCompactView from './dashboard/ExpenseCompactView';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faEuroSign
-} from '@fortawesome/free-solid-svg-icons';
 
 const ExpensesCompact = ({ expenses }) => {
   let total = 0;

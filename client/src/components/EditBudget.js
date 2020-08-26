@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import {
-  BrowserRouter as Router,
   useHistory,
   useParams,
 } from 'react-router-dom';

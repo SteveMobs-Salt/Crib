@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
-import BudgetChart from '../BudgetChart';
 import CategoryBudgetCompact from '../CategoryBudgetCompact';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -19,8 +15,8 @@ function BudgetOverview() {
     selectedHousehold,
     household
   } = useContext(HouseholdContext);
-  const { path, url } = useRouteMatch();
-  // console.log(budgets, expenses, categories);
+  const { url } = useRouteMatch();
+
   // map over categories, which maps over expenses matching the categories
   let data = null, budgets, expenses, categories;
   if (household) {
@@ -69,8 +65,6 @@ function BudgetOverview() {
           </span>
         </div>
       </div>
-      {/* {budgets.map( budget => <p>{budget}</p>)} */}
-      {/* <BudgetChart /> */}
       {data ? (
         data.map(cat => (
           <Link to={`${url}/${cat.category}`}>

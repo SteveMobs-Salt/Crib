@@ -1,8 +1,5 @@
 import React, { useContext } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useRouteMatch,
   useHistory,
@@ -11,25 +8,6 @@ import HouseholdContext from '../../contexts/HouseholdContext';
 import ExpenseCompactView from './ExpenseCompactView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCoffee,
-  faUtensils,
-  faHamburger,
-  faBolt,
-  faShower,
-  faSubway,
-  faMoneyCheckAlt,
-  faHouseDamage,
-  faHospitalUser,
-  faPiggyBank,
-  faHouseUser,
-  faSwimmer,
-  faCocktail,
-  faUserSecret,
-  faTshirt,
-  faDice,
-  faCalculator,
-  faShoppingBasket,
-  faChevronCircleLeft,
   faChevronLeft,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
