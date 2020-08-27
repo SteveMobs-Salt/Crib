@@ -11,7 +11,7 @@ const ShoppingListCompact = ({ items }) => {
       <div className="compact-title">
         <span className="icon">
         </span>
-        <span className="title">Shopping List</span>
+        <p className="title">Shopping List</p>
         {items ? fewItems.map(i => <ShoppingListItem key={i._id} item={i} />) : null}
       </div>
     </div>

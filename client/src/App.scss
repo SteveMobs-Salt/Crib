@@ -201,6 +201,7 @@ a:visited {
 
     .title {
       position: relative;
+      // margin-bottom: 12px;
       font-weight: 800;
       font-size: 1.4em;
       z-index: 10;
@@ -279,6 +280,14 @@ a:visited {
   &.shopping {
     display: flex;
     flex-direction: column;
+
+    .compact-title {
+      .title { 
+        // border: 1px solid red;
+        margin-bottom: 10px;
+        // padding-bottom:20px;
+      }
+    }
   }
 
   &.expenses {
