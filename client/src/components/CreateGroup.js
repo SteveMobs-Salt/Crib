@@ -1,46 +1,70 @@
-import React, { useContext } from 'react';
-import {
-    BrowserRouter as Router,
-    useHistory,
-} from 'react-router-dom';
-import HouseholdContext from '../contexts/HouseholdContext';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import HouseholdContext from '../contexts/HouseholdContext';
 
 
 function CreateGroup() {
-    const { setHousehold, household: { categories } } = useContext(HouseholdContext);
-    const history = useHistory();
+  const {
+    user,
+  } = useContext(HouseholdContext);
+  const history = useHistory();
+  const [referral, setReferral] = useState(null);
 
-    const handleCreateGroup = e => {
-        e.preventDefault();
-        axios.post('/api/groups/create', {
-            name: e.target.name.value,
+  const handleCreateGroup = e => {
+    e.preventDefault();
+    axios
+      .post('/api/groups/create', {
+        name: e.target.name.value,
+      })
+      .then(response => {
+        setReferral(response.data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: 'Crib - Join Group',
+          text: `${user.name} invited you to join their household. Your referral code is: ${referral}`,
+          url: 'https://desolate-hollows-89856.herokuapp.com/',
         })
-            .then(response => console.log(response))
-            .catch(err => console.log(err));
+        .then(() => console.log('Successful share'))
+        .catch(error => console.log('Error sharing', error));
     }
+  };
 
-    return (
-        <div className="create-group">
-            <div className="header">
-                <nav>
-                    <FontAwesomeIcon
-                        icon={faChevronLeft}
-                        size="lg"
-                        onClick={() => history.go(-1)}
-                    />
-                    <h2>Create group</h2>
-                </nav>
-            </div>
-
-            <form onSubmit={e => handleCreateGroup(e)}>
-                <input type="text" placeholder="Group Name" name="name" />
-                <button type="submit">Create</button>
-            </form>
+  return (
+    <div className="join-group create">
+      <div className="header">
+        <nav>
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            size="lg"
+            onClick={() => history.go(-1)}
+          />
+          <h2>Create group</h2>
+        </nav>
+      </div>
+      {referral ? (
+        <div className="referral" type="button" onClick={() => handleShare()}>
+          {' '}
+          Your group's referral code: <span className="code">{referral}</span>
         </div>
-    )
+      ) : (
+        <div className="form">
+          <form onSubmit={e => handleCreateGroup(e)}>
+            <input type="text" placeholder="Enter group name.." name="name" />
+            <button type="submit">Create</button>
+          </form>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default CreateGroup
+export default CreateGroup;

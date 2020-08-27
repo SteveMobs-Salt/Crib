@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import HouseholdContext from '../contexts/HouseholdContext';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useHistory,
   useParams,
@@ -34,15 +31,17 @@ import {
 function CategoryBudgetOverview() {
   const history = useHistory();
   const { category } = useParams();
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const {
     selectedHousehold,
     household
   } = useContext(HouseholdContext);
+  // amount is assigned a value and is used but linting does not recognize
+  // eslint-disable-next-line 
   let amount, catExpenses, percent, budgets, expenses;
-  let budgetTotal=0, catExpensesTotal=0;
-  if(household) {
-    ({budgets, expenses} = household[selectedHousehold])
+  // let budgetTotal = 0, catExpensesTotal = 0;
+  if (household) {
+    ({ budgets, expenses } = household[selectedHousehold])
   }
   if (budgets && expenses) {
     let budget = budgets.find(a => a.category === category);
@@ -50,7 +49,8 @@ function CategoryBudgetOverview() {
     catExpenses = expenses.filter(a => a.category === category);
     percent = (catExpenses.reduce((a, c) => a + c.amount, 0) * 100) / budgets.reduce((a, c) => a + c.amount, 0)
   }
-
+  // Switch can be null and it shouldn't be a problem
+  // eslint-disable-next-line 
   let icon = null;
   switch (category) {
     case 'Entertainment':
@@ -89,7 +89,7 @@ function CategoryBudgetOverview() {
   }
 
   return (
-    <div>
+    <div className="category-budget-overview">
       <div className="header">
         <nav>
           <FontAwesomeIcon
@@ -100,13 +100,9 @@ function CategoryBudgetOverview() {
           <h2>{category}</h2>
         </nav>
         <Link to={`${url}/edit`}>
-            <FontAwesomeIcon icon={faEdit} size="lg" />
-          </Link>
+          <FontAwesomeIcon icon={faEdit} size="lg" />
+        </Link>
       </div>
-
-      {/* add button to edit / delete budget????? */}
-      {/* dashboard/budget/'category'/edit */}
-      {/* <h3>{amount}</h3> */}
       <div className="category-progress-overview">
         <CircularProgressbarWithChildren
           value={percent}
@@ -117,22 +113,30 @@ function CategoryBudgetOverview() {
             pathTransitionDuration: 1,
             pathColor: `rgba(255, 255, 255, 1)`,
             textColor: '#fff',
-            textSize: '25px',
+            textSize: '10px',
             trailColor: `rgba(62, 152, 199, 1)`,
             backgroundColor: '#3e98c7',
           })}>
-          <FontAwesomeIcon icon={icon} size="5x" />
+            {percent ? <div className="total-budget">
+            <span className="percent">{`${parseInt(percent)}%`}</span>
+            <br />
+            {`of total budget`}
+            </div> : amount > 0 ? 'Add an expense' : 'Set a budget'}
+          {/* <FontAwesomeIcon icon={icon} size="5x" /> */}
         </CircularProgressbarWithChildren>
       </div>
       <div>
         {catExpenses
           ? catExpenses.map(a => (
+            <Link key={a._id} to={`/dashboard/expenses/${a._id}`}>
               <ExpenseCompactView
                 name={a.name}
                 amount={a.amount}
                 category={category}
+                date={a.date}
               />
-            ))
+            </Link>
+          ))
           : null}
       </div>
     </div>

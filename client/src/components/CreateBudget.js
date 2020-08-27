@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
   useHistory,
 } from 'react-router-dom';
 import axios from 'axios';
@@ -38,11 +33,9 @@ function CreateBudget() {
     axios
       .post('/budget', body)
       .then(data => {
-        console.log(data);
         return data;
       })
       .then(res => {
-        console.log(res)
         setHousehold(res.data);
         history.go(-2);
       })

@@ -102,36 +102,29 @@ app.put('/expenses', async (req, res) => {
 
 //FIXED
 app.post('/shopping_list', async (req, res) => {
-  const owner = req.session.passport.user;
+  // const owner = req.session.passport.user;
   const { name, id } = req.body;
-  // const householdId = req.session.household;
   const household = await Household.findById(id);
-  // for a group : if(household.owner === owner | household.owner.includes(id)
-  // OR pass along groupId )
-  if (household.owners.includes(owner)) {
-    const uuid = uuidv4();
-    household.shoppingList.push({
-      _id: uuid,
-      name,
-      bought: false,
-      date: Date.now(),
-    });
-    household.markModified('shoppingList');
-    household.save();
-    res.redirect('/api/household');
-  }
+  const uuid = uuidv4();
+  household.shoppingList.push({
+    _id: uuid,
+    name,
+    bought: false,
+    date: Date.now(),
+  });
+  household.markModified('shoppingList');
+  household.save();
+  res.redirect('/api/household');
+  1;
 });
 
 // FIXED
 app.delete('/shopping_list', async (req, res) => {
   const { taskId, id } = req.query;
-  console.log('made it to the endpoint', taskId, id);
   // const householdId = req.session.household;
   const household = await Household.findById(id);
-  console.log(household);
   /* eslint no-underscore-dangle: 0 */
   const index = household.shoppingList.map(a => a._id).indexOf(taskId);
-  console.log(index);
   if (index === -1) {
     return res.status(404).end();
   }
@@ -144,7 +137,6 @@ app.delete('/shopping_list', async (req, res) => {
 // Fetch household data
 app.all('/api/household', async (req, res) => {
   const userId = req.session.passport.user;
-  console.log(userId)
   const household = await Household.aggregate([
     {
       $match: {
@@ -163,7 +155,6 @@ app.all('/api/household', async (req, res) => {
 
 // FIXED
 app.post('/budget', async (req, res) => {
-  console.log(req.body);
   const { category, amount, id } = req.body;
   const household = await Household.findById(id);
   household.budgets.push({ category, amount });
@@ -176,31 +167,10 @@ app.post('/budget', async (req, res) => {
 
 app.put('/budget', async (req, res) => {
   const { category, amount, id, previousCategory } = req.query;
-  console.log(category, amount, id);
-  // const householdId = req.session.household;
-
-  // const defaultCat = [
-  //   'Groceries',
-  //   'Housing',
-  //   'Utilities',
-  //   'Transportation',
-  //   'Insurance',
-  //   'Loan Repayments',
-  //   'Entertainment',
-  //   'Clothing',
-  //   'Dining',
-  //   'Fitness',
-  //   'Other'
-  // ];
-  // if(defaultCat.includes(previousCategory)){
-  //   return res.status(403).end();
-  // }
-
   const household = await Household.findById(id);
   const index = household.budgets
     .map(b => b.category)
     .indexOf(previousCategory);
-  console.log(index);
   if (index === -1) {
     return res.status(404).end();
   }
@@ -248,7 +218,7 @@ app.post('/api/groups/join', async (req, res) => {
   const { referral_code } = req.body;
   const household = await Household.findOne({ referral_code: referral_code });
   //TODO fix if statement (array of objects now instead of strings)
-  const ownersArray = household.owners.map(a=> a.userId); 
+  const ownersArray = household.owners.map(a => a.userId);
   if (ownersArray.includes(req.session.passport.user)) {
     return res.redirect('/api/household');
   }
@@ -263,11 +233,27 @@ app.post('/api/groups/join', async (req, res) => {
 
 // add name for group owner/creator
 app.post('/api/groups/create', async (req, res) => {
-  const newHousehold = new Household({ owners: [{userId: req.session.passport.user, name: req.session.name}] });
-  newHousehold.name = req.body.name;
+  const newHousehold = new Household({
+    owners: [{ userId: req.session.passport.user, name: req.session.name }],
+    name: req.body.name
+  });
+  // newHousehold.name = req.body.name;
   newHousehold.type = 'Group';
   await newHousehold.save();
   res.json(newHousehold.referral_code);
 });
+
+app.delete('/api/groups/leave', async (req, res) => {
+  const { id, userId } = req.query;
+  const household = await Household.findById(id);
+  const index = household.owners.map(a => a.userId).indexOf(userId);
+  if (index === -1) {
+    return res.status(404).end();
+  }
+  household.owners.splice(index, 1);
+  household.markModified('owners');
+  household.save();
+  return res.redirect('/api/household');
+})
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));

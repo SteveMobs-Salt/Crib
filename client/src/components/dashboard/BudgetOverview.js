@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
 import HouseholdContext from '../../contexts/HouseholdContext';
-import BudgetChart from '../BudgetChart';
 import CategoryBudgetCompact from '../CategoryBudgetCompact';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -19,8 +15,8 @@ function BudgetOverview() {
     selectedHousehold,
     household
   } = useContext(HouseholdContext);
-  const { path, url } = useRouteMatch();
-  // console.log(budgets, expenses, categories);
+  const { url } = useRouteMatch();
+
   // map over categories, which maps over expenses matching the categories
   let data = null, budgets, expenses, categories;
   if (household) {
@@ -49,31 +45,29 @@ function BudgetOverview() {
             size="lg"
             onClick={() => history.go(-1)}
           />
-          <h2>Budget</h2>
+          <h2>Budget Overview</h2>
         </nav>
         <Link to={`${url}/add`}>
           <FontAwesomeIcon icon={faPlus} size="lg" />
         </Link>
       </div>
       <div className="numbers-overview">
-        <span className="budget-total">
+        <div className="budget-total">
+          <span>Budget</span>
           <span className="number">
-            ${budgets ? `${budgets.reduce((a, c) => a + c.amount, 0)}` : null}
+          € {budgets ? `${parseInt(budgets.reduce((a, c) => a + c.amount, 0))}` : null}
           </span>
-          <span>Total Budget</span>
-        </span>
-        <span className="spent-total">
+        </div>
+        <div className="spent-total">
+          <span>Spent</span>
           <span className="number">
-            ${expenses ? `${expenses.reduce((a, c) => a + c.amount, 0)}` : null}
+          € {expenses ? `${parseInt(expenses.reduce((a, c) => a + c.amount, 0))}` : null}
           </span>
-          <span>Total Spent</span>
-        </span>
+        </div>
       </div>
-      {/* {budgets.map( budget => <p>{budget}</p>)} */}
-      {/* <BudgetChart /> */}
       {data ? (
-        data.map(cat => (
-          <Link to={`${url}/${cat.category}`}>
+        data.map((cat, i) => (
+          <Link key={i} to={`${url}/${cat.category}`}>
             <CategoryBudgetCompact
               category={cat.category}
               spent={cat.spent}

@@ -1,48 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import UserContext from '../contexts/UserContext';
 import BudgetCompact from './BudgetCompact';
 import ExpensesCompact from './ExpensesCompact';
 import ShoppingListCompact from './ShoppingListCompact';
 import HouseholdContext from '../contexts/HouseholdContext';
-import {
-  Link,
-  useRouteMatch,
-  useHistory,
-} from 'react-router-dom';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBars,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import criblogo from '../images/Crib_copy.png';
+
 
 const Dashboard = () => {
-  const { userID } = useContext(UserContext);
-  const { setHousehold, household, selectedHousehold, setSelectedHousehold } = useContext(
-    HouseholdContext,
-  );
+  const {
+    setHousehold,
+    household,
+    selectedHousehold,
+    setSelectedHousehold,
+  } = useContext(HouseholdContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const history = useHistory();
   useEffect(() => {
     fetch('/api/household')
       .then(res => {
-        return res.json()
+        return res.json();
       })
       .then(data => {
         setHousehold(data);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [setHousehold]);
 
-  let expenses= [], budgets, shoppingList, personalIndex;
+  let expenses = [], budgets, shoppingList, personalIndex;
   if (household) {
-    console.log(household);
     ({ expenses, budgets, shoppingList } = household[selectedHousehold]);
-    personalIndex = household.map((a, index) => {
-      return { ...a, index }
-    })
-      .find(a => a.type === "Personal")
-      .index
+    personalIndex = household
+      .map((a, index) => {
+        return { ...a, index };
+      })
+      .find(a => a.type === 'Personal').index;
   }
 
   let totalBudget = 0,
@@ -55,7 +51,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     fetch('/api/auth/logout')
       .then(res => {
-        history.push('/signin')
+        history.push('/signin');
         localStorage.removeItem('households');
         localStorage.removeItem('user');
         localStorage.removeItem('selectedHousehold');
@@ -65,59 +61,76 @@ const Dashboard = () => {
 
   return (
     <>
-      <Menu customBurgerIcon={false} isOpen={sidebarOpen} onClose={() => setSidebarOpen(!sidebarOpen)} right>
-        <span className="menu-item" onClick={() => {
-          setSelectedHousehold(personalIndex);
-          setSidebarOpen(!sidebarOpen)
-        }}>Personal</span>
-        <span className="menu-item" >Groups</span>
-        <div>
-          {household && household.length > 1 ?
-            household.map((a, index) => {
-              return { ...a, index };
-            }).filter(a => a.type !== "Personal")
-              .map(a => <span onClick={() => {
-                setSelectedHousehold(a.index);
-                setSidebarOpen(!sidebarOpen)
-              }}>{a.name}</span>) : null}
+      <Menu
+        customBurgerIcon={false}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(!sidebarOpen)}
+        right
+      >
+        <div className="crib-logo">
+          <img src={criblogo} alt="crib-logo" />
+          <p className="crib-name">CRIB</p>
+        </div>
+        <span
+          className="menu-item"
+          onClick={() => {
+            setSelectedHousehold(personalIndex);
+            setSidebarOpen(!sidebarOpen);
+          }}
+        >
+          Personal
+        </span>
+        <div className="menu-groups">
+          <span className="menu-item" onClick={() => history.push('/groups')}>Manage Groups</span>
+          <ul className="">
+            {household && household.length > 1
+              ? household
+                .map((a, index) => {
+                  return { ...a, index };
+                })
+                .filter(a => a.type !== 'Personal')
+                .map(a => (
+                  <li key={a._id} className="group-name"
+                    onClick={() => {
+                      setSelectedHousehold(a.index);
+                      setSidebarOpen(!sidebarOpen);
+                    }}
+                  >
+                    {a.name}
+                  </li>
+                ))
+              : null}
+          </ul>
         </div>
         <Link to="/create-group">
-          <span className="menu-item"> Create group </span></Link>
+          <span className="menu-item create"> Create group </span>
+        </Link>
         <Link to="/join-group">
-          <span className="menu-item"> Join group </span></Link>
-        <span className="menu-item" >Settings</span>
-
-        <span onClick={() => handleLogout()}>Logout</span>
+          <span className="menu-item join"> Join group </span>
+        </Link>
+        {/* <span className="menu-item">Settings</span> */}
+        <span className="menu-item logout" onClick={() => handleLogout()}>Logout</span>
       </Menu>
       <div className="dashboard">
         <div className="header">
           <nav>
-            {/* <FontAwesomeIcon icon={faChevronLeft} size="lg" onClick={() => history.go(-1)}/> */}
             <h2>Dashboard</h2>
           </nav>
-          {/* <button onClick={() => setSelectedHousehold(selectedHousehold + 1)} type="button">Change Group</button> */}
-          {/* <Link to={`${url}/add`}> */}
           <div className="household-views">
-            <FontAwesomeIcon icon={faBars} size="lg" className="person" onClick={() => setSidebarOpen(!sidebarOpen)} />
-            {/* <FontAwesomeIcon
-            icon={faUsers}
-            size="lg"
-            className="group"
-            onClick={() => handleLogout()}
-          /> */}
+            <FontAwesomeIcon
+              icon={faBars}
+              size="lg"
+              className="menu"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            />
           </div>
-          {/* </Link> */}
         </div>
-
-        {/* /dashboard/budget */}
         <Link to={`${url}/budget`}>
           <BudgetCompact budget={totalBudget} spent={totalSpent} />
         </Link>
-        {/* /dashboard/expenses */}
         <Link to={`${url}/expenses`}>
           <ExpensesCompact expenses={expenses} />
         </Link>
-        {/* /dashboard/shopping-list */}
         <Link to={`${url}/shopping-list`}>
           <ShoppingListCompact items={shoppingList} />
         </Link>

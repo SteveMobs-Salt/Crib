@@ -1,16 +1,13 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import UserContext from '../contexts/UserContext';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useHistory,
 } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import HouseholdContext from '../contexts/HouseholdContext';
+import criblogo from '../images/Crib_copy.png';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
@@ -30,8 +27,10 @@ const SignUpForm = () => {
     axios
       .post('/api/auth/register_login', userData)
       .then(res => {
-        setUser({userId: res.data.user,
-        name: res.data.name });
+        setUser({
+          userId: res.data.user,
+          name: res.data.name
+        });
         history.push('/dashboard');
       })
       .catch(err => {
@@ -42,6 +41,9 @@ const SignUpForm = () => {
 
   return (
     <div className="login-form">
+       <div className="crib-login">
+      <img src={criblogo} alt="crib-login" />
+    </div>
       <header>
         <h1>Create Account</h1>
       </header>
