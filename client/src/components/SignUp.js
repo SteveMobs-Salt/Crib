@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import HouseholdContext from '../contexts/HouseholdContext';
+import criblogo from '../images/Crib_copy.png';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
@@ -40,6 +41,9 @@ const SignUpForm = () => {
 
   return (
     <div className="login-form">
+       <div className="crib-login">
+      <img src={criblogo} alt="crib-login" />
+    </div>
       <header>
         <h1>Create Account</h1>
       </header>
