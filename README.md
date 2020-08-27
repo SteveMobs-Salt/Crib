@@ -68,11 +68,14 @@ Try [Crib](https://crib-app.herokuapp.com/) out.
 
 ## Features to come: 
 
-__Split expenses__: 
-- Notifications are sent to members when an expense is split with them with details of the transaction.
-- Tabs to keep track of how much members owe each other and an option to settle up the tab.
-- Reminder notifications can be sent to remind members to settle their tabs with you.
+__Going Native__: mobile and desktop applications.
 
-__Shopping list__: 
-- Receive a notification when someone adds an item to the shopping list. 
-- Set a reminder for the things that need to be bought on the shopping list that is sent to you or other members.
+__User Profile__: settings, management and customization.
+
+__Keeping Tabs__: split expenses and keep tabs.
+
+__Notifications__: receive notifications for new expenses.
+
+__Payment Gateway__: request & receive payments.
+
+__Geolocation__: location based reminders to pick something up from the store.
