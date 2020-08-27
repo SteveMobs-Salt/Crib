@@ -903,6 +903,20 @@ button {
   }
 }
 
+.crib-logo{
+  margin-left: 60px;
+  margin-bottom: 90px;
+  width: 80px;
+  height: 80px;
+  outline: none;
+}
+
+.crib-name{
+  font-size: 25px;
+  font-family: 'Cabin', sans-serif;
+  text-indent: 12px;
+  color: #fff;
+}
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
   fill: #373a47;

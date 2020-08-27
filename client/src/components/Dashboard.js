@@ -7,6 +7,8 @@ import HouseholdContext from '../contexts/HouseholdContext';
 import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import criblogo from '../images/Crib_copy.png';
+
 
 const Dashboard = () => {
   const {
@@ -65,6 +67,10 @@ const Dashboard = () => {
         onClose={() => setSidebarOpen(!sidebarOpen)}
         right
       >
+        <div className="crib-logo">
+          <img src={criblogo} alt="crib-logo" />
+          <p className="crib-name">CRIB</p>
+        </div>
         <span
           className="menu-item"
           onClick={() => {
@@ -75,10 +81,10 @@ const Dashboard = () => {
           Personal
         </span>
         <div className="menu-groups">
-            <span className="menu-item" onClick={() => history.push('/groups')}>Manage Groups</span>
+          <span className="menu-item" onClick={() => history.push('/groups')}>Manage Groups</span>
           <ul className="">
-          {household && household.length > 1
-            ? household
+            {household && household.length > 1
+              ? household
                 .map((a, index) => {
                   return { ...a, index };
                 })
@@ -93,8 +99,8 @@ const Dashboard = () => {
                     {a.name}
                   </li>
                 ))
-            : null}
-            </ul>
+              : null}
+          </ul>
         </div>
         <Link to="/create-group">
           <span className="menu-item create"> Create group </span>
