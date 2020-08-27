@@ -37,7 +37,10 @@ When an item is purchased or a service paid for, and it is added to the expenses
 
 If a member of a household purchases an item they can add the expense and select whom in the group will be sharing the expense. Those members will be able to see how much they owe that member on the expense. 
 
-__Note__: This app is a MVP and additional features will be added.
+__Note__: This app is a MVP and additional features will be added. __We took a mobile-first approach so view the app in mobile view for an optimal experience.__
+Desktop view will be added in the future.
+
+Try [Crib](https://crib-app.herokuapp.com/) out. 
 
 ## Demo
 
